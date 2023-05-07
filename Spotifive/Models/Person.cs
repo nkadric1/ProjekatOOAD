@@ -1,14 +1,17 @@
 ﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spotifive.Models
 {
     public abstract class Person
     {
-        int ID;
-        string name;
-        string surname;
-        DateAndTime dateOfBirth;
-        enum gender { M, F };
+        [Key] public int PersonID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateFormat DateOfBirth { get; set; }
+        public Gender Gender { get; set; }
+        public Account Account { get; set; } 
+        public Person() { }
 
     }
 }

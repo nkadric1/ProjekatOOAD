@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
     public class RegisteredUser : Person
     {
-        int ID;
-        Song song;
-        List<Playlist> playlists;
-        Account account;
+     public RegisteredUser() { }
+        [ForeignKey("Song")] public int? SongID { get; set; }
+        public Song Song { get; set; }
     }
 }
