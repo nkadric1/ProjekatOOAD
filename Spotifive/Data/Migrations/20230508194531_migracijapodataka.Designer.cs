@@ -10,8 +10,8 @@ using Spotifive.Data;
 namespace Spotifive.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230507230305_M")]
-    partial class M
+    [Migration("20230508194531_migracijapodataka")]
+    partial class migracijapodataka
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,7 @@ namespace Spotifive.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdminID")
+                    b.Property<int>("AdminID")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -243,8 +243,7 @@ namespace Spotifive.Data.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AdminID")
-                        .IsUnique()
-                        .HasFilter("[AdminID] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Account");
                 });
@@ -267,17 +266,17 @@ namespace Spotifive.Data.Migrations
                     b.ToTable("Artist");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.ArtistHasSong", b =>
+            modelBuilder.Entity("Spotifive.Models.ArtistSongs", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ArtistID")
+                    b.Property<int>("ArtistID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SongID")
+                    b.Property<int>("SongID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -286,20 +285,20 @@ namespace Spotifive.Data.Migrations
 
                     b.HasIndex("SongID");
 
-                    b.ToTable("ArtistHasSong");
+                    b.ToTable("ArtistSongs");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditingOfArtist", b =>
+            modelBuilder.Entity("Spotifive.Models.EditorArtists", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ArtistID")
+                    b.Property<int>("ArtistID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EditorID")
+                    b.Property<int>("EditorID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -308,20 +307,20 @@ namespace Spotifive.Data.Migrations
 
                     b.HasIndex("EditorID");
 
-                    b.ToTable("EditingOfArtist");
+                    b.ToTable("EditorArtists");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditingOfSong", b =>
+            modelBuilder.Entity("Spotifive.Models.EditorSongs", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EditorID")
+                    b.Property<int>("EditorID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SongID")
+                    b.Property<int>("SongID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -330,40 +329,18 @@ namespace Spotifive.Data.Migrations
 
                     b.HasIndex("SongID");
 
-                    b.ToTable("EditingOfSong");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Favorites", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("PlaylistID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SongID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("PlaylistID");
-
-                    b.HasIndex("SongID");
-
-                    b.ToTable("Favorites");
+                    b.ToTable("EditorSongs");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Person", b =>
                 {
-                    b.Property<int>("PersonID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DateOfBirth")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -374,7 +351,7 @@ namespace Spotifive.Data.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonID");
+                    b.HasKey("ID");
 
                     b.ToTable("Person");
                 });
@@ -399,6 +376,28 @@ namespace Spotifive.Data.Migrations
                     b.ToTable("Playlist");
                 });
 
+            modelBuilder.Entity("Spotifive.Models.PlaylistSongs", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PlaylistID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PlaylistID");
+
+                    b.HasIndex("SongID");
+
+                    b.ToTable("PlaylistSongs");
+                });
+
             modelBuilder.Entity("Spotifive.Models.Review", b =>
                 {
                     b.Property<int>("ID")
@@ -409,13 +408,13 @@ namespace Spotifive.Data.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CriticID")
+                    b.Property<int>("CriticID")
                         .HasColumnType("int");
 
                     b.Property<double>("Grade")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SongID")
+                    b.Property<int>("SongID")
                         .HasColumnType("int");
 
                     b.Property<string>("TimeStamp")
@@ -440,8 +439,8 @@ namespace Spotifive.Data.Migrations
                     b.Property<string>("CodeQR")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DateRelease")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateRelease")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Genre")
                         .HasColumnType("int");
@@ -471,7 +470,12 @@ namespace Spotifive.Data.Migrations
                     b.Property<int?>("AccountID")
                         .HasColumnType("int");
 
+                    b.Property<int>("ArtistID")
+                        .HasColumnType("int");
+
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("ArtistID");
 
                     b.ToTable("Critic");
                 });
@@ -495,10 +499,15 @@ namespace Spotifive.Data.Migrations
                     b.Property<int?>("AccountID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SongID")
+                    b.Property<int>("ArtistID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongID")
                         .HasColumnType("int");
 
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("ArtistID");
 
                     b.HasIndex("SongID");
 
@@ -560,67 +569,66 @@ namespace Spotifive.Data.Migrations
                 {
                     b.HasOne("Spotifive.Models.Administrator", "Administrator")
                         .WithOne("Account")
-                        .HasForeignKey("Spotifive.Models.Account", "AdminID");
+                        .HasForeignKey("Spotifive.Models.Account", "AdminID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Administrator");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.ArtistHasSong", b =>
+            modelBuilder.Entity("Spotifive.Models.ArtistSongs", b =>
                 {
                     b.HasOne("Spotifive.Models.Artist", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistID");
+                        .HasForeignKey("ArtistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
                         .WithMany()
-                        .HasForeignKey("SongID");
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Artist");
 
                     b.Navigation("Song");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditingOfArtist", b =>
+            modelBuilder.Entity("Spotifive.Models.EditorArtists", b =>
                 {
                     b.HasOne("Spotifive.Models.Artist", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistID");
+                        .HasForeignKey("ArtistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Spotifive.Models.Editor", "Editor")
                         .WithMany()
-                        .HasForeignKey("EditorID");
+                        .HasForeignKey("EditorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Artist");
 
                     b.Navigation("Editor");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditingOfSong", b =>
+            modelBuilder.Entity("Spotifive.Models.EditorSongs", b =>
                 {
                     b.HasOne("Spotifive.Models.Editor", "Editor")
                         .WithMany()
-                        .HasForeignKey("EditorID");
+                        .HasForeignKey("EditorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
                         .WithMany()
-                        .HasForeignKey("SongID");
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Editor");
-
-                    b.Navigation("Song");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Favorites", b =>
-                {
-                    b.HasOne("Spotifive.Models.Playlist", "Playlist")
-                        .WithMany()
-                        .HasForeignKey("PlaylistID");
-
-                    b.HasOne("Spotifive.Models.Song", "Song")
-                        .WithMany()
-                        .HasForeignKey("SongID");
-
-                    b.Navigation("Playlist");
 
                     b.Navigation("Song");
                 });
@@ -636,15 +644,38 @@ namespace Spotifive.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Spotifive.Models.PlaylistSongs", b =>
+                {
+                    b.HasOne("Spotifive.Models.Playlist", "Playlist")
+                        .WithMany()
+                        .HasForeignKey("PlaylistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Spotifive.Models.Song", "Song")
+                        .WithMany()
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+
+                    b.Navigation("Song");
+                });
+
             modelBuilder.Entity("Spotifive.Models.Review", b =>
                 {
                     b.HasOne("Spotifive.Models.Critic", "User")
                         .WithMany()
-                        .HasForeignKey("CriticID");
+                        .HasForeignKey("CriticID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
                         .WithMany()
-                        .HasForeignKey("SongID");
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Song");
 
@@ -655,7 +686,7 @@ namespace Spotifive.Data.Migrations
                 {
                     b.HasOne("Spotifive.Models.Person", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Administrator", "PersonID")
+                        .HasForeignKey("Spotifive.Models.Administrator", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
@@ -666,13 +697,21 @@ namespace Spotifive.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AccountID");
 
+                    b.HasOne("Spotifive.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Spotifive.Models.Person", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Critic", "PersonID")
+                        .HasForeignKey("Spotifive.Models.Critic", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Account");
+
+                    b.Navigation("Artist");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Editor", b =>
@@ -683,7 +722,7 @@ namespace Spotifive.Data.Migrations
 
                     b.HasOne("Spotifive.Models.Person", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Editor", "PersonID")
+                        .HasForeignKey("Spotifive.Models.Editor", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
@@ -696,17 +735,27 @@ namespace Spotifive.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AccountID");
 
+                    b.HasOne("Spotifive.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Spotifive.Models.Person", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.RegisteredUser", "PersonID")
+                        .HasForeignKey("Spotifive.Models.RegisteredUser", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
                         .WithMany()
-                        .HasForeignKey("SongID");
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Account");
+
+                    b.Navigation("Artist");
 
                     b.Navigation("Song");
                 });
