@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spotifive.Models
 {
     public class Administrator : Person
-    {
-        int ID;
-        List<Account> accounts;
+         {       public Administrator() { }
+                
     }
 }

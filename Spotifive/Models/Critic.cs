@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
     public class Critic : Person
-    {
-        int ID;
-        List<Review> reviews;
-        Song song;
-        Account account;
+    {       
+        public Critic() { }
 
     }
 }

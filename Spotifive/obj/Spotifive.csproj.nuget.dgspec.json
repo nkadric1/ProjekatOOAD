@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Korisnik\\source\\repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj": {}
+    "C:\\Users\\x\\source\\repos\\ProjekatOOAD1\\Spotifive\\Spotifive.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Korisnik\\source\\repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj": {
+    "C:\\Users\\x\\source\\repos\\ProjekatOOAD1\\Spotifive\\Spotifive.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Korisnik\\source\\repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj",
+        "projectUniqueName": "C:\\Users\\x\\source\\repos\\ProjekatOOAD1\\Spotifive\\Spotifive.csproj",
         "projectName": "Spotifive",
-        "projectPath": "C:\\Users\\Korisnik\\source\\repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj",
-        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Korisnik\\source\\repos\\nkadric1\\ProjekatOOAD\\Spotifive\\obj\\",
+        "projectPath": "C:\\Users\\x\\source\\repos\\ProjekatOOAD1\\Spotifive\\Spotifive.csproj",
+        "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\x\\source\\repos\\ProjekatOOAD1\\Spotifive\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -79,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
