@@ -8,6 +8,6 @@ namespace Spotifive.Models
         [Key] public int ID { get; set; }
         public string ArtistName { get; set; }
         public string ArtistSurname { get; set; }
-     public Artist() { }
+        public Artist() { }
     }
 }

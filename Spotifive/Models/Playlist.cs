@@ -8,8 +8,6 @@ namespace Spotifive.Models
     {
         [Key] public int ID { get; set; }
         public string PlaylistName { get; set; }
-        [ForeignKey("RegisteredUser")] public int UserID { get; set; }
-        public RegisteredUser User { get; set; }
         public Playlist() { }
     }
 }
