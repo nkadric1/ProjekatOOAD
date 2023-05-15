@@ -19,85 +19,53 @@ namespace Spotifive.Controllers
             _context = context;
         }
 
-        // GET: Editor
-        public async Task<IActionResult> Index()
+        //Add new song//////////////////////////////////
+        // GET: Editor/AddSong
+        public IActionResult AddSong()
         {
-            var applicationDbContext = _context.Editor.Include(e => e.Account).Include(e => e.Song);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Editor/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var editor = await _context.Editor
-                .Include(e => e.Account)
-                .Include(e => e.Song)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (editor == null)
-            {
-                return NotFound();
-            }
-
-            return View(editor);
-        }
-
-        // GET: Editor/Create
-        public IActionResult Create()
-        {
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID");
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "ID");
             return View();
         }
 
-        // POST: Editor/Create
+        // POST: Editor/AddSong
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SongID,ID,Name,Surname,DateOfBirth,Gender,AccountID")] Editor editor)
+        public async Task<IActionResult> AddSong([Bind("ID,SongName,DateRelease,Genre,CodeQR,LinkYT")] Song song)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(editor);
+                _context.Add(song);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", editor.AccountID);
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "ID", editor.SongID);
-            return View(editor);
+            return View(song);
         }
-
-        // GET: Editor/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //Edit song/////////////////////////////////////
+        // GET: Song/Edit/5
+        public async Task<IActionResult> UpdateSong(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var editor = await _context.Editor.FindAsync(id);
-            if (editor == null)
+            var song = await _context.Song.FindAsync(id);
+            if (song == null)
             {
                 return NotFound();
             }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", editor.AccountID);
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "ID", editor.SongID);
-            return View(editor);
+            return View(song);
         }
 
-        // POST: Editor/Edit/5
+        // POST: Song/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SongID,ID,Name,Surname,DateOfBirth,Gender,AccountID")] Editor editor)
+        public async Task<IActionResult> UpdateSong(int id, [Bind("ID,SongName,DateRelease,Genre,CodeQR,LinkYT")] Song song)
         {
-            if (id != editor.ID)
+            if (id != song.ID)
             {
                 return NotFound();
             }
@@ -106,12 +74,12 @@ namespace Spotifive.Controllers
             {
                 try
                 {
-                    _context.Update(editor);
+                    _context.Update(song);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EditorExists(editor.ID))
+                    if (!SongExists(song.ID))
                     {
                         return NotFound();
                     }
@@ -122,45 +90,158 @@ namespace Spotifive.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", editor.AccountID);
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "ID", editor.SongID);
-            return View(editor);
+            return View(song);
         }
+        private bool SongExists(int id)
+        {
+            return _context.Song.Any(e => e.ID == id);
+        }
+        //Delete song//////////////////////////////////////////////////
 
-        // GET: Editor/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Song/Delete/5
+        public async Task<IActionResult> DeleteSong(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var editor = await _context.Editor
-                .Include(e => e.Account)
-                .Include(e => e.Song)
+            var song = await _context.Song
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (editor == null)
+            if (song == null)
             {
                 return NotFound();
             }
 
-            return View(editor);
+            return View(song);
         }
 
-        // POST: Editor/Delete/5
+        // POST: Song/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmedOfSong(int id)
         {
-            var editor = await _context.Editor.FindAsync(id);
-            _context.Editor.Remove(editor);
+            var song = await _context.Song.FindAsync(id);
+            _context.Song.Remove(song);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult UploadFile() { return View(); }
+        public IActionResult SearchSong() { return View(); }
+        public IActionResult SignOut() { return View(); }
+        public IActionResult IndexOfAccount() { return View(); }
+        public IActionResult OnHomeClick() { return View(); }
+        public IActionResult OnArtistClick() { return View(); }
+        public IActionResult OnSongClick() { return View(); }
+
+
+
+        // GET: Artist/Create
+        public IActionResult AddArtist()
+        {
+            return View();
+        }
+
+        // POST: Artist/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddArtist([Bind("ID,ArtistName,ArtistSurname")] Artist artist)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(artist);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(artist);
+        }
+
+        // GET: Artist/Edit/5
+        public async Task<IActionResult> UpdateArtist(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artist = await _context.Artist.FindAsync(id);
+            if (artist == null)
+            {
+                return NotFound();
+            }
+            return View(artist);
+        }
+
+        // POST: Artist/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateArtist(int id, [Bind("ID,ArtistName,ArtistSurname")] Artist artist)
+        {
+            if (id != artist.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(artist);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ArtistExists(artist.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(artist);
+        }
+
+        // GET: Artist/Delete/5
+        public async Task<IActionResult> DeleteArtist(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artist = await _context.Artist
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (artist == null)
+            {
+                return NotFound();
+            }
+
+            return View(artist);
+        }
+
+        // POST: Artist/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedOfArtist(int id)
+        {
+            var artist = await _context.Artist.FindAsync(id);
+            _context.Artist.Remove(artist);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EditorExists(int id)
+        private bool ArtistExists(int id)
         {
-            return _context.Editor.Any(e => e.ID == id);
+            return _context.Artist.Any(e => e.ID == id);
         }
+
     }
 }

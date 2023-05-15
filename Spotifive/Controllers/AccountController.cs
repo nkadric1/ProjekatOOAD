@@ -19,29 +19,11 @@ namespace Spotifive.Controllers
             _context = context;
         }
 
-        // GET: Account
         public async Task<IActionResult> Index()
         {
             return View(await _context.Account.ToListAsync());
         }
 
-        // GET: Account/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            return View(account);
-        }
 
         // GET: Account/Create
         public IActionResult Create()
@@ -65,85 +47,20 @@ namespace Spotifive.Controllers
             return View(account);
         }
 
-        // GET: Account/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //when user want to log in p+++
+        public IActionResult LogIn(String username, String password) { return View(); }
+        // check this method and create??????
+        public IActionResult SignIn(bool type, String username, String password, String email, [Bind("ID,Name,Sirname,DateOfBirth,Gender,AccountID")] Person person)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var account = await _context.Account.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-            return View(account);
+            //Create(person.AccountID);
+            //how to add account to user that is in process of making new profile
+            return View();
         }
+        public IActionResult OnForgotClick() { return View(); }
+        public IActionResult ResetPassword() { return View(); }
+        public IActionResult GetOnHomeScreen() { return View(); }
 
-        // POST: Account/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Username,Password,Email")] Account account)
-        {
-            if (id != account.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(account);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AccountExists(account.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(account);
-        }
-
-        // GET: Account/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            return View(account);
-        }
-
-        // POST: Account/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var account = await _context.Account.FindAsync(id);
-            _context.Account.Remove(account);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        public IActionResult SignOut() { return View(); }
 
         private bool AccountExists(int id)
         {

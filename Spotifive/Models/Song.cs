@@ -13,6 +13,7 @@ namespace Spotifive.Models
         public Genre Genre { get; set; }    
         public string CodeQR { get; set; }
         public string LinkYT { get; set; }
+        public Artist Artist { get; set; }
         public Song() { }
     }
 }

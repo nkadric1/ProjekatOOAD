@@ -9,5 +9,6 @@ namespace Spotifive.Models
         public string ArtistName { get; set; }
         public string ArtistSurname { get; set; }
         public Artist() { }
+        public List<Song> Songs { get; set; }
     }
 }

@@ -33,5 +33,12 @@ namespace Spotifive.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult GetProfile() { return View(); }
+        public IActionResult OnArtistClick() { return View(); }
+        public IActionResult OnPlaylistClick() { return View(); }
+        public IActionResult SearchSong() { return View(); }
+        public IActionResult OnSongClick() { return View(); }
+
     }
 }

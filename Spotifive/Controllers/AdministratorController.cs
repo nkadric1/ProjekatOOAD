@@ -19,71 +19,22 @@ namespace Spotifive.Controllers
             _context = context;
         }
 
-        // GET: Administrator
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Administrator.Include(a => a.Account);
-            return View(await applicationDbContext.ToListAsync());
-        }
 
-        // GET: Administrator/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        public async Task<IActionResult> UpdateUser(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var administrator = await _context.Administrator
-                .Include(a => a.Account)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (administrator == null)
+            var user = await _context.Person.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-
-            return View(administrator);
-        }
-
-        // GET: Administrator/Create
-        public IActionResult Create()
-        {
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID");
-            return View();
-        }
-
-        // POST: Administrator/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Administrator administrator)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(administrator);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
-            return View(administrator);
-        }
-
-        // GET: Administrator/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var administrator = await _context.Administrator.FindAsync(id);
-            if (administrator == null)
-            {
-                return NotFound();
-            }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
-            return View(administrator);
+            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", user.AccountID);
+            return View(user);
         }
 
         // POST: Administrator/Edit/5
@@ -91,9 +42,9 @@ namespace Spotifive.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Administrator administrator)
+        public async Task<IActionResult> UpdateUser(int id, [Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Person person)
         {
-            if (id != administrator.ID)
+            if (id != person.ID)
             {
                 return NotFound();
             }
@@ -102,12 +53,12 @@ namespace Spotifive.Controllers
             {
                 try
                 {
-                    _context.Update(administrator);
+                    _context.Update(person);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdministratorExists(administrator.ID))
+                    if (!UserExists(person.ID))
                     {
                         return NotFound();
                     }
@@ -118,43 +69,45 @@ namespace Spotifive.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
-            return View(administrator);
+            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", person.AccountID);
+            return View(person);
         }
 
         // GET: Administrator/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteUser(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var administrator = await _context.Administrator
+            var user = await _context.Person
                 .Include(a => a.Account)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (administrator == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(administrator);
+            return View(user);
         }
 
         // POST: Administrator/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmedOfUser(int id)
         {
-            var administrator = await _context.Administrator.FindAsync(id);
-            _context.Administrator.Remove(administrator);
+            var user = await _context.Person.FindAsync(id);
+            _context.Person.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult SignOut() { return View(); }
 
-        private bool AdministratorExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Administrator.Any(e => e.ID == id);
+            return _context.Person.Any(e => e.ID == id);
         }
+
     }
 }
