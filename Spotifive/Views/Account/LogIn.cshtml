@@ -1,0 +1,206 @@
+﻿@model Spotifive.Models.Account
+
+@{
+	ViewData["Title"] = "Log in";
+}
+
+<head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+
+	<link rel="stylesheet" href="~/css/motoDark.css">
+	<link rel="stylesheet" href="~/css/bodyLight.css">
+
+	<style>
+		.posLogo {
+			position: absolute;
+			top: 7px;
+			left: 10px;
+		}
+	</style>
+
+	<style>
+		posButtonUser {
+			position: absolute;
+			left: 500px;
+			bottom: 150px;
+		}
+	</style>
+
+
+	<style>
+		posButtonCritic {
+			position: absolute;
+			right: 500px;
+			bottom: 150px;
+		}
+	</style>
+
+	<style>
+		posButtonEditor {
+			position: absolute;
+			right: 675px;
+			bottom: 70px;
+		}
+	</style>
+
+	<style>
+		.buttonEditor {
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			font-size: 22px;
+			border-radius: 30px;
+			border: 1px solid #0b2847;
+			background-color: #a8b6f0;
+			text-align: center;
+			color: #0b2847;
+			padding-right: 15px;
+			padding-left: 15px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	</style>
+
+	<style>
+		.buttonUserCritic {
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			font-size: 22px;
+			border-radius: 30px;
+			background-color: #0b2847;
+			text-align: center;
+			color: #a8b6f0;
+			padding-right: 15px;
+			padding-left: 15px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	</style>
+
+	<style>
+		h1 {
+			font-size: 40px;
+		}
+	</style>
+
+	<style>
+		positionh1 {
+			position: absolute;
+			top: 90px;
+			left: 690px;
+		}
+	</style>
+
+	<style>
+		position1 {
+			position: absolute;
+			top: 200px;
+			left: 640px;
+		}
+	</style>
+
+
+	<style>
+		h6 {
+			font-size: 20px;
+		}
+	</style>
+
+	<style>
+		positionh6 {
+			position: absolute;
+			top: 400px;
+			left: 665px;
+		}
+	</style>
+
+	<style>
+		linking {
+			font-size: 16px;
+			color: #025abf;
+			font-style: italic;
+		}
+	</style>
+
+	<moto></>Let the music move you.</moto>
+</head>
+
+<body>
+	<img width="130" height="100" class="posLogo" src="~/assets/images/SpotiFIVELogo.png">
+
+
+
+	<h1><positionh1>Log in</positionh1></h1>
+
+
+
+	<div class="row">
+		<!--<div class="col-md-4">-->
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<position1>
+				<div>
+					<div class="form-group">
+						<label asp-for="Username" class="control-label">Username</label>
+						<input asp-for="Username" class="form-control" />
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+
+					<div class="form-group">
+						<label asp-for="Password" class="control-label">Password</label>
+						<input asp-for="Password" class="form-control" />
+						<span asp-validation-for="Password" class="text-danger"></span>
+						<br>
+					</div>
+				</div>
+			</position1>
+
+			<div>
+				<h6><positionh6><linking>Forgot Your password?</linking></positionh6></h6>
+			</div>
+
+			<posButtonUser>
+				<div class="form-group">
+
+					<button class="buttonUserCritic">Log in as User</button>
+
+				</div>
+			</posButtonUser>
+
+			<posButtonCritic>
+				<div class="form-group">
+					<button class="buttonUserCritic">
+						Log in as Critic
+					</button>
+				</div>
+			</posButtonCritic>
+
+			<posButtonEditor>
+				<div class="form-group">
+
+					<button class="buttonEditor">
+
+						Log in as Editor
+
+					</button>
+
+				</div>
+			</posButtonEditor>
+
+		</form>
+	</div>
+
+
+	<!--</div>-->
+	<!--
+	<div>
+		<a asp-action="Index">Back to List</a>
+	</div>
+	-->
+</body>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

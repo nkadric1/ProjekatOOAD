@@ -17,7 +17,7 @@ namespace Spotifive.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult Home() { return View(); }
         public IActionResult Index()
         {
             return View();

@@ -1,0 +1,12 @@
+﻿﻿button {
+    font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+    font-size: 22px;
+    border-radius: 30px;
+    background-color: #0b2847;
+    text-align: center;
+    color: #a8b6f0;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

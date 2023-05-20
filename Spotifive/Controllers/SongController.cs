@@ -25,7 +25,7 @@ namespace Spotifive.Controllers
             return View(await _context.Song.ToListAsync());
         }
 
-        // GET: Song/Details/5
+       /* // GET: Song/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,7 +42,7 @@ namespace Spotifive.Controllers
 
             return View(song);
         }
-
+       */
         // GET: Song/Create
         public IActionResult Create()
         {
@@ -65,56 +65,9 @@ namespace Spotifive.Controllers
             return View(song);
         }
 
-        // GET: Song/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        public IActionResult Edit() { return View(); }
+        public IActionResult Details() { return View(); }
 
-            var song = await _context.Song.FindAsync(id);
-            if (song == null)
-            {
-                return NotFound();
-            }
-            return View(song);
-        }
-
-        // POST: Song/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,SongName,DateRelease,Genre,CodeQR,LinkYT")] Song song)
-        {
-            if (id != song.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(song);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SongExists(song.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(song);
-        }
 
         // GET: Song/Delete/5
         public async Task<IActionResult> Delete(int? id)

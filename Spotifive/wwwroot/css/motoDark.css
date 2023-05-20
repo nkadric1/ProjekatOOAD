@@ -1,0 +1,10 @@
+﻿moto {
+    color: #0b2847;
+    text-align: right;
+    font-size: 28px;
+    font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+    position: absolute;
+    right: 70px;
+    top: 20px;
+    font-style: italic;
+}
