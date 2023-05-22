@@ -68,9 +68,9 @@ namespace Spotifive.Controllers
         public IActionResult Edit() { return View(); }
         public IActionResult Details() { return View(); }
 
-
-        // GET: Song/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		public IActionResult Song() { return View(); }
+		// GET: Song/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

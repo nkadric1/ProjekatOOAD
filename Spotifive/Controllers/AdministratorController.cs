@@ -26,6 +26,7 @@ namespace Spotifive.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public IActionResult Administrator() { return View(); }
         // GET: Administrator/Details/5
         public async Task<IActionResult> Details(int? id)
         {

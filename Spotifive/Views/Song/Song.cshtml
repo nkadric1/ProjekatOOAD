@@ -1,0 +1,140 @@
+﻿@model Spotifive.Models.Song
+@{
+	ViewData["Title"] = "Song";
+}
+<!-- Song screen -->
+
+<head>
+
+	<link rel="stylesheet" href="~/css/moto.css">
+	<link rel="stylesheet" href="~/css/body.css">
+	<link rel="stylesheet" href="~/css/sgnLogBttn.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+	<style>
+		.centered {
+			position: absolute;
+			top: 20px;
+			left: 50%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.profile {
+			position: absolute;
+			top: 60px;
+			right: 80px;
+			height: 60px;
+			width: 60px;
+		}
+
+		.reviews {
+			position: absolute;
+			bottom: 40px;
+			left: 50px;
+			height: 40px;
+			width: 40px;
+		}
+
+		.ratings {
+			position: absolute;
+			bottom: 90px;
+			left: 50px;
+			height: 40px;
+			width: 40px;
+		}
+
+		.textReviews {
+			position: absolute;
+			bottom: 140px;
+			left: 30px;
+			font-size: 20px;
+		}
+
+		.download {
+			position: absolute;
+			bottom: 80px;
+			left: 30%;
+			height: 30px;
+			width: 30px;
+		}
+
+		.textDownload {
+			position: absolute;
+			bottom: 15px;
+			left: 28%;
+			font-size: 20px;
+		}
+
+		.previous {
+			position: absolute;
+			bottom: 80px;
+			left: 42%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.play {
+			position: absolute;
+			bottom: 80px;
+			left: 50%;
+			height: 45px;
+			width: 45px;
+		}
+
+		.next {
+			position: absolute;
+			bottom: 80px;
+			left: 58%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.add {
+			position: absolute;
+			bottom: 80px;
+			left: 70%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.textAdd {
+			position: absolute;
+			bottom: 15px;
+			left: 70%;
+			font-size: 20px;
+		}
+
+		#progressBar {
+			background-color: white;
+			position: absolute;
+			bottom: 155px;
+			left: 31%;
+			height: 10px;
+			width: 600px;
+		}
+
+			#progressBar::-webkit-progress-value {
+				background-color: #a8b6f0; /* Set the color to #a8b6f0 */
+			}
+
+	</style>
+
+</head>
+
+<body>
+	<img class="centered" src="~/assets/images/DetailsDots.png" />
+	<img class="reviews" src="~/assets/images/Reviews.png" />
+	<img class="profile" src="~/assets/images/Profile.png" />
+	<img class="ratings" src="~/assets/images/Ratings.png" />
+	<p class="textReviews">Reviews</p>
+	<img class="download" src="~/assets/images/Download.png" />
+	<p class="textDownload">Download</p>
+	<img class="previous" src="~/assets/images/Previous.png" />
+	<img class="play" src="~/assets/images/Play.png" />
+	<img class="next" src="~/assets/images/Next.png" />
+	<img class="add" src="~/assets/images/Add.png" />
+	<p class="textAdd">Add</p>
+	<!--Timestamp dodati dinamicki!!!-->
+	<progress class="progress" id="progressBar" value="50" max="100"></progress>
+</body>

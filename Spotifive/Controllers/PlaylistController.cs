@@ -144,6 +144,8 @@ namespace Spotifive.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Playlist() { return View(); }
+        public IActionResult PlaylistSongs() { return View(); }
 
         private bool PlaylistExists(int id)
         {
