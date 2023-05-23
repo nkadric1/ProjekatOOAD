@@ -115,7 +115,7 @@
 
     <!--User avatar-->
 
-    <img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png">
+    <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
     <!--Tekst-->
 
@@ -126,12 +126,21 @@
 
     <div class="positionh2">
 
-        <button class="buttons">Home</button>
+        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
+        {
+            <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
+        }
         <br>
-        <button class="buttons">Artists</button>
-        <br>
-        <button class="buttons"><b>Playlists</b></button>
+        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
+        {
 
+            <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
+        }
+        <br>
+        @if (User.IsInRole("Registered user"))
+        {
+            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
+        }
     </div>
 
     <div>

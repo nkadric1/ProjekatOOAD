@@ -42,7 +42,7 @@
 		posMain {
 			position: absolute;
 			top: 130px;
-			right: 190px;
+			right: 120px;
 		}
 	</style>
 
@@ -50,7 +50,7 @@
 		posLogo {
 			position: absolute;
 			top: 7px;
-			right: 680px;
+			right: 640px;
 		}
 	</style>
 
@@ -59,9 +59,9 @@
 			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
 			font-size: 22px;
 			border-radius: 30px;
+			color: #0b2847;
 			background-color: #a8b6f0;
 			text-align: center;
-			color: #0b2847;
 			padding-right: 15px;
 			padding-left: 15px;
 			padding-top: 5px;
@@ -71,18 +71,18 @@
 
 
 	<style>
-		posButton1 {
-			position: absolute;
-			right: 535px;
+		.posButton1 {
+			position: fixed;
+			right: 500px;
 			bottom: 30px;
 		}
 	</style>
 
 
 	<style>
-		posButton2 {
-			position: absolute;
-			right: 265px;
+		.posButton2 {
+			position: fixed;
+		 right: 300px;
 			bottom: 30px;
 		}
 	</style>
@@ -103,10 +103,17 @@
 		<p class="main">in history, our mission is to take You on a journey </p><br>
 		<p class="main">through the world of music.</p><br>
 		<p class="main">Log in or sign up to join us today! </p><br>
-		<br>
+		<button class="buttons posButton1">
+			<a  asp-area="Identity" asp-page="/Account/Login" style="color: #0b2847;">
+			<p>Log In</p>
+			</a>
+		</button>
+		<button class="buttons posButton2">
+			<a  asp-area="Identity" asp-page="/Account/Register" style="color: #0b2847;">
+			<p>Sign up</p>
+		</a> </button>
 	</posMain>
-
-	<posButton1><button class="buttons"><b>Log in</b></button></posButton1>
-	<posButton2><button class="buttons">Sign up</button></posButton2>
-
+	<br />
+	
+	
 </body>

@@ -464,12 +464,9 @@ C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Spotifive.Ta
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Spotifive.TagHelpers.output.cache
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Spotifive.RazorCoreGenerate.cache
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Details.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Administrator\Index.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Playlist\Edit.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -496,3 +493,12 @@ C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\
 C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Song\Song.cshtml.g.cs
 C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Playlist\Playlist.cshtml.g.cs
 C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Playlist\PlaylistSongs.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\AccessDenied.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ForgotPassword.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv6.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Account.cshtml.g.cs

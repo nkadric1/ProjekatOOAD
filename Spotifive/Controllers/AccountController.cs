@@ -27,10 +27,11 @@ namespace Spotifive.Controllers
 		public IActionResult SignUp() { return View(); }
 		public IActionResult Reset() { return View(); }
 		public IActionResult LogIn() { return View(); }
+        public IActionResult Account() { return View(); }
 
 
-		// GET: Account/Details/5
-		public async Task<IActionResult> Details(int? id)
+        // GET: Account/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
