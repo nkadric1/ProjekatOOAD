@@ -1,0 +1,378 @@
+﻿@model Spotifive.Models.Administrator
+
+@{
+    ViewData["Title"] = "Edit Account";
+}
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="~/css/body.css">
+
+    <style>
+        .image1 {
+            position: fixed;
+            top: 100px;
+            left: 200px;
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+        }
+    </style>
+    <style>
+        .background {
+            position: fixed;
+            top: 150px;
+            left: 260px;
+            width: 1000px;
+            height: 500px;
+            background-color: #a8b6f0;
+        }
+    </style>
+
+    <style>
+        .signOut {
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #a8b6f0;
+            text-align: center;
+            color: #0b2847;
+        }
+
+        .delete {
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            font-weight: bold;
+            background-color: whitesmoke;
+            text-align: center;
+            color: #0b2847;
+            border-color: #0b2847;
+            height: 100px;
+            width: 100px;
+        }
+
+        .update {
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            font-weight: bold;
+            background-color: whitesmoke;
+            text-align: center;
+            color: #0b2847;
+            border-color: #0b2847;
+            height: 100px;
+            width: 100px;
+        }
+
+        .background1 {
+            position: fixed;
+            top: 520px;
+            left: 1100px;
+            width: 100px;
+            height: 20px;
+            background-color: #a8b6f0;
+        }
+    </style>
+
+
+    <style>
+        h1 {
+            position: fixed;
+            top: 180px;
+            left: 430px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        h2 {
+            position: fixed;
+            top: 240px;
+            left: 280px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        h3 {
+            position: fixed;
+            top: 280px;
+            left: 280px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        h4 {
+            position: fixed;
+            top: 320px;
+            left: 280px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        h5 {
+            position: fixed;
+            top: 360px;
+            left: 280px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        h6 {
+            position: fixed;
+            top: 400px;
+            left: 280px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        .text-box {
+            border: 1px solid white;
+            padding: 1px;
+            width: 300px;
+            height: 30px;
+            position: fixed;
+            top: 240px;
+            left: 460px;
+            font-family: Montserrat;
+            color: #0b2847;
+        }
+    </style>
+
+    <style>
+        .text-box1 {
+            border: 1px solid white;
+            padding: 1px;
+            width: 300px;
+            height: 30px;
+            position: fixed;
+            top: 280px;
+            left: 460px;
+            font-family: Montserrat;
+            color: #0b2847;
+        }
+    </style>
+
+    <style>
+        .text-box2 {
+            border: 1px solid white;
+            padding: 1px;
+            width: 300px;
+            height: 30px;
+            position: fixed;
+            top: 320px;
+            left: 460px;
+            font-family: Montserrat;
+            color: #0b2847;
+        }
+    </style>
+
+    <style>
+        .text-box3 {
+            border: 1px solid white;
+            padding: 1px;
+            width: 300px;
+            height: 30px;
+            position: fixed;
+            top: 360px;
+            left: 460px;
+            font-family: Montserrat;
+            color: #0b2847;
+        }
+    </style>
+
+    <style>
+        .text-box4 {
+            border: 1px solid white;
+            padding: 1px;
+            width: 300px;
+            height: 30px;
+            position: fixed;
+            top: 400px;
+            left: 460px;
+            font-family: Montserrat;
+            background-color: #a8b6f0;
+        }
+    </style>
+
+    <style>
+        posSignOut {
+            position: fixed;
+            top: 50px;
+            right: 200px;
+        }
+
+        posDelete {
+            position: fixed;
+            top: 500px;
+            right: 459px;
+        }
+
+        posUpdate {
+            position: fixed;
+            top: 500px;
+            right: 360px;
+        }
+
+    </style>
+
+    <style>
+        .checkboxUser {
+            position: fixed;
+            top: 480px;
+            left: 480px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <style>
+        .checkboxCritic {
+            position: fixed;
+            top: 520px;
+            left: 480px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .search-container {
+        }
+
+        .search-box {
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            color: #0b2847;
+            margin: 0 10px;
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid gray;
+            width: 300px;
+        }
+
+        .search-button {
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            color: #0b2847;
+            background-color: #a8b6f0;
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        posSearch {
+            position: absolute;
+            top: 45px;
+            left: 250px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <form action="#">
+        <posSearch>
+            <input type="text" class="search-box" placeholder="Type here">
+            <button type="submit" class="search-button">Search</button>
+        </posSearch>
+    </form>
+
+    <div class="text-box">
+        <div class="background"></div>
+    </div>
+
+
+    <div>
+        <posSignOut>
+            <button class="signOut">Sign out</button>
+        </posSignOut>
+    </div>
+
+
+    <h1>
+        User
+    </h1>
+
+
+    <h2>
+        Name:
+    </h2>
+
+
+
+    <h3>
+        Last name:
+    </h3>
+
+
+
+    <h4>
+        Date of birth:
+    </h4>
+
+
+    <h5>
+        Address:
+    </h5>
+
+    <h6>
+        Email:
+    </h6>
+
+
+    <div class="text-box">
+    </div>
+
+    <div class="text-box1">
+    </div>
+
+
+    <div class="text-box2">
+    </div>
+
+    <div class="text-box3">
+    </div>
+
+    <div class="text-box4">
+    </div>
+
+    <div class="checkboxUser">
+        <label for="userCheckbox">User</label>
+        <input type="checkbox" id="userCheckbox" name="User">
+    </div>
+
+    <div class="checkboxCritic">
+        <label for="criticCheckbox">Critic</label>
+        <input type="checkbox" id="criticCheckbox" name="Critic">
+    </div>
+
+    <div>
+        <posDelete>
+            <button class="delete">Delete</button>
+        </posDelete>
+    </div>
+
+    <div>
+        <posUpdate>
+            <button class="update">Update</button>
+        </posUpdate>
+    </div>
+    <!--JEDAN CHECKBOX JE DISABLED KADA JE DRUGI KLIKNUT, TO DODATI!!!
+        DODATI SVUGDJE ZA MONTSERRAT  + STILOVE POPRAVITI!
+    -->
+
+</body>

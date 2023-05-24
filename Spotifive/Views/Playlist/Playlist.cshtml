@@ -1,0 +1,160 @@
+﻿@model Spotifive.Models.Playlist
+
+@{
+    ViewData["Title"] = "Playlists";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/motoDark.css">
+    <link rel="stylesheet" href="~/css/bodyLight.css">
+    <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
+    <link rel="stylesheet" href="~/css/logo.css">
+
+    <!--Search bar-->
+
+    <style>
+        .search-container {
+            position: fixed;
+            top: 30px;
+            left: 340px;
+        }
+
+        .search-box {
+            margin: 20px 5px;
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid gray;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            position: fixed;
+            top: 50px;
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            font-size: 22px;
+            border-radius: 30px;
+            background-color: #0b2847;
+            text-align: center;
+            color: #a8b6f0;
+            padding-right: 15px;
+            padding-left: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+
+    <style>
+        h3 {
+            position: fixed;
+            top: 100px;
+            left: 150px;
+        }
+    </style>
+
+    <style>
+
+        .imgProfile {
+            position: absolute;
+            right: 120px;
+            top: 49px;
+            font-style: italic;
+            height: 50px;
+            width: 50px;
+        }
+
+    </style>
+
+
+    <style>
+        h1 {
+            position: fixed;
+            top: 140px;
+            left: 350px;
+            font-size: 40px;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        .buttons {
+            border: 1px solid transparent;
+            color: #0b2847;
+            text-align: left;
+            font-size: 28px;
+            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+            background-color: #a8b6f0;
+        }
+    </style>
+
+    <style>
+        .positionh2 {
+            position: fixed;
+            top: 60px;
+            left: 100px;
+        }
+
+        .logo {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="search-container">
+        <form action="#">
+            <input type="text" class="search-box" placeholder="Type here">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+
+
+    <!--User avatar-->
+
+    <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
+
+    <!--Tekst-->
+
+    <div>
+        <h1>Playlists</h1>
+    </div>
+
+
+    <div class="positionh2">
+
+        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
+        {
+            <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
+        }
+        <br>
+        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
+        {
+
+            <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
+        }
+        <br>
+        @if (User.IsInRole("Registered user"))
+        {
+            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
+        }
+    </div>
+
+    <div>
+        <a href="your-link-here">
+            <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
+        </a>
+        <!--ili ovako-->
+        <!--
+                    <button onclick="window.location.href='your-link'">
+          <img src="your-here-image-source" altImage Button">
+        ="</button>
+
+        -->
+
+    </div>
+
+</body>

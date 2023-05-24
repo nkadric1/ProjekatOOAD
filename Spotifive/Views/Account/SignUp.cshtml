@@ -1,0 +1,203 @@
+﻿@model Spotifive.Models.Account
+
+@{
+	ViewData["Title"] = "Sign up";
+}
+
+<head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+	<link rel="stylesheet" href="~/css/motoDark.css">
+	<link rel="stylesheet" href="~/css/bodyLight.css">
+	<link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
+
+
+	<style>
+		.posLogo {
+			position: absolute;
+			top: 7px;
+			left: 10px;
+		}
+	</style>
+
+	<style>
+		.buttonUserCritic {
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			font-size: 22px;
+			border-radius: 30px;
+			background-color: #0b2847;
+			text-align: center;
+			color: #a8b6f0;
+			padding-right: 15px;
+			padding-left: 15px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	</style>
+
+	<style>
+		posButtonUser {
+			position: absolute;
+			left: 500px;
+			bottom: 25px;
+		}
+	</style>
+
+
+	<style>
+		posButtonCritic {
+			position: absolute;
+			right: 500px;
+			bottom: 25px;
+		}
+	</style>
+
+	<style>
+		h1 {
+			font-size: 40px;
+		}
+	</style>
+
+	<style>
+		positionh1 {
+			position: absolute;
+			top: 90px;
+			left: 690px;
+		}
+	</style>
+
+	<style>
+		position1 {
+			position: absolute;
+			top: 200px;
+			left: 400px;
+		}
+	</style>
+
+	<style>
+		position2 {
+			position: absolute;
+			top: 200px;
+			right: 400px;
+		}
+	</style>
+
+	<style>
+		h6 {
+			font-size: 20px;
+		}
+	</style>
+
+	<style>
+		positionh6 {
+			position: absolute;
+			top: 150px;
+			left: 620px;
+		}
+	</style>
+
+	<style>
+		linking {
+			font-size: 20px;
+			color: #025abf;
+			font-style: italic;
+		}
+	</style>
+
+	<moto></>Let the music move you.</moto>
+</head>
+
+<body>
+	<img width="130" height="100" class="posLogo" src="~/assets/images/SpotiFIVELogo.png">
+
+
+
+	<h1><positionh1>Sign up</positionh1></h1>
+	<h6><positionh6>Already have an account? <linking>Log in.</linking></positionh6></h6>
+
+
+	<div class="row">
+		<!--<div class="col-md-4">-->
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<position1>
+				<div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="First name"/>
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="Last name" />
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="Gender" />
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="Date of birth" />
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+				</div>
+			</position1>
+			<position2>
+				<div>
+					<div class="form-group">
+						<input asp-for="Email" class="form-control" placeholder="E-mail" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="Username"/>
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Password" class="form-control" placeholder="Password"/>
+						<span asp-validation-for="Password" class="text-danger"></span>
+						<br>
+					</div>
+					<div class="form-group">
+						<input asp-for="Username" class="form-control" placeholder="Confirm Your password" />
+						<span asp-validation-for="Username" class="text-danger"></span>
+						<br>
+					</div>
+				</div>
+			</position2>
+
+			<posButtonUser>
+				<div class="form-group">
+
+					<button class="buttonUserCritic">Sign up as User</button>
+
+				</div>
+			</posButtonUser>
+
+			<posButtonCritic>
+				<div class="form-group">
+					<button class="buttonUserCritic">
+						Sign up as Critic
+					</button>
+				</div>
+			</posButtonCritic>
+
+		</form>
+	</div>
+	<!--</div>-->
+	<!--
+	<div>
+		<a asp-action="Index">Back to List</a>
+	</div>
+	-->
+</body>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -4,44 +4,116 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<head>
+
+	<link rel="stylesheet" href="~/css/moto.css">
+	<link rel="stylesheet" href="~/css/body.css">
+	<link rel="stylesheet" href="~/css/sgnLogBttn.css">
+
+	<style>
+		.cover {
+			height: 100vh; /*Set the image to fill the height of the screen.*/
+			width: auto; /*Width remains the same.*/
+			position: absolute;
+			left: 0px;
+			top: 0px;
+		}
+	</style>
+	<style>
+		body {
+			background-color: #0b2847; /* Set the background color to dark blue */
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+		}
+	</style>
+
+	<style>
+		/*Style for moto text.*/
+		.main {
+			color: #a8b6f0;
+			text-align: center;
+			font-size: 20px;
+			right: 200px;
+			line-height: 1.2; /* Set the line height to 1.5 times the font size */
+		}
+	</style>
+	<style>
+		/*Style for main text.*/
+		posMain {
+			position: absolute;
+			top: 130px;
+			right: 120px;
+		}
+	</style>
+
+	<style>
+		posLogo {
+			position: absolute;
+			top: 7px;
+			right: 640px;
+		}
+	</style>
+
+	<style>
+		.buttons {
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			font-size: 22px;
+			border-radius: 30px;
+			color: #0b2847;
+			background-color: #a8b6f0;
+			text-align: center;
+			padding-right: 15px;
+			padding-left: 15px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	</style>
+
+
+	<style>
+		.posButton1 {
+			position: fixed;
+			right: 500px;
+			bottom: 30px;
+		}
+	</style>
+
+
+	<style>
+		.posButton2 {
+			position: fixed;
+		 right: 300px;
+			bottom: 30px;
+		}
+	</style>
+	<moto>Let the music move you.</moto>
+
+</head>
+<body>
+	<posLogo><img width="130" height="100" src="~/assets/images/SpotiFIVELogo.png"></posLogo>
+	<p><img class="cover" src="~/assets/images/CoverOriginal.png"></p>
+	<br>
+	<br>
+	<posMain>
+		<p class="main"><i><b>SpotiFIVE</b></i> is home to millions of songs from every corner</p><br>
+		<p class="main"> of the<i><b> world</b></i>.</p><br>
+		<p class="main">Whether it's by keeping the classical works of </p><br>
+		<p class="main">the renowned artists from the bygone past alive,</p> <br>
+		<p class="main">or giving a home to modern voices carving their names </p><br>
+		<p class="main">in history, our mission is to take You on a journey </p><br>
+		<p class="main">through the world of music.</p><br>
+		<p class="main">Log in or sign up to join us today! </p><br>
+		<button class="buttons posButton1">
+			<a  asp-area="Identity" asp-page="/Account/Login" style="color: #0b2847;">
+			<p>Log In</p>
+			</a>
+		</button>
+		<button class="buttons posButton2">
+			<a  asp-area="Identity" asp-page="/Account/Register" style="color: #0b2847;">
+			<p>Sign up</p>
+		</a> </button>
+	</posMain>
+	<br />
+	
+	
+</body>

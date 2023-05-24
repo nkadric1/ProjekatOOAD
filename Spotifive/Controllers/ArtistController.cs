@@ -24,7 +24,7 @@ namespace Spotifive.Controllers
         {
             return View(await _context.Artist.ToListAsync());
         }
-
+        public IActionResult Artist() { return View(); }
         // GET: Artist/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -1,0 +1,567 @@
+﻿@model Spotifive.Models.Song
+@{
+	ViewData["Title"] = "Song";
+}
+<head>
+
+	<link rel="stylesheet" href="~/css/moto.css">
+	<link rel="stylesheet" href="~/css/body.css">
+	<link rel="stylesheet" href="~/css/sgnLogBttn.css">
+	<link rel="stylesheet" href="~/css/popUp.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<style>
+		.centered {
+			position: absolute;
+			top: 20px;
+			left: 50%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.profile {
+			position: absolute;
+			top: 60px;
+			right: 80px;
+			height: 60px;
+			width: 60px;
+		}
+
+		.reviews {
+			position: absolute;
+			bottom: 40px;
+			left: 50px;
+			height: 40px;
+			width: 40px;
+		}
+
+		.ratings {
+			position: absolute;
+			bottom: 90px;
+			left: 50px;
+			height: 40px;
+			width: 40px;
+		}
+
+		.textReviews {
+			position: absolute;
+			bottom: 140px;
+			left: 30px;
+			font-size: 20px;
+		}
+
+		.download {
+			position: absolute;
+			bottom: 80px;
+			left: 30%;
+			height: 30px;
+			width: 30px;
+		}
+
+		.textDownload {
+			position: absolute;
+			bottom: 15px;
+			left: 28%;
+			font-size: 20px;
+		}
+
+		.previous {
+			position: absolute;
+			bottom: 80px;
+			left: 42%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.play {
+			position: absolute;
+			bottom: 80px;
+			left: 50%;
+			height: 45px;
+			width: 45px;
+		}
+
+		.next {
+			position: absolute;
+			bottom: 80px;
+			left: 58%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.add {
+			position: absolute;
+			bottom: 80px;
+			left: 70%;
+			height: 40px;
+			width: 40px;
+		}
+
+		.textAdd {
+			position: absolute;
+			bottom: 15px;
+			left: 70%;
+			font-size: 20px;
+		}
+
+		#progressBar {
+			background-color: white;
+			position: absolute;
+			bottom: 155px;
+			left: 31%;
+			height: 10px;
+			width: 600px;
+		}
+
+			#progressBar::-webkit-progress-value {
+				background-color: #a8b6f0; /* Set the color to #a8b6f0 */
+			}
+
+		.edit {
+			position: absolute;
+			bottom: 80px;
+			left: 80%;
+			height: 30px;
+			width: 30px;
+		}
+
+		.textEdit {
+			position: absolute;
+			bottom: 15px;
+			left: 80%;
+			font-size: 20px;
+		}
+
+		.addingToPlaylist {
+			position: absolute;
+			top: 80px;
+			left: 300px;
+			opacity: 0.8;
+			width: 400px;
+			height: 500px;
+			background-color: whitesmoke;
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			color: #0b2847;
+		}
+
+		.successfulyDownloaded {
+			opacity: 0.8;
+			width: 230px;
+			height: 130px;
+			background-color: whitesmoke;
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			color: #0b2847;
+		}
+
+		.criticComment {
+			opacity: 0.8;
+			width: 400px;
+			height: 400px;
+			background-color: whitesmoke;
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			color: #0b2847;
+		}
+
+		.criticRating {
+			opacity: 0.8;
+			width: 400px;
+			height: 400px;
+			background-color: whitesmoke;
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			color: #0b2847;
+		}
+	</style>
+
+</head>
+
+<body>
+	<img class="centered" src="~/assets/images/DetailsDots.png" />
+
+	<a href="#criticActions"  data-toggle="modal">
+		<img class="reviews" src="~/assets/images/Reviews.png" />
+	</a>
+	<a href="#userActions" data-toggle="modal">
+		<img class="reviews" src="~/assets/images/Reviews.png" />
+	</a>
+
+	<img class="profile" src="~/assets/images/Profile.png" />
+
+	<a href="#criticActionsRating" data-toggle="modal">
+		<img class="ratings" src="~/assets/images/Ratings.png" />
+	</a>
+
+	<p class="textReviews">Reviews</p>
+
+	<a href="#successfulDownload" data-toggle="modal">
+		<img class="download" src="~/assets/images/Download.png" />
+	</a>
+
+	<p class="textDownload">Download</p>
+	<img class="previous" src="~/assets/images/Previous.png" />
+	<img class="play" src="~/assets/images/Play.png" />
+	<img class="next" src="~/assets/images/Next.png" />
+
+	<a href="#addToPlaylist" data-toggle="modal">
+		<img class="add" src="~/assets/images/Add.png" />
+	</a>
+
+	<p class="textAdd">Add</p>
+	<img class="edit" src="~/assets/images/Edit.png" />
+	<p class="textEdit">Edit</p>
+	<!--Timestamp dodati dinamicki!!!-->
+	<progress class="progress" id="progressBar" value="50" max="100"></progress>
+
+
+	<div class="modal fade" id="addToPlaylist" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content addingToPlaylist">
+				<style>
+					h1 {
+						font-size: 22px;
+						position: absolute;
+						top: 10px;
+						left: 20px;
+					}
+
+					h2 {
+						font-size: 22px;
+						position: absolute;
+						top: 330px;
+						left: 20px;
+					}
+
+					.rectangle {
+						position: absolute;
+						top: 10px;
+						left: 0px;
+						width: 100%;
+						height: 50px;
+						background-color: whitesmoke;
+					}
+
+					.buttonOK {
+						position: absolute;
+						bottom: 0px;
+						right: 0px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						font-weight: bold;
+					}
+
+					.buttonCancel {
+						position: absolute;
+						bottom: 0px;
+						right: 110px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+					}
+
+					.textbox {
+						border-color: #0b2847;
+						position: absolute;
+						top: 390px;
+						left: 60px;
+						font-size: 18px;
+						height: 40px;
+						width: 280px;
+					}
+				</style>
+
+				<div class="rectangle"></div>
+
+				<h1>Add to playlist:</h1>
+
+				<h2>Or make a new playlist:</h2>
+
+				<input type="text" id="newPlaylist" placeholder="Enter name..." class="textbox">
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonCancel" data-dismiss="modal">Cancel</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonOK" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="modal fade" id="successfulDownload" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content successfulyDownloaded">
+				<style>
+					h12 {
+						font-size: 22px;
+						position: absolute;
+						top: 10px;
+						left: 43px;
+					}
+
+					.rectangle2 {
+						position: absolute;
+						top: 10px;
+						left: 0px;
+						width: 100%;
+						height: 50px;
+						background-color: whitesmoke
+					}
+
+					.buttonOK2 {
+						position: absolute;
+						bottom: 0px;
+						right: 0px;
+						font-size: 18px;
+						height: 40px;
+						width: 100%;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						font-weight: bold;
+					}
+				</style>
+				<div class="rectangle2"></div>
+
+				<h12>Downloaded successfully!</h12>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonOK2" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	@if (User.IsInRole("Critic"))
+	{
+
+		<div class="modal fade" id="criticActions" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content criticComment">
+					<style>
+						h13 {
+						font-size: 22px;
+						position: absolute;
+						top: 20px;
+						left: 55px;
+						}
+
+						.rectangle3 {
+						position: absolute;
+						top: 10px;
+						left: 0px;
+						width: 100%;
+						height: 50px;
+						background-color: #a8b6f0;
+						}
+
+						.buttonConfirm {
+						position: absolute;
+						bottom: 0px;
+						right: 0px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						font-weight: bold;
+						}
+
+						.buttonCancel3 {
+						position: absolute;
+						bottom: 0px;
+						right: 110px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						}
+
+						.textbox3 {
+						border-color: #0b2847;
+						position: absolute;
+						top: 70px;
+						left: 50px;
+						font-size: 18px;
+						height: 280px;
+						width: 290px;
+						}
+					</style>
+					<div class="rectangle3">	</div>
+					<h13>You are logged in as Critic</h13>
+
+
+					<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	@if(User.IsInRole("Registered user"))
+	{
+		<div class="modal fade" id="userActions" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content criticComment">
+					<style>
+						h13 {
+							font-size: 22px;
+							position: absolute;
+							top: 20px;
+							left: 55px;
+						}
+
+						.rectangle3 {
+							position: absolute;
+							top: 10px;
+							left: 0px;
+							width: 100%;
+							height: 50px;
+							background-color: #a8b6f0;
+						}
+
+						.buttonConfirm {
+							position: absolute;
+							bottom: 0px;
+							right: 0px;
+							font-size: 18px;
+							height: 40px;
+							width: 110px;
+							background-color: whitesmoke;
+							color: #0b2847;
+							border-color: #0b2847;
+							font-weight: bold;
+						}
+
+						.buttonCancel3 {
+							position: absolute;
+							bottom: 0px;
+							right: 110px;
+							font-size: 18px;
+							height: 40px;
+							width: 110px;
+							background-color: whitesmoke;
+							color: #0b2847;
+							border-color: #0b2847;
+						}
+
+						.textbox3 {
+							border-color: #0b2847;
+							position: absolute;
+							top: 70px;
+							left: 50px;
+							font-size: 18px;
+							height: 280px;
+							width: 290px;
+						}
+					</style>
+					<div class="rectangle3">	</div>
+					<h13>You are logged in as Critic</h13>
+
+
+					<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	}
+	<div class="modal fade" id="criticActionsRating" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content criticComment">
+				<style>
+					h13 {
+						font-size: 22px;
+						position: absolute;
+						top: 20px;
+						left: 55px;
+					}
+
+					.rectangle3 {
+						position: absolute;
+						top: 10px;
+						left: 0px;
+						width: 100%;
+						height: 50px;
+						background-color: #a8b6f0;
+					}
+
+					.buttonConfirm {
+						position: absolute;
+						bottom: 0px;
+						right: 0px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						font-weight: bold;
+					}
+
+					.buttonCancel3 {
+						position: absolute;
+						bottom: 0px;
+						right: 110px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+					}
+
+					.starbar {
+						border-color: #0b2847;
+						position: absolute;
+						top: 70px;
+						left: 50px;
+						font-size: 18px;
+						height: 280px;
+						width: 290px;
+					}
+
+				</style>
+				<div class="rectangle3">	</div>
+				<h13>You are logged in as Critic</h13>
+
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
