@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Spotifive.Migrations
 {
-    public partial class drmiggggg : Migration
+    public partial class firstspotimigrationfive : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,9 @@ namespace Spotifive.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageM = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageF = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,7 +31,8 @@ namespace Spotifive.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ArtistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArtistSurname = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ArtistSurname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,7 +101,8 @@ namespace Spotifive.Migrations
                     DateRelease = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Genre = table.Column<int>(type: "int", nullable: false),
                     CodeQR = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkYT = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LinkYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -397,6 +401,58 @@ namespace Spotifive.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EditorSongs",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EditorID = table.Column<int>(type: "int", nullable: false),
+                    SongID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EditorSongs", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_EditorSongs_Editor_EditorID",
+                        column: x => x.EditorID,
+                        principalTable: "Editor",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_EditorSongs_Song_SongID",
+                        column: x => x.SongID,
+                        principalTable: "Song",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSongs",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    SongID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSongs", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_UserSongs_RegisteredUser_UserID",
+                        column: x => x.UserID,
+                        principalTable: "RegisteredUser",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_UserSongs_Song_SongID",
+                        column: x => x.SongID,
+                        principalTable: "Song",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ArtistSongs_ArtistID",
                 table: "ArtistSongs",
@@ -452,6 +508,16 @@ namespace Spotifive.Migrations
                 column: "SongID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EditorSongs_EditorID",
+                table: "EditorSongs",
+                column: "EditorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EditorSongs_SongID",
+                table: "EditorSongs",
+                column: "SongID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Person_AccountID",
                 table: "Person",
                 column: "AccountID");
@@ -480,6 +546,16 @@ namespace Spotifive.Migrations
                 name: "IX_Review_SongID",
                 table: "Review",
                 column: "SongID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSongs_SongID",
+                table: "UserSongs",
+                column: "SongID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSongs_UserID",
+                table: "UserSongs",
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -506,16 +582,16 @@ namespace Spotifive.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Editor");
+                name: "EditorSongs");
 
             migrationBuilder.DropTable(
                 name: "PlaylistSongs");
 
             migrationBuilder.DropTable(
-                name: "RegisteredUser");
+                name: "Review");
 
             migrationBuilder.DropTable(
-                name: "Review");
+                name: "UserSongs");
 
             migrationBuilder.DropTable(
                 name: "Artist");
@@ -527,16 +603,22 @@ namespace Spotifive.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Editor");
+
+            migrationBuilder.DropTable(
                 name: "Playlist");
 
             migrationBuilder.DropTable(
                 name: "Critic");
 
             migrationBuilder.DropTable(
-                name: "Song");
+                name: "RegisteredUser");
 
             migrationBuilder.DropTable(
                 name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "Song");
 
             migrationBuilder.DropTable(
                 name: "Account");

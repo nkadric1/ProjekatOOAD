@@ -17,7 +17,11 @@ namespace Spotifive.Data
        public DbSet<Administrator> Administrator { get; set; }
        public DbSet<Artist> Artist { get; set; }
         public DbSet<ArtistSongs> ArtistSongs { get; set; }
-       public DbSet<Critic> Critic { get; set; }
+        public DbSet<EditorSongs> EditorSongs { get; set; }
+        public DbSet<EditorSongs> UserSongs { get; set; }
+
+
+        public DbSet<Critic> Critic { get; set; }
       public DbSet<Editor> Editor { get; set; }
         public DbSet<Song>  Song { get; set; }
       public DbSet<Person> Person { get; set; }
@@ -34,6 +38,9 @@ namespace Spotifive.Data
            modelBuilder.Entity<Critic>().ToTable("Critic");
             modelBuilder.Entity<Editor>().ToTable("Editor");
             modelBuilder.Entity<ArtistSongs>().ToTable("ArtistSongs");
+            modelBuilder.Entity<EditorSongs>().ToTable("EditorSongs");
+            modelBuilder.Entity<UserSongs>().ToTable("UserSongs");
+
             modelBuilder.Entity<Song>().ToTable("Song");
            modelBuilder.Entity<Person>().ToTable("Person");
            modelBuilder.Entity<Playlist>().ToTable("Playlist");

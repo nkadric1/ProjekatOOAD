@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\Spotifive.csproj": {}
+    "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\Spotifive.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\Spotifive.csproj": {
+    "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\Spotifive.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\Spotifive.csproj",
+        "projectUniqueName": "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\Spotifive.csproj",
         "projectName": "Spotifive",
-        "projectPath": "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\Spotifive.csproj",
+        "projectPath": "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\Spotifive.csproj",
         "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\obj\\",
+        "outputPath": "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",

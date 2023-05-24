@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z2R5nGgOIK076RmCkFWKSwp7YbgSvCCWFexPnb5nUMYtASylTyN0D5y0KdWLhJpyehF1uMJEBgF+VMv2kFN1Ng==",
+  "dgSpecHash": "GLiiBcOU31TxlI5C12yMRytsdrfZN9YUP/AHLKf77qtkYm4xOwX4ZZRU4zQrxLGkiPAA5U2AAI0H3PEMduxc5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\x\\source\\repos\\ProjekatOOADv6.0\\Spotifive\\Spotifive.csproj",
+  "projectFilePath": "C:\\Users\\x\\Source\\Repos\\ProjekatOOADv8.0\\Spotifive\\Spotifive.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\x\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\x\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",
