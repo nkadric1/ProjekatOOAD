@@ -4,6 +4,7 @@ using Spotifive.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Spotifive.Data
 {
@@ -12,6 +13,24 @@ namespace Spotifive.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+        //implementation of singleton pattern
+        private static ApplicationDbContext instance;
+        private ApplicationDbContext()
+        {
+        }
+        public static ApplicationDbContext getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ApplicationDbContext();
+            }
+            return instance;
+        }
+
+        public Connection getConnection()
+        {
+            return null;
         }
         public DbSet<Account> Account { get; set; }
        public DbSet<Administrator> Administrator { get; set; }
@@ -50,6 +69,7 @@ namespace Spotifive.Data
 
             base.OnModelCreating(modelBuilder);
         }
+     
     }
 
 }

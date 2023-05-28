@@ -103,6 +103,16 @@ namespace Spotifive.Controllers
             return RedirectToAction(nameof(Index));
         }
     */
+       /* [ValidateAntiForgeryToken]
+        public IActionResult SearchSong(string name)
+        {
+            var songList = from s in Song select s;
+            if (!string.IsNullOrEmpty(name))
+            {
+                songList = songList.Where(r => r.name.Contains(name));
+            }
+            return View(songList.ToList());
+        }*/
         private bool SongExists(int id)
         {
             return _context.Song.Any(e => e.ID == id);

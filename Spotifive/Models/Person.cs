@@ -15,6 +15,16 @@ namespace Spotifive.Models
         [ForeignKey("Account")] public int AccountID { get; set; }
         public Account Account { get; set; }
         public Person() { }
+        //implementation of prototype pattern
+
+        public virtual Person Clone()
+        {
+            Person clone = (Person)this.MemberwiseClone();
+            clone.Name = String.Copy(Name);
+            clone.Surname = String.Copy(Surname);
+            clone.Gender = Gender;
+            return clone;
+        }
       
     }
 }
