@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Spotifive.Data;
 using Spotifive.Models;
 using System;
 using System.Collections.Generic;
@@ -11,18 +13,19 @@ namespace Spotifive.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+       // private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
-        public IActionResult Home() { return View(); }
-        public IActionResult Index()
+      
+        public async Task<IActionResult> Home()
         {
-            return View();
+            return View(await _context.Song.ToListAsync());
         }
-
+    
         public IActionResult Privacy()
         {
             return View();

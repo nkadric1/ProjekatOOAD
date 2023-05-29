@@ -1,4 +1,4 @@
-﻿@model Spotifive.Models.Artist
+﻿@model IEnumerable< Spotifive.Models.Artist>
 
 @{
     ViewData["Title"] = "Artists";
@@ -15,8 +15,8 @@
     <style>
         .search-container {
             position: fixed;
-            top: 30px;
-            left: 340px;
+            top: 2%;
+            left: 20%;
         }
 
         .search-box {
@@ -30,7 +30,8 @@
 
         .search-button {
             position: fixed;
-            top: 50px;
+            top: 4.5%;
+            left: 42%;
             font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
             font-size: 22px;
             border-radius: 30px;
@@ -69,8 +70,8 @@
     <style>
         h1 {
             position: fixed;
-            top: 140px;
-            left: 350px;
+            top: 20%;
+            left: 20%;
             font-size: 40px;
             font-weight: bold;
         }
@@ -98,6 +99,17 @@
             position: fixed;
             bottom: 40px;
             right: 60px;
+        }
+
+        .imgpos {
+            height: 150px;
+            width: 150px;
+        }
+
+        .tabpos {
+            position: fixed;
+            top: 40%;
+            left: 20%;
         }
     </style>
 
@@ -143,7 +155,21 @@
         }
 
     </div>
+    <table class="table tabpos">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="font-size:24px">
 
+                        @Html.DisplayFor(modelItem => item.ArtistName)
+                    </td>
+                   
+
+                </tr>
+            }
+        </tbody>
+    </table>
     <div>
         <a href="your-link-here">
             <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">

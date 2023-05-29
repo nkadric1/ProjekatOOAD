@@ -19,12 +19,8 @@ namespace Spotifive.Controllers
             _context = context;
         }
 
-        // GET: Artist
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Artist.ToListAsync());
-        }
-        public IActionResult Artist() { return View(); }
+    
+        public async Task<IActionResult> Artist() { return View(await _context.Artist.ToListAsync()); }
         // GET: Artist/Details/5
         public async Task<IActionResult> Details(int? id)
         {
