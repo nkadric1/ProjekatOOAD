@@ -1,4 +1,4 @@
-﻿@model Spotifive.Models.Playlist
+﻿@model IEnumerable<Spotifive.Models.Playlist>
 
 @{
     ViewData["Title"] = "Playlists";
@@ -99,6 +99,12 @@
             bottom: 40px;
             right: 60px;
         }
+
+        .table_text {
+            color: #0b2847;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+        }
     </style>
 
 </head>
@@ -156,5 +162,22 @@
         -->
 
     </div>
+
+    <!--lista playlista-->
+    <table class="table table_text">
+        <tbody>
+            @foreach (var item in Model)
+            {
+				<tr>
+					<a asp-asp-controller="Song" asp-action="Song" asp-route-id="@item.ID">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaylistName)
+                    </td>
+
+                    </a> |
+                </tr>
+            }
+        </tbody>
+    </table>
 
 </body>

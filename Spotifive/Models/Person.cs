@@ -11,7 +11,9 @@ namespace Spotifive.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Gender Gender { get; set; }
+
+		[EnumDataType(typeof(Gender))]
+		public Gender Gender { get; set; }
         [ForeignKey("Account")] public int AccountID { get; set; }
         public Account Account { get; set; }
         public Person() { }

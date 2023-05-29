@@ -90,7 +90,7 @@ namespace Spotifive.Controllers
 
             return View(song);
         }
-        /*
+		/*
         // POST: Song/Delete/5
 
         [HttpPost, ActionName("Delete")]
@@ -103,7 +103,39 @@ namespace Spotifive.Controllers
             return RedirectToAction(nameof(Index));
         }
     */
-        private bool SongExists(int id)
+		// POST: Song/Edit
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("ID,SongName,DateRelease,Genre,CodeQR,LinkYT")] Song song)
+		{
+			if (id != song.ID)
+			{
+				return NotFound();
+			}
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					_context.Update(song);
+					await _context.SaveChangesAsync();
+				}
+				catch (DbUpdateConcurrencyException)
+				{
+					if (!SongExists(song.ID))
+					{
+						return NotFound();
+					}
+					else
+					{
+						throw;
+					}
+				}
+				return RedirectToAction(nameof(Song));
+			}
+			return View(song);
+		}
+
+		private bool SongExists(int id)
         {
             return _context.Song.Any(e => e.ID == id);
         }

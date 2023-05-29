@@ -27,7 +27,9 @@ namespace Spotifive.Controllers
 		public IActionResult SignUp() { return View(); }
 		public IActionResult Reset() { return View(); }
 		public IActionResult LogIn() { return View(); }
-        public IActionResult Account() { return View(); }
+
+        public IActionResult Account() {
+			return View(); }
 
 
         // GET: Account/Details/5
@@ -154,5 +156,8 @@ namespace Spotifive.Controllers
         {
             return _context.Account.Any(e => e.ID == id);
         }
-    }
+
+		//DODANO
+		
+	}
 }
