@@ -9,15 +9,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Spotifive.Data;
 
 namespace Spotifive.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordModel(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -28,7 +29,8 @@ namespace Spotifive.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            public string Username { get; set; }
+            [EmailAddress]
+            public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -43,7 +45,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
             public string Code { get; set; }
         }
 
-    /*    public IActionResult OnGet(string code = null)
+        public IActionResult OnGet(string code = null)
         {
             if (code == null)
             {
@@ -57,7 +59,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
                 };
                 return Page();
             }
-        }*/
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -66,7 +68,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
                 return Page();
             }
 
-            var user = await _userManager.FindByEmailAsync(Input.Username);
+            var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

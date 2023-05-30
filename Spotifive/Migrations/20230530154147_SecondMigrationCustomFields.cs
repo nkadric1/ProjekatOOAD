@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Spotifive.Migrations
 {
-    public partial class firstspotimigrationfive : Migration
+    public partial class SecondMigrationCustomFields : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,6 +58,11 @@ namespace Spotifive.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Surname = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", maxLength: 250, nullable: false),
+                    Gender = table.Column<int>(type: "int", maxLength: 250, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -98,7 +103,7 @@ namespace Spotifive.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SongName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateRelease = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateRelease = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Genre = table.Column<int>(type: "int", nullable: false),
                     CodeQR = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LinkYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
