@@ -76,12 +76,10 @@
 			width: 40px;
 		}
 
-		.play {
+		.playsong {
 			position: absolute;
-			bottom: 80px;
-			left: 50%;
-			height: 45px;
-			width: 45px;
+			bottom: 140px;
+			left: 20%;
 		}
 
 		.next {
@@ -107,18 +105,7 @@
 			font-size: 20px;
 		}
 
-		#progressBar {
-			background-color: white;
-			position: absolute;
-			bottom: 155px;
-			left: 31%;
-			height: 10px;
-			width: 600px;
-		}
-
-			#progressBar::-webkit-progress-value {
-				background-color: #a8b6f0; /* Set the color to #a8b6f0 */
-			}
+	
 
 		.edit {
 			position: absolute;
@@ -200,9 +187,11 @@
 	</a>
 
 	<p class="textDownload">Download</p>
-	<img class="previous" src="~/assets/images/Previous.png" />
-	<img class="play" src="~/assets/images/Play.png" />
-	<img class="next" src="~/assets/images/Next.png" />
+	
+		<audio controls style="width: 70%" class="playsong">
+			<source src="https://drive.google.com/uc?export=download&id=1Q7rgf3clizZtY6_6TKaibBAFrF6mY0sJ" />
+		</audio>
+
 
 	<a href="#addToPlaylist" data-toggle="modal">
 		<img class="add" src="~/assets/images/Add.png" />
@@ -212,7 +201,6 @@
 	<img class="edit" src="~/assets/images/Edit.png" />
 	<p class="textEdit">Edit</p>
 	<!--Timestamp dodati dinamicki!!!-->
-	<progress class="progress" id="progressBar" value="50" max="100"></progress>
 
 
 	<div class="modal fade" id="addToPlaylist" data-backdrop="static" data-keyboard="false">

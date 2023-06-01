@@ -166,19 +166,7 @@
             <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
         
     </div>
-    <ul id="songList">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td style="font-size:24px">
-
-                    @Html.DisplayFor(modelItem => item.SongName)
-                </td>
-             
-
-            </tr>
-        }
-    </ul>
+  
     <table class="table tabpos" >
         <tbody>
             @foreach (var item in Model)
@@ -204,13 +192,7 @@
         <a href="your-link-here">
             <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
         </a>
-        <!--ili ovako-->
-        <!--
-                    <button onclick="window.location.href='your-link'">
-          <img src="your-here-image-source" altImage Button">
-        ="</button>
-
-        -->
+  
 
     </div>
 

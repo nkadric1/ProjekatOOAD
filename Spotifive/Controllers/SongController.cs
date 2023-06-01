@@ -70,7 +70,6 @@ namespace Spotifive.Controllers
         public IActionResult Edit() { return View(); }
 		[Authorize(Roles = "Editor,Registered user,Critic")]
 		public IActionResult Details() { return View(); }
-		[Authorize(Roles = "Editor,Registered user,Critic")]
 		public IActionResult Song() { return View(); }
         [Authorize(Roles = "Editor")]
         // GET: Song/Delete/5
