@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Spotifive.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
@@ -11,6 +12,8 @@ namespace Spotifive.Models
         public string Email { get; set; }
         public string ImageM { get; set; }
         public string ImageF { get; set; }
-        public Account() { }
+		[ForeignKey("ApplicationUser")] public int UserID { get; set; }
+		public ApplicationUser User { get; set; }
+		public Account() { }
     }
 }

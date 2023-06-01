@@ -4,14 +4,114 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+	<link rel="stylesheet" href="~/css/motoDark.css">
+	<link rel="stylesheet" href="~/css/bodyLight.css">
+	<link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
+
+
+	<style>
+		.posLogo {
+			position: absolute;
+			top: 7px;
+			left: 10px;
+		}
+	</style>
+
+	<style>
+		.buttonUserCritic {
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+			font-size: 22px;
+			border-radius: 30px;
+			background-color: #0b2847;
+			text-align: center;
+			color: #a8b6f0;
+			padding-right: 15px;
+			padding-left: 15px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	</style>
+
+	<style>
+		posButtonUser {
+			position: absolute;
+			right: 400px;
+			bottom: 120px;
+		}
+		posrole{
+			position: absolute;
+			left:400px;
+			bottom: 200px;
+		}
+	</style>
+
+
+	<style>
+		h1 {
+			font-size: 40px;
+		}
+	</style>
+
+	<style>
+		positionh1 {
+			position: absolute;
+			top: 90px;
+			left: 690px;
+		}
+	</style>
+
+	<style>
+		position1 {
+			position: absolute;
+			top: 200px;
+			left: 400px;
+		}
+	</style>
+
+	<style>
+		position2 {
+			position: absolute;
+			top: 200px;
+			right: 400px;
+		}
+	</style>
+
+	<style>
+		h6 {
+			font-size: 20px;
+		}
+	</style>
+
+	<style>
+		positionh6 {
+			position: absolute;
+			top: 150px;
+			left: 620px;
+		}
+	</style>
+
+	<style>
+		linking {
+			font-size: 20px;
+			color: #025abf;
+			font-style: italic;
+		}
+	</style>
+
+	<moto></>Let the music move you.</moto>
+</head>
+<body>
+	<img width="130" height="100" class="posLogo" src="~/assets/images/SpotiFIVELogo.png">
+	<h1><positionh1>Sign up</positionh1></h1>
+	<h6><positionh6>Already have an account? <a asp-area="Identity" asp-page="/Account/Login">Log in.</a></positionh6></h6>
 
 <div class="row">
-    <div class="col-md-4">
+  <!--  <div class="col-md-4">-->
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
+           <!-- <div asp-validation-summary="All" class="text-danger"></div>-->
 			<position1>
 				<div>
 					<div class="form-group">
@@ -60,47 +160,32 @@
 					</div>
 				</div>
 			</position2>
-			@Html.Hidden("Select", (object)ViewBag.Select)
-			<select asp-for="Input.Role" name="role" id="role" style="align:center;" class="dropdown">
-				<option selected="selected" value="registered">RegisteredUser</option>
-				<option value="critic">Critic</option>
-				<option value="editor">Editor</option>
-			</select>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
+<posrole>
+			
+				<div class="form-group">
+					<label asp-for="Input.Role"></label>
+					<select asp-for="Input.Role" class="form-control" asp-items="ViewBag.Role">
+					</select>
+					<span asp-validation-for="Input.Role" class="text-danger"></span>
+				</div>
 
+			</posrole>
+            <!--<button type="submit" class="btn btn-primary">Register</button>-->
+				<posButtonUser>
+					<div class="form-group">
+
+						<button type="submit" class="buttonUserCritic">Sign up</button>
+
+					</div>
+				</posButtonUser>
+        </form>
+  
+
+<!--
+			</div>
+	-->
+</div>
+</body>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

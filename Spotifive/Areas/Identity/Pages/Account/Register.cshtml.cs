@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Spotifive.Data;
@@ -90,9 +91,12 @@ namespace Spotifive.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl;
+			
+			ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        }
+			IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
+			ViewData["Role"] = new SelectList(roles.ToList(), "Name");
+		}
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -100,7 +104,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName= Input.Username ,Name = Input.Name, Surname = Input.Surname, DateOfBirth = Input.DateOfBirth, Email = Input.Email, Gender = Input.Gender};
+                var user = new ApplicationUser { UserName= Input.Username ,Name = Input.Name, Surname = Input.Surname, DateOfBirth = Input.DateOfBirth, Email = Input.Email, Gender = Input.Gender, Role=Input.Role};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

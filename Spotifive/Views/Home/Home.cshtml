@@ -154,20 +154,17 @@
 
 
     <div class="positionh2">
-        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
-        {
+        
             <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
-        }
+        
         <br>
-        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic")){
 
             <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
-        }
+        
         <br>
-        @if (User.IsInRole("Registered user"))
-        {
+       
             <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
-        }
+        
     </div>
     <ul id="songList">
         @foreach (var item in Model)

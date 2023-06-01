@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Spotifive.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace Spotifive.Data
@@ -18,5 +19,8 @@ namespace Spotifive.Data
 		public Gender Gender { get; set; }
 	
 		public string Role { get; set; }
+		[ForeignKey("Account")] public int AccountID { get; set; }
+		public Account Account { get; set; }
+
 	}
 }

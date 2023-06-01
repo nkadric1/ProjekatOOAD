@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Spotifive.Data;
 
 namespace Spotifive.Models
 {
     public class EditorSongs
     {
         [Key] public int ID { get; set; }
-        [ForeignKey("Editor")] public int EditorID { get; set; }
         [ForeignKey("Song")] public int SongID { get; set; }
         public Song Song { get; set; }
-        public Editor Editor{ get; set; }
-        public EditorSongs() { }
+		[ForeignKey("ApplicationUser")] public int UserID { get; set; }
+		public ApplicationUser AppUser { get; set; }
+		public EditorSongs() { }
     }
 }
