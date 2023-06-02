@@ -835,9 +835,6 @@ C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Spotifive.Ta
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Spotifive.RazorCoreGenerate.cache
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Account.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\LogIn.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\Reset.cshtml.g.cs
-C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Account\SignUp.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Administrator\Administrator.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Artist\Artist.cshtml.g.cs
 C:\Users\x\Source\Repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Home\Home.cshtml.g.cs

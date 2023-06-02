@@ -161,14 +161,13 @@
 				</div>
 			</position2>
 <posrole>
-			
+			<form method="post">
 				<div class="form-group">
-					<label asp-for="Input.Role"></label>
 					<select asp-for="Input.Role" class="form-control" asp-items="ViewBag.Role">
 					</select>
 					<span asp-validation-for="Input.Role" class="text-danger"></span>
 				</div>
-
+				</form>
 			</posrole>
             <!--<button type="submit" class="btn btn-primary">Register</button>-->
 				<posButtonUser>

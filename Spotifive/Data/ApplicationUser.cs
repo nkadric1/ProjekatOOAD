@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Spotifive.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ namespace Spotifive.Data
 {
     public class ApplicationUser: IdentityUser
 	{
-	
+		
 		public string Name { get; set; }
 	
 		public string Surname { get; set; }
@@ -19,8 +20,10 @@ namespace Spotifive.Data
 		public Gender Gender { get; set; }
 	
 		public string Role { get; set; }
-		[ForeignKey("Account")] public int AccountID { get; set; }
-		public Account Account { get; set; }
+
+		public ApplicationUser() { }
+		
+
 
 	}
 }

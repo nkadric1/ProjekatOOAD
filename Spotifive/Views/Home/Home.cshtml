@@ -1,5 +1,4 @@
 ﻿@model IEnumerable< Spotifive.Models.Song>
-
 @{
     ViewData["Title"] = "Home";
 }
@@ -9,7 +8,14 @@
     <link rel="stylesheet" href="~/css/bodyLight.css">
     <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
     <link rel="stylesheet" href="~/css/logo.css">
-
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
     <!--Search bar-->
 
     <style>
@@ -19,7 +25,15 @@
             bottom: 40px;
             right: 60px;
         }
-   
+    secsongs{
+        position:absolute;
+        top: 30%;
+        left: 20%;
+        
+    }
+    header{
+        position:relative;
+    }
         .search-container {
             position: fixed;
             top: 2%;
@@ -50,6 +64,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
+
     </style>
 
     <style>
@@ -113,10 +128,9 @@
     </style>
 
 </head>
+<header>
 
-<body>
-
-    <div class="search-container" >
+    <div class="search-container">
         <form action="#">
             <input id="searchBar" type="text" class="search-box" placeholder="Type here">
             <button id="search" class="search-button">Search</button>
@@ -140,53 +154,62 @@
                 }
             }
         });
-        </script>
-
+    </script>
     <!--User avatar-->
 
     <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
-    <!--Tekst-->
 
     <div>
         <h1>Top songs</h1>
     </div>
-
-
     <div class="positionh2">
-        
-            <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
-        
+
+        <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
+
         <br>
 
-            <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
-        
+        <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
+
         <br>
-       
-            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
-        
+
+        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
+
     </div>
   
-    <table class="table tabpos" >
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td style="font-size:24px">
-                       
-                        @Html.DisplayFor(modelItem => item.SongName)
-                    </td>
-                    <td>
-                        <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song"><img class="imgpos" src=@item.Image></a>
+</header>
 
-                    </td>
-     
-                </tr>
-            }
-        </tbody>
-    </table>
 
- 
+   
+
+    
+
+   
+        <secsongs>
+        @foreach (var item in Model)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <hr>
+                        <div class="profile-card-2">
+                            <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
+                                <img src=@item.Image alt="@item.SongName" class="img-fluid w-50 h-50">
+                            </a>
+                            <p class="text-left">@item.SongName</p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+
+
+
+
+    </secsongs> 
       
     <div>
         <a href="your-link-here">
@@ -196,4 +219,3 @@
 
     </div>
 
-</body>

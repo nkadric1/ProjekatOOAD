@@ -162,9 +162,6 @@ namespace Spotifive.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -231,9 +228,6 @@ namespace Spotifive.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountID")
-                        .IsUnique();
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -263,9 +257,6 @@ namespace Spotifive.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
@@ -450,6 +441,9 @@ namespace Spotifive.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ArtistID")
+                        .HasColumnType("int");
+
                     b.Property<string>("CodeQR")
                         .HasColumnType("nvarchar(max)");
 
@@ -469,6 +463,8 @@ namespace Spotifive.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ArtistID");
 
                     b.ToTable("Song");
                 });
@@ -577,17 +573,6 @@ namespace Spotifive.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Spotifive.Data.ApplicationUser", b =>
-                {
-                    b.HasOne("Spotifive.Models.Account", "Account")
-                        .WithOne("User")
-                        .HasForeignKey("Spotifive.Data.ApplicationUser", "AccountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("Spotifive.Models.ArtistSongs", b =>
                 {
                     b.HasOne("Spotifive.Models.Artist", "Artist")
@@ -671,6 +656,15 @@ namespace Spotifive.Migrations
                     b.Navigation("Song");
                 });
 
+            modelBuilder.Entity("Spotifive.Models.Song", b =>
+                {
+                    b.HasOne("Spotifive.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistID");
+
+                    b.Navigation("Artist");
+                });
+
             modelBuilder.Entity("Spotifive.Models.UserSongs", b =>
                 {
                     b.HasOne("Spotifive.Data.ApplicationUser", "AppUser")
@@ -722,11 +716,6 @@ namespace Spotifive.Migrations
                         .HasForeignKey("Spotifive.Models.RegisteredUser", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Account", b =>
-                {
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

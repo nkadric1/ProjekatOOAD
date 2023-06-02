@@ -14,6 +14,7 @@ namespace Spotifive.Models
         public string CodeQR { get; set; }
         public string LinkYT { get; set; }
         public string Image { get; set; }
+        public Artist Artist { get; set; }
         public Song() { }
     }
 }

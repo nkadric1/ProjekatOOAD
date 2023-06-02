@@ -1,8 +1,9 @@
-﻿@model Spotifive.Models.Account
+﻿@model CurrentUser
+@using Microsoft.AspNetCore.Identity
+@using Spotifive.Data
+@inject UserManager<ApplicationUser> UserManager
 @{
-}
-@{
-    ViewData["Title"] = "User";
+    var user = await UserManager.GetUserAsync(User);
 }
 <body style="background-color:#0b2847;">
 </body>
@@ -30,12 +31,13 @@
         height: 300px;
         background-color: #a8b6f0;
     }
-</style>
 
-<div class="text-box">
-    <div class="background"></div>
-</div>
-<style>
+    .bckh1 {
+        position: fixed;
+        top: 150px;
+        left: 380px;
+        color: #a8b6f0;
+    }
     .text-box10 {
         color: #0b2847;
         font-family: Montserrat;
@@ -46,7 +48,8 @@
     .background1 {
         position: fixed;
         top: 520px;
-        left: 1100px;    }
+        left: 1100px;
+    }
 
     .buttonUserCritic {
         font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
@@ -59,161 +62,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
-</style>
 
-<div class="text-box10" ;">
-    <button class="background1 buttonUserCritic"> <a asp-action="Index" asp-controller="Account" style="color:#0b2847">Sign out</a></button>
-</div>
-
-
-<style>
-    .bckh1 {
-        position: fixed;
-        top: 150px;
-        left: 380px;
-        color:#a8b6f0;
-    }
-</style>
-<input class="bckh1"  type="text" id="username" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
-    
-<style>
-    h2 {
-        position: fixed;
-        top: 300px;
-        left: 220px;
-    }
-</style>
-
-<h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
-    <b>Name:</b>
-</h2>
-
-<style>
-    h3 {
-        position: fixed;
-        top: 340px;
-        left: 220px;
-    }
-</style>
-
-<h3 style="color:#0b2847; font-family: Montserrat ; font-size: 20px">
-    <b>Surname:</b>
-</h3>
-
-<style>
-    h4 {
-        position: fixed;
-        top: 380px;
-        left: 220px;
-    }
-</style>
-
-<h4 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-    <b>Date of birth:</b>
-</h4>
-<style>
-    h5 {
-        position: fixed;
-        top: 420px;
-        left: 220px;
-    }
-</style>
-
-<h5 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-    <b>E-mail:</b>
-</h5>
-<style>
-    h6 {
-        position: fixed;
-        top: 460px;
-        left: 220px;
-    }
-</style>
-
-<h6 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-    <b>Password:</b>
-</h6>
-
-<style>
-    .text-box {
-        border: 1px solid white;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        position: fixed;
-        top: 300px;
-        left: 400px;
-        font-family: Montserrat;
-        color: #0b2847;
-    }
-</style>
-
-<input type="text" class="text-box" id="name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-<style>
-    .text-box1 {
-        border: 1px solid white;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        position: fixed;
-        top: 340px;
-        left: 400px;
-        font-family: Montserrat;
-        color: #0b2847;
-    }
-</style>
-
-<input type="text" class="text-box1" id="surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-
-<style>
-    .text-box2 {
-        border: 1px solid white;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        position: fixed;
-        top: 380px;
-        left: 400px;
-        font-family: Montserrat;
-        color: #0b2847;
-    }
-</style>
-
-<input type="date" class="text-box2" id="date" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-
-<style>
-    .text-box3 {
-        border: 1px solid white;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        position: fixed;
-        top: 420px;
-        left: 400px;
-        font-family: Montserrat;
-        color: #0b2847;
-    }
-</style>
-
-<input type="email" class="text-box3" id="email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-
-<style>
-    .text-box4 {
-        border: 1px solid white;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        position: fixed;
-        top: 460px;
-        left: 400px;
-        font-family: Montserrat;
-        color: #0b2847;
-    }
-</style>
-
-<input type="password" class="text-box4" id="pass" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-
-<style>
     .image2 {
         position: fixed;
         top: 100px;
@@ -221,7 +70,51 @@
         height: 30px;
         width: 30px;
     }
-
 </style>
+
+<div class="text-box">
+    <div class="background"></div>
+</div>
+
+<input class="bckh1" type="text" value="@user.UserName" asp-for="Username" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
+
+<form method="post" asp-route-change="data">
+    <div class="form-group mb-3">
+        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <b>Name:</b> 
+        </h2>
+        <input type="text" class="form-control" value="@user.Name" asp-for="Name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+    </div>
+    <div class="form-group mb-3">
+        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <b>Surname:</b>
+        </h2>
+        <input type="text" class="form-control" value="@user.Surname" asp-for="Surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+    </div>
+    <div class="form-group mb-3">
+        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <b>Date of birth:</b>
+        </h2>
+        <input type="date" class="form-control" value="@user.DateOfBirth" asp-for="Date" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+    </div>
+    <div class="form-group mb-3">
+        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <b>E-mail:</b>
+        </h2>
+        <input type="email" class="form-control" value="@user.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+    </div>
+    <div class="form-group mb-3">
+        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <b>Password:</b>
+        </h2>
+        <input type="password" class="form-control" asp-for="Password" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+    </div>
+</form>
+
+
+<div class="text-box10" ;">
+    <button class="background1 buttonUserCritic"> <a asp-action="Index" asp-controller="Account" style="color:#0b2847">Sign out</a></button>
+</div>
+
 <a asp-action="Home" asp-controller="Home"><img class="image2" src="https://static.vecteezy.com/system/resources/thumbnails/009/385/954/small/house-symbol-and-home-icon-sign-design-free-png.png"/>
 </a>
