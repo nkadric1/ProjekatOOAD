@@ -18,6 +18,8 @@ namespace Spotifive.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Playlist() { return View(await _context.Playlist.ToListAsync()); }
+
 
         // GET: Playlist
         public async Task<IActionResult> Index()
@@ -144,7 +146,7 @@ namespace Spotifive.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Playlist() { return View(); }
+       
         public IActionResult PlaylistSongs() { return View(); }
 
         private bool PlaylistExists(int id)

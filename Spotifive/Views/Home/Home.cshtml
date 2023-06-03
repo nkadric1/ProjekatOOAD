@@ -86,6 +86,18 @@
             width: 50px;
         }
 
+        .imagesong{
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            width: 150px;
+            height: 150px;
+        }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+
     </style>
 
 
@@ -165,15 +177,15 @@
     </div>
     <div class="positionh2">
 
-        <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
+        <button class="buttons"><a asp-action="Home" asp-controller="Home" style="color:#0b2847;">Home</a></button>
 
         <br>
 
-        <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
+        <button class="buttons"><a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;">Artists</a></button>
 
         <br>
 
-        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
+        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
 
     </div>
   
@@ -188,22 +200,21 @@
         <secsongs>
         @foreach (var item in Model)
         {
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <hr>
-                        <div class="profile-card-2">
-                            <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
-                                <img src=@item.Image alt="@item.SongName" class="img-fluid w-50 h-50">
-                            </a>
-                            <p class="text-left">@item.SongName</p>
+         
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
+                <div class="album-thumb">
+                    <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
+                        <img src=@item.Image alt="@item.SongName" class="imagesong">
+                    </a>
+                    <div class="album-info">
+                        <p class="text-right" style="color:#0b2847;">@item.SongName</p>
 
-                        </div>
                     </div>
-
-
                 </div>
+               
             </div>
+        </div>
         }
 
 

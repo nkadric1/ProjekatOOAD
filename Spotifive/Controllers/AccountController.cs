@@ -32,11 +32,11 @@ namespace Spotifive.Controllers
 					return View();
 		}
         [HttpPost]
-        public async Task<IActionResult> Account(CurrentUser newuser, string c)
+        public async Task<IActionResult> Account(ApplicationUser newuser, string c)
         {
             if (c == "data")
             {
-                if (newuser.Name == null || newuser.Surname == null || newuser.Username == null || newuser.Email == null)
+                if (newuser.Name == null || newuser.Surname == null || newuser.UserName == null || newuser.Email == null)
                 {
                     ModelState.AddModelError("emptyFields", "Fields cannot be empty");
                     return View(newuser);
@@ -44,9 +44,9 @@ namespace Spotifive.Controllers
                 var u = await _userManager.GetUserAsync(User);
                 u.Name = newuser.Name;
                 u.Surname = newuser.Surname;
-                u.DateOfBirth = newuser.Date;
+                u.DateOfBirth = newuser.DateOfBirth;
                 u.Email = newuser.Email;
-                u.UserName = newuser.Username;
+                u.UserName = newuser.UserName;
 
                 await _userManager.UpdateAsync(u);
                 _context.SaveChanges();

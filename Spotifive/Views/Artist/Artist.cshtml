@@ -13,6 +13,23 @@
     <!--Search bar-->
 
     <style>
+      
+        .logo {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+        }
+
+        secsongs {
+            position: absolute;
+            top: 30%;
+            left: 20%;
+        }
+
+        header {
+            position: relative;
+        }
+
         .search-container {
             position: fixed;
             top: 2%;
@@ -43,6 +60,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
+
     </style>
 
     <style>
@@ -62,6 +80,18 @@
             font-style: italic;
             height: 50px;
             width: 50px;
+        }
+
+        .imagesong {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            width: 150px;
+            height: 150px;
+        }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         }
 
     </style>
@@ -95,12 +125,6 @@
             left: 100px;
         }
 
-        .logo {
-            position: fixed;
-            bottom: 40px;
-            right: 60px;
-        }
-
         .imgpos {
             height: 150px;
             width: 150px;
@@ -115,72 +139,97 @@
 
 </head>
 
+
+
+   
+   
+
+    <header>
+      
+
+        <div class="search-container">
+            <form action="#">
+                <input id="searchBar" type="text" class="search-box" placeholder="Type here">
+                <button id="search" class="search-button">Search</button>
+            </form>
+        </div>
+        <script>
+            const searchBar = document.getElementById('searchBar');
+            const searchButton = document.getElementById('search');
+            const songList = document.querySelector('songList');
+            const songs = songList.getElementsByTagName('p');
+
+            searchButton.addEventListener('click', function () {
+                const searchTerm = searchBar.value.toLowerCase();
+
+                for (let i = 0; i < songs.length; i++) {
+                    const songName = songs[i].textContent.toLowerCase();
+                    if (songName.includes(searchTerm)) {
+                        songs[i].style.display = 'block';
+                    } else {
+                        songs[i].style.display = 'none';
+                    }
+                }
+            });
+        </script>
+        <!--User avatar-->
+
+        <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
+
+
+        <div>
+            <h1>Top artists</h1>
+        </div>
+
+        <div class="positionh2">
+
+        <button class="buttons"><a asp-action="Home" asp-controller="Home" style="color:#0b2847;">Home</a></button>
+
+            <br>
+
+        <button class="buttons"><a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;">Artists</a></button>
+
+            <br>
+
+        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+
+        </div>
+
+    </header>
+
 <body>
-
-    <div class="search-container">
-        <form action="#">
-            <input type="text" class="search-box" placeholder="Type here">
-            <button type="submit" class="search-button">Search</button>
-        </form>
-    </div>
-
-
-    <!--User avatar-->
-
-    <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
-
-    <!--Tekst-->
-
-    <div>
-        <h1>Top artists</h1>
-    </div>
-
-
-    <div class="positionh2">
-
-        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
-        {
-            <button class="buttons"><a asp-action="Home" asp-controller="Home">Home</a></button>
-        }
-        <br>
-        @if (User.IsInRole("Registered user") || User.IsInRole("Editor") || User.IsInRole("Critic"))
+    <secsongs>
+        @foreach (var item in Model)
         {
 
-            <button class="buttons"><a asp-action="Artist" asp-controller="Artist">Artists</a></button>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2" style="overflow-y:scroll; height: 500px;">
+                <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
+                    <div class="album-thumb">
+                        <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
+                            <img src=@item.Image alt="@item.ArtistName" class="imagesong">
+                        </a>
+                    </div>
+                    <div class="album-info">
+                        <p class="text-left" style="color:#0b2847;">@item.ArtistName</p>
+                        <p class="text-left" style="color:#0b2847;">@item.ArtistSurname</p>
+
+                        <br />
+                    </div>
+                </div>
+            </div>
         }
-        <br>
-        @if (User.IsInRole("Registered user"))
-        {
-            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist">Playlists</a></button>
-        }
 
-    </div>
-    <table class="table tabpos">
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td style="font-size:24px">
 
-                        @Html.DisplayFor(modelItem => item.ArtistName)
-                    </td>
-                   
 
-                </tr>
-            }
-        </tbody>
-    </table>
+
+    </secsongs>
+
+    
     <div>
         <a href="your-link-here">
             <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
         </a>
-        <!--ili ovako-->
-        <!--
-                    <button onclick="window.location.href='your-link'">
-          <img src="your-here-image-source" altImage Button">
-        ="</button>
-
-        -->
+       
 
     </div>
 
