@@ -1,5 +1,5 @@
 # SpotiFive
-![SPOTIFIVECIRCLE](https://github.com/unahodzic1/probamala/assets/122841109/eeca04fd-e6b0-464f-a29c-6d00c00c266d)
+![image](https://github.com/nkadric1/ProjekatOOAD/assets/122841109/8aa9d17b-50a8-4959-a699-222e59017ff2)
 
 ## Team Members
 1. [Nadina Miralem](https://github.com/nmiralem1)
