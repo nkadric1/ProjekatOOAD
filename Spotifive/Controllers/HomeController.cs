@@ -20,7 +20,13 @@ namespace Spotifive.Controllers
         {
             _context = context;
         }
-      
+        [HttpPost]
+        public IActionResult GetPartialView(string para)
+        {
+            //get data
+            var model = _context.Song.Where(x => x.SongName == para).ToList();
+            return PartialView("_PopView", model);
+        }
         public async Task<IActionResult> Home()
         {
             return View(await _context.Song.ToListAsync());

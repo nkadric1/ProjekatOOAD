@@ -7,6 +7,10 @@ namespace Spotifive.Models
     public class Critic : Person
     {       
         public Critic() { }
+        public override Person Clone()
+        {
+            return (Critic)this.MemberwiseClone();
+        }
 
     }
 }

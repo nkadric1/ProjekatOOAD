@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Spotifive.Data;
 using Spotifive.Models;
@@ -102,16 +104,31 @@ namespace Spotifive.Controllers
             return RedirectToAction(nameof(Index));
         }
     */
-       /* [ValidateAntiForgeryToken]
-        public IActionResult SearchSong(string name)
-        {
-            var songList = from s in Song select s;
-            if (!string.IsNullOrEmpty(name))
-            {
-                songList = songList.Where(r => r.name.Contains(name));
-            }
-            return View(songList.ToList());
-        }*/
+        /* public IActionResult SearchResult(string search)
+         {
+             List<Song> songs = _context.Song.ToList();
+             if (search == null)
+                 ViewBag.SearchResults = songs;
+             else
+             {
+                 string pattern = $"{Regex.Escape(search)}";
+                 List<Song> searchResults = songs.Where(p => Regex.IsMatch(p.SongName, pattern, RegexOptions.IgnoreCase)).ToList();
+
+                 ViewBag.SearchResults = searchResults;
+             }
+             return View(ViewBag.SearchResults);
+         }*/
+        /* [ValidateAntiForgeryToken]
+         public IActionResult SearchSong(string name)
+         {
+             var songList = from s in Song select s;
+             if (!string.IsNullOrEmpty(name))
+             {
+                 songList = songList.Where(r => r.name.Contains(name));
+             }
+             return View(songList.ToList());
+         }*/
+       
         private bool SongExists(int id)
         {
             return _context.Song.Any(e => e.ID == id);

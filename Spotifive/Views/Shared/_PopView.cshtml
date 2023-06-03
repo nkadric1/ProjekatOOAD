@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Spotifive.Models.Song>
+
+
+    <div class="row text-center" style="margin-bottom:100px;">
+        @foreach (Song item in Model)
+        {
+            <div class="col-sm-4">
+                <div>
+                    <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@item.ID" style="-webkit-text-fill-color:black;">
+                        <p><strong> @item.SongName</strong></p>
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+

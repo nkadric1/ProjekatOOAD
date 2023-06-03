@@ -1,14 +1,14 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+	ViewData["Title"] = "Register";
 }
 
 <head>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
-	<link rel="stylesheet" href="~/css/motoDark.css">
-	<link rel="stylesheet" href="~/css/bodyLight.css">
+	<link rel="stylesheet" href="/css/motoDark.css">
+	<link rel="stylesheet" href="/css/bodyLight.css">
 	<link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
 
 
@@ -22,8 +22,8 @@
 
 	<style>
 		.buttonUserCritic {
-			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-			font-size: 22px;
+			font-family: 'Montserrat', sans-serif;
+			/sans-serif is in case there is no montserrat on the user's system/ font-size: 22px;
 			border-radius: 30px;
 			background-color: #0b2847;
 			text-align: center;
@@ -41,9 +41,10 @@
 			right: 400px;
 			bottom: 120px;
 		}
-		posrole{
+
+		posrole {
 			position: absolute;
-			left:400px;
+			left: 400px;
 			bottom: 200px;
 		}
 	</style>
@@ -108,10 +109,10 @@
 	<h1><positionh1>Sign up</positionh1></h1>
 	<h6><positionh6>Already have an account? <a asp-area="Identity" asp-page="/Account/Login">Log in.</a></positionh6></h6>
 
-<div class="row">
-  <!--  <div class="col-md-4">-->
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-           <!-- <div asp-validation-summary="All" class="text-danger"></div>-->
+	<div class="row">
+		<!--  <div class="col-md-4">-->
+		<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+			<!-- <div asp-validation-summary="All" class="text-danger"></div>-->
 			<position1>
 				<div>
 					<div class="form-group">
@@ -160,31 +161,32 @@
 					</div>
 				</div>
 			</position2>
-<posrole>
-			<form method="post">
+			<posrole>
+
 				<div class="form-group">
+					<label asp-for="Input.Role"></label>
 					<select asp-for="Input.Role" class="form-control" asp-items="ViewBag.Role">
 					</select>
 					<span asp-validation-for="Input.Role" class="text-danger"></span>
 				</div>
-				</form>
+
 			</posrole>
-            <!--<button type="submit" class="btn btn-primary">Register</button>-->
-				<posButtonUser>
-					<div class="form-group">
+			<!--<button type="submit" class="btn btn-primary">Register</button>-->
+			<posButtonUser>
+				<div class="form-group">
 
-						<button type="submit" class="buttonUserCritic">Sign up</button>
+					<button type="submit" class="buttonUserCritic">Sign up</button>
 
+				</div>
+			</posButtonUser>
+		</form>
+
+
+		<!--
 					</div>
-				</posButtonUser>
-        </form>
-  
-
-<!--
-			</div>
-	-->
-</div>
+			-->
+	</div>
 </body>
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+	<partial name="_ValidationScriptsPartial" />
 }

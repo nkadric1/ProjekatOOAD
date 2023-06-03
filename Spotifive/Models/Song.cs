@@ -1,7 +1,12 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Spotifive.Models
 {
@@ -17,5 +22,6 @@ namespace Spotifive.Models
         public string Image { get; set; }
         public Artist Artist { get; set; }
         public Song() { }
+        
     }
 }

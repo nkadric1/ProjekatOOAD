@@ -5,6 +5,10 @@ namespace Spotifive.Models
 {
     public class Administrator : Person
          {       public Administrator() { }
-                
+        public override Person Clone()
+        {
+            return (Administrator)this.MemberwiseClone();
+        }
+
     }
 }

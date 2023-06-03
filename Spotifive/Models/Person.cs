@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
-    public class Person
+    public abstract class Person
     {
         [Key] public int ID { get; set; }
         public string Name { get; set; }
@@ -17,14 +17,7 @@ namespace Spotifive.Models
         public Person() { }
         //implementation of prototype pattern
 
-        public virtual Person Clone()
-        {
-            Person clone = (Person)this.MemberwiseClone();
-            clone.Name = String.Copy(Name);
-            clone.Surname = String.Copy(Surname);
-            clone.Gender = Gender;
-            return clone;
-        }
+        public abstract Person Clone();
       
     }
 }
