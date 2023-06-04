@@ -70,7 +70,15 @@ namespace Spotifive.Controllers
         public IActionResult Edit() { return View(); }
 		[Authorize(Roles = "Editor,Registered user,Critic")]
 		public IActionResult Details() { return View(); }
-		public IActionResult Song() { return View(); }
+		/*public IActionResult Song() {
+            var song = new Song();
+
+            // Call the GetComments method to populate the Reviews property
+            song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
+
+            return View(song); 
+            //return View(); 
+        }*/
         [Authorize(Roles = "Editor")]
         // GET: Song/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -116,5 +124,20 @@ namespace Spotifive.Controllers
         {
             return _context.Song.Any(e => e.ID == id);
         }
+
+        public IActionResult Song(int id)
+        {
+            var song = _context.Song.FirstOrDefault(m => m.ID == id);
+            if (song == null)
+            {
+                return NotFound();
+            }
+
+            // Call the GetComments method to populate the Reviews property
+            song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
+
+            return View(song);
+        }
+       
     }
 }

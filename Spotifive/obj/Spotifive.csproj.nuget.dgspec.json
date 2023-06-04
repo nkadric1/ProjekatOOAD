@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\x\\source\\repos\\ProjekatOOADv9.0\\Spotifive\\Spotifive.csproj": {}
+    "C:\\Users\\Amina\\Source\\Repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj": {}
   },
   "projects": {
-    "C:\\Users\\x\\source\\repos\\ProjekatOOADv9.0\\Spotifive\\Spotifive.csproj": {
+    "C:\\Users\\Amina\\Source\\Repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\x\\source\\repos\\ProjekatOOADv9.0\\Spotifive\\Spotifive.csproj",
+        "projectUniqueName": "C:\\Users\\Amina\\Source\\Repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj",
         "projectName": "Spotifive",
-        "projectPath": "C:\\Users\\x\\source\\repos\\ProjekatOOADv9.0\\Spotifive\\Spotifive.csproj",
-        "packagesPath": "C:\\Users\\x\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\x\\source\\repos\\ProjekatOOADv9.0\\Spotifive\\obj\\",
+        "projectPath": "C:\\Users\\Amina\\Source\\Repos\\nkadric1\\ProjekatOOAD\\Spotifive\\Spotifive.csproj",
+        "packagesPath": "C:\\Users\\Amina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Amina\\Source\\Repos\\nkadric1\\ProjekatOOAD\\Spotifive\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\x\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Amina\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AltoHttp": {
+              "target": "Package",
+              "version": "[1.5.2, )"
+            },
+            "Google.Apis.YouTube.v3": {
+              "target": "Package",
+              "version": "[1.60.0.3064, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.17, )"
@@ -63,6 +71,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "YoutubeExplode": {
+              "target": "Package",
+              "version": "[6.2.15, )"
+            },
+            "YoutubeExtractor": {
+              "target": "Package",
+              "version": "[0.10.11, )"
             }
           },
           "imports": [
@@ -76,6 +92,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

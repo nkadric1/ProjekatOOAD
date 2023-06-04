@@ -67,36 +67,36 @@ namespace Spotifive.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-			[Display(Name = "Gender")]
-			[Required]
-			public Gender Gender { get; set; }
-			[Display(Name = "Date of birth")]
-			[Required]
-			public DateTime DateOfBirth { get; set; }
+            [Display(Name = "Gender")]
+            [Required]
+            public Gender Gender { get; set; }
+            [Display(Name = "Date of birth")]
+            [Required]
+            public DateTime DateOfBirth { get; set; }
 
-			[Required]
-			[Display(Name = "Name")]
+            [Required]
+            [Display(Name = "Name")]
 
-			public string Name { get; set; }
-			[Required]
-			[Display(Name = "Surname")]
+            public string Name { get; set; }
+            [Required]
+            [Display(Name = "Surname")]
 
-			public string Surname { get; set; }
-            [Display(Name="Role")]
+            public string Surname { get; set; }
+            [Display(Name = "Role")]
             public string Role { get; set; }
-			[Required]
-			[Display(Name = "Username")]
-			public string Username { get; set; }
-		}
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-			
-			ReturnUrl = returnUrl;
+
+            ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-			IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
-			ViewData["Role"] = new SelectList(roles.ToList(), "Name");
-		}
+            IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
+            ViewData["Role"] = new SelectList(roles.ToList(), "Name");
+        }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -104,19 +104,15 @@ namespace Spotifive.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName= Input.Username ,Name = Input.Name, Surname = Input.Surname, DateOfBirth = Input.DateOfBirth, Email = Input.Email, Gender = Input.Gender, Role=Input.Role};
-
+                var user = new ApplicationUser { UserName = Input.Username, Name = Input.Name, Surname = Input.Surname, DateOfBirth = Input.DateOfBirth, Email = Input.Email, Gender = Input.Gender, Role = Input.Role };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
-				{
-					var defaultrole = _roleManager.FindByNameAsync("Registered user").Result;
-
-					if (defaultrole != null)
+                {
+                    var defaultrole = _roleManager.FindByNameAsync("Registered user").Result;
+                    if (defaultrole != null)
                     {
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
-
                     }
-
 
                     _logger.LogInformation("User created a new account with password.");
 

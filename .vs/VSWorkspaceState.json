@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Spotifive",
+    "\\Spotifive\\Models"
   ],
-  "SelectedNode": "\\Spotifive.sln",
+  "SelectedNode": "\\Spotifive\\Models\\Song.cs",
   "PreviewInSolutionExplorer": false
 }
