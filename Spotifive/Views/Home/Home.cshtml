@@ -195,7 +195,10 @@
 
         <br>
 
-        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+        @if (User.IsInRole("RegisteredUser"))
+        {
+                    <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+        }
         
     </div>
   

@@ -1,4 +1,4 @@
-﻿@model DataChangeViewModel
+﻿@model Spotifive.Models.ApplicationUser
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 @{
@@ -71,12 +71,10 @@
     }
 </style>
 
-<div class="text-box">
-    <div class="background"></div>
-</div>
 
-<input class="bckh1" type="text" value="@user.UserName" asp-for="Username" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
 
+<input class="bckh1" type="text" value="@user.UserName" asp-for="UserName" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
+<body>
 <form method="post" asp-route-change="data">
     <div class="form-group mb-3">
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
@@ -94,7 +92,7 @@
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Date of birth:</b>
         </h2>
-        <input type="date" class="form-control" value="@user.DateOfBirth" asp-for="Date" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+        <input type="text" class="form-control" value="@user.DateOfBirth" asp-for="DateOfBirth" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
     <div class="form-group mb-3">
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
@@ -102,15 +100,15 @@
         </h2>
         <input type="email" class="form-control" value="@user.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
-    <div class="form-group mb-3">
+  <!--  <div class="form-group mb-3">
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Password:</b>
         </h2>
         <input type="password" class="form-control" id="password" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-    </div>
+    </div> -->
 </form>
 
-
+</body>
 <div class="text-box10" ;">
     <button class="background1 buttonUserCritic"> <a asp-action="Index" asp-controller="Account" style="color:#0b2847">Sign out</a></button>
 </div>

@@ -37,9 +37,23 @@ namespace Spotifive.Controllers
      
         public IActionResult Account() {
 
-            var user = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ViewData["ApplicationUser"] = user;
-            return View(user);
+            /* var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+             ViewData["ApplicationUser"] = userid;
+             return View();*/
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId != null)
+            {
+
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (user != null)
+                {
+                    ViewData["ApplicationUser"] = user;
+                    return View(user);
+                }
+            }
+            return RedirectToAction("Login");
         }
        /* [HttpPost]
         public async Task<IActionResult> Account(ApplicationUser newuser, string c)
