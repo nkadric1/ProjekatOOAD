@@ -27,6 +27,11 @@ namespace Spotifive.Controllers
             var model = _context.Artist.Where(x => x.ArtistName.Contains(para) || x.ArtistSurname.Contains(para)).ToList();
             return PartialView("_PopArtistView", model);
         }
+        public IActionResult PartialViewArtist(int id)
+        {
+            var songs = _context.ArtistSongs.Include(x => x.Song).Where(entry => entry.ID == id).Select(entry => entry.Song);
+            return PartialView("_PopView", songs);
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -81,6 +86,7 @@ namespace Spotifive.Controllers
             }
             return View(artist);
         }
+      
 
         // POST: Artist/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.

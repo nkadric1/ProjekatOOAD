@@ -245,7 +245,7 @@ namespace Spotifive.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "nvarchar(450)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

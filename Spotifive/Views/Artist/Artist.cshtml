@@ -174,23 +174,32 @@
 
     </form>
 
-    @section Scripts{
-        <script>
-            $('#showPop').click(function () {
-                var url = '@Url.Action("GetPartialView", "Artist")';
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: { "para": $("#Text1").val() },
-                    success: function (data) {
-                        $('#popup').html(data);
-                    }
-                });
-            })
+    <form>
+      
+
+        </>
+        <!-- Modal -->
+        <div class="modal fade" id="artist" role="dialog">
+            <div class="modal-dialog   modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="background-color:#0b2847;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body ">
+                        <div id="popupart">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </form>
 
 
-        </script>
-    }
         <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
 
@@ -222,8 +231,8 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-2" >
                 <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
                     <div class="album-thumb">
-                        <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
-                            <img src=@item.Image alt="@item.ArtistName" class="imagesong">
+                        <a data-target="#artist" data-toggle="modal" id="showPopArtist">
+                            <img  src=@item.Image alt="@item.ArtistName" id="imageart" class="imagesong">
                         </a>
                     </div>
                     <div class="album-info">
@@ -251,3 +260,35 @@
     </div>
 
 </body>
+@section Scripts{
+    <script>
+        $('#showPop').click(function () {
+            var url = '@Url.Action("GetPartialView", "Artist")';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: { "para": $("#Text1").val() },
+                success: function (data) {
+                    $('#popup').html(data);
+                }
+            });
+        })
+
+
+    </script>
+    <script>
+        $('#showPopArtist').click(function () {
+            var url = '@Url.Action("PartialViewArtist", "Artist")';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: { "para": $("#imageart").val() },
+                success: function (data) {
+                    $('#popupart').html(data);
+                }
+            });
+        })
+
+
+    </script>
+    }

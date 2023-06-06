@@ -21,7 +21,7 @@ namespace Spotifive.Models
         public string DriveLink { get; set; }
         public string Image { get; set; }
         public Artist Artist { get; set; }
-        public ICollection<PlaylistSongs> PlaylistSongs { get; set; }
+        public IList<PlaylistSongs> PlaylistSongs { get; set; }
 
         public Song() { }
         

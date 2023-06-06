@@ -13,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace Spotifive.Controllers
 {
+    [Authorize(Roles = "Critic,RegisteredUser,Editor")]
     public class HomeController : Controller
     {
-       // private readonly ILogger<HomeController> _logger;
+      
         private readonly ApplicationDbContext _context;
 
         public HomeController(ApplicationDbContext context)

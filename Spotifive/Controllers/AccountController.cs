@@ -31,6 +31,7 @@ namespace Spotifive.Controllers
         {
 
            return View(await _context.Account.ToListAsync());
+            
         }
         [HttpGet]
      

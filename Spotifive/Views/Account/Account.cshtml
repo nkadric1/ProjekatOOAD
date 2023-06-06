@@ -1,4 +1,4 @@
-﻿@model Spotifive.Models.ApplicationUser
+﻿@model DataChangeViewModel
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 @{
@@ -75,7 +75,7 @@
     <div class="background"></div>
 </div>
 
-<input class="bckh1" type="text" value="@user.UserName" asp-for="UserName" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
+<input class="bckh1" type="text" value="@user.UserName" asp-for="Username" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
 
 <form method="post" asp-route-change="data">
     <div class="form-group mb-3">
@@ -94,7 +94,7 @@
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Date of birth:</b>
         </h2>
-        <input type="date" class="form-control" value="@user.DateOfBirth" asp-for="DateOfBirth" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+        <input type="date" class="form-control" value="@user.DateOfBirth" asp-for="Date" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
     <div class="form-group mb-3">
         <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">

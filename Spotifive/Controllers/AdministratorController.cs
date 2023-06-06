@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ namespace Spotifive.Controllers
     public class AdministratorController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private UserManager<ApplicationUser> _userManager;
         public AdministratorController(ApplicationDbContext context)
         {
             _context = context;
@@ -119,7 +119,7 @@ namespace Spotifive.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
+            
             return View(administrator);
         }
 

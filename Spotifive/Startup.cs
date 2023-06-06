@@ -33,13 +33,14 @@ namespace Spotifive
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddRoles<IdentityRole>()
+            services.AddDefaultIdentity<ApplicationUser>(options => { options.SignIn.RequireConfirmedAccount = true; 
+                options.Password = new PasswordOptions { RequireDigit = true, RequiredLength = 6, 
+                RequireLowercase = true, RequireUppercase = true, RequireNonAlphanumeric = true };}).AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-          /*  services.AddIdentity<ApplicationUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                  .AddEntityFrameworkStores<ApplicationDbContext>();*/
-            services.AddIdentityCore<ApplicationUser>();
+            services.AddAuthentication().AddCookie();
+            services.AddAuthorization();
+             services.AddIdentityCore<ApplicationUser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
