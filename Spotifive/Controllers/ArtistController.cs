@@ -21,7 +21,12 @@ namespace Spotifive.Controllers
 
     
         public async Task<IActionResult> Artist() { return View(await _context.Artist.ToListAsync()); }
-        // GET: Artist/Details/5
+        public IActionResult GetPartialView(string para)
+        {
+            //get data
+            var model = _context.Artist.Where(x => x.ArtistName.Contains(para) || x.ArtistSurname.Contains(para)).ToList();
+            return PartialView("_PopArtistView", model);
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

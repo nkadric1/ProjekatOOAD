@@ -20,7 +20,12 @@ namespace Spotifive.Controllers
         }
         public async Task<IActionResult> Playlist() { return View(await _context.Playlist.ToListAsync()); }
 
-
+          public IActionResult GetPartialView(string para)
+        {
+            //get data
+            var model = _context.Song.Where(x => x.SongName.Contains(para)).ToList();
+            return PartialView("_PopView", model);
+        }
         // GET: Playlist
         public async Task<IActionResult> Index()
         {
@@ -136,18 +141,22 @@ namespace Spotifive.Controllers
             return View(playlist);
         }
 
-        // POST: Playlist/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var playlist = await _context.Playlist.FindAsync(id);
-            _context.Playlist.Remove(playlist);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
        
-        public IActionResult PlaylistSongs() { return View(); }
+       
+        public async Task<IActionResult> PlaylistSongs() {
+
+            /* var play = await _context.Song
+   .Include(one => one.PlaylistSongs)
+   .ThenInclude(team => team.Playlist)
+   .ToListAsync();
+
+             if (play == null)
+             {
+                 return NotFound();
+             }
+             return View(play);*/
+            return View(await _context.Playlist.ToListAsync());
+        }
 
         private bool PlaylistExists(int id)
         {

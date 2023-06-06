@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Spotifive.Data;
 using Spotifive.Models;
+using System.Security.Claims;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGeneration;
 
 namespace Spotifive.Controllers
 {
@@ -25,13 +29,18 @@ namespace Spotifive.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Account.ToListAsync());
+
+           return View(await _context.Account.ToListAsync());
         }
         [HttpGet]
+     
         public IActionResult Account() {
-					return View();
-		}
-        [HttpPost]
+
+            var user = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewData["ApplicationUser"] = user;
+            return View(user);
+        }
+       /* [HttpPost]
         public async Task<IActionResult> Account(ApplicationUser newuser, string c)
         {
             if (c == "data")
@@ -54,7 +63,7 @@ namespace Spotifive.Controllers
             }
             else return NotFound();
         }
-
+       */
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();

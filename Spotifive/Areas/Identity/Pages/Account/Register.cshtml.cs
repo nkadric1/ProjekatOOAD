@@ -14,8 +14,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Spotifive.Data;
 using Spotifive.Models;
+
 
 namespace Spotifive.Areas.Identity.Pages.Account
 {
@@ -95,7 +95,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
-            ViewData["Role"] = new SelectList(roles.ToList(), "Name");
+            ViewData["Role"] = new SelectList(roles.ToList(), "Id","Name");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -109,9 +109,14 @@ namespace Spotifive.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     var defaultrole = _roleManager.FindByNameAsync("Registered user").Result;
-                    if (defaultrole != null)
+                    var role = _roleManager.FindByIdAsync(Input.Role).Result;
+                    if (role == null)
                     {
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
+                    else
+                    {
+                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, role.Name);
                     }
 
                     _logger.LogInformation("User created a new account with password.");

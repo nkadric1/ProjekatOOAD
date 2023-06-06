@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Spotifive.Data;
 using Spotifive.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,9 +26,10 @@ namespace Spotifive.Controllers
         public IActionResult GetPartialView(string para)
         {
             //get data
-            var model = _context.Song.Where(x => x.SongName == para).ToList();
+            var model = _context.Song.Where(x => x.SongName.Contains(para)).ToList();
             return PartialView("_PopView", model);
         }
+   
         public async Task<IActionResult> Home()
         {
             return View(await _context.Song.ToListAsync());

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Spotifive.Migrations
 {
-    public partial class FinalMigration : Migration
+    public partial class FinalMigrationToDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,19 +81,6 @@ namespace Spotifive.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Playlist",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Playlist", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +239,27 @@ namespace Spotifive.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Playlist",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Playlist", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Playlist_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Administrator",
                 columns: table => new
                 {
@@ -373,32 +381,6 @@ namespace Spotifive.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlaylistSongs",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlaylistID = table.Column<int>(type: "int", nullable: false),
-                    SongID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PlaylistSongs", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_PlaylistSongs_Playlist_PlaylistID",
-                        column: x => x.PlaylistID,
-                        principalTable: "Playlist",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PlaylistSongs_Song_SongID",
-                        column: x => x.SongID,
-                        principalTable: "Song",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
@@ -453,6 +435,32 @@ namespace Spotifive.Migrations
                         principalTable: "Song",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlaylistSongs",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlaylistID = table.Column<int>(type: "int", nullable: false),
+                    SongID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlaylistSongs", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_PlaylistSongs_Playlist_PlaylistID",
+                        column: x => x.PlaylistID,
+                        principalTable: "Playlist",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PlaylistSongs_Song_SongID",
+                        column: x => x.SongID,
+                        principalTable: "Song",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -518,6 +526,11 @@ namespace Spotifive.Migrations
                 name: "IX_Person_AccountID",
                 table: "Person",
                 column: "AccountID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Playlist_AppUserId",
+                table: "Playlist",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlaylistSongs_PlaylistID",
@@ -609,10 +622,10 @@ namespace Spotifive.Migrations
                 name: "Person");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Song");
 
             migrationBuilder.DropTable(
-                name: "Song");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Account");

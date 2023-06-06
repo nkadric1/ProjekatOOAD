@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +10,12 @@ namespace Spotifive.Models
         public Critic() { }
         public override Person Clone()
         {
-            return (Critic)this.MemberwiseClone();
+            Critic cUser = (Critic)this.MemberwiseClone();
+            cUser.Name = (string)this.Name.Clone();
+            cUser.Surname = (string)this.Surname.Clone();
+            cUser.DateOfBirth = (DateTime)this.DateOfBirth;
+            cUser.Gender = (Gender)((int)this.Gender);
+            return cUser;
         }
 
     }

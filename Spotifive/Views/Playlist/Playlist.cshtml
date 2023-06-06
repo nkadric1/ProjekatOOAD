@@ -139,33 +139,50 @@
 <header>
 
 
-    <div class="search-container">
-        <form action="#">
-            <input id="searchBar" type="text" class="search-box" placeholder="Type here">
-            <button id="search" class="search-button">Search</button>
-        </form>
-    </div>
-    <script>
-        const searchBar = document.getElementById('searchBar');
-        const searchButton = document.getElementById('search');
-        const songList = document.querySelector('songList');
-        const songs = songList.getElementsByTagName('p');
+   <form>
+        <div class="search-container">
+            <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
+            <button type="button" class="search-button" data-target="#srcplaylist" data-toggle="modal" id="showPop">Search</button>
+        </div>
 
-        searchButton.addEventListener('click', function () {
-            const searchTerm = searchBar.value.toLowerCase();
+        </>
+        <!-- Modal -->
+        <div class="modal fade" id="srcplaylist" role="dialog">
+            <div class="modal-dialog   modal-lg">
 
-            for (let i = 0; i < songs.length; i++) {
-                const songName = songs[i].textContent.toLowerCase();
-                if (songName.includes(searchTerm)) {
-                    songs[i].style.display = 'block';
-                } else {
-                    songs[i].style.display = 'none';
-                }
-            }
-        });
-    </script>
-    <!--User avatar-->
+                <!-- Modal content-->
+                <div class="modal-content" style="background-color:#0b2847;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body ">
+                        <div id="popup">
+                        </div>
+                    </div>
 
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+    @section Scripts{
+        <script>
+            $('#showPop').click(function () {
+                var url = '@Url.Action("GetPartialView", "Playlist")';
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: { "para": $("#Text1").val() },
+                    success: function (data) {
+                        $('#popup').html(data);
+                    }
+                });
+            })
+
+
+        </script> }
     <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
 
@@ -194,7 +211,7 @@
         @foreach (var item in Model)
         {
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-2" style="overflow-y:scroll;">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2" >
                 <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
                     <div class="album-thumb">
                         <a asp-action="PlaylistSongs" asp-route-id="@item.ID" asp-controller="Playlist">

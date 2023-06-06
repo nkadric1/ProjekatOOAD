@@ -1,6 +1,5 @@
-﻿@model Spotifive.Data.ApplicationUser
+﻿@model Spotifive.Models.ApplicationUser
 @using Microsoft.AspNetCore.Identity
-@using Spotifive.Data
 @inject UserManager<ApplicationUser> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);

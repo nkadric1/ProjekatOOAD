@@ -154,7 +154,34 @@ namespace Spotifive.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Spotifive.Data.ApplicationUser", b =>
+            modelBuilder.Entity("Spotifive.Models.Account", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("Spotifive.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -237,33 +264,6 @@ namespace Spotifive.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Account", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageF")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageM")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Artist", b =>
@@ -370,10 +370,18 @@ namespace Spotifive.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("PlaylistName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Playlist");
                 });
@@ -536,7 +544,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -545,7 +553,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -560,7 +568,7 @@ namespace Spotifive.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Spotifive.Data.ApplicationUser", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -569,7 +577,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -597,7 +605,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Spotifive.Models.EditorSongs", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", "AppUser")
+                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
@@ -623,16 +631,25 @@ namespace Spotifive.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("Spotifive.Models.Playlist", b =>
+                {
+                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Spotifive.Models.PlaylistSongs", b =>
                 {
                     b.HasOne("Spotifive.Models.Playlist", "Playlist")
-                        .WithMany()
+                        .WithMany("PlaylistSongs")
                         .HasForeignKey("PlaylistID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
-                        .WithMany()
+                        .WithMany("PlaylistSongs")
                         .HasForeignKey("SongID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -644,7 +661,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Spotifive.Models.Review", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", "AppUser")
+                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
@@ -670,7 +687,7 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Spotifive.Models.UserSongs", b =>
                 {
-                    b.HasOne("Spotifive.Data.ApplicationUser", "AppUser")
+                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
@@ -719,6 +736,16 @@ namespace Spotifive.Migrations
                         .HasForeignKey("Spotifive.Models.RegisteredUser", "ID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Spotifive.Models.Playlist", b =>
+                {
+                    b.Navigation("PlaylistSongs");
+                });
+
+            modelBuilder.Entity("Spotifive.Models.Song", b =>
+                {
+                    b.Navigation("PlaylistSongs");
                 });
 #pragma warning restore 612, 618
         }

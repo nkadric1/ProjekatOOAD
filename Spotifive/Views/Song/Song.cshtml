@@ -2,6 +2,7 @@
 @{
 	ViewData["Title"] = "Song";
 }
+
 <head>
 
 	<link rel="stylesheet" href="~/css/moto.css">
@@ -329,9 +330,7 @@
 			</div>
 		</div>
 	</div>
-	@if (User.IsInRole("Critic"))
-	{
-
+	
 		<div class="modal fade" id="criticActions" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog">
 				<div class="modal-content criticComment">
@@ -386,12 +385,20 @@
 						height: 280px;
 						width: 290px;
 						}
-					</style>
+									.content {
+						width: 420px;
+						margin-top: 100px;
+					}
+
+					
+
+				</style>
 					<div class="rectangle3">	</div>
 					<h13>You are logged in as Critic</h13>
 
 
-					<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
+
+	<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
@@ -401,8 +408,9 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
-	}
+	
 	@if(User.IsInRole("Registered user"))
 	{
 		<div class="modal fade" id="userActions" data-backdrop="static" data-keyboard="false">

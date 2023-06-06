@@ -9,15 +9,7 @@
     <link rel="stylesheet" href="~/css/bodyLight.css">
     <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
     <link rel="stylesheet" href="~/css/logo.css">
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
    
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-    <!--Search bar-->
 
     <style>
     
@@ -32,12 +24,10 @@
         left: 20%;
         
     }
-    header{
-        position:relative;
-    }
+   
         .search-container {
             position: fixed;
-            top: 2%;
+            top: 3%;
             left: 20%;
         }
 
@@ -52,7 +42,7 @@
 
         .search-button {
             position: fixed;
-            top: 4.5%;
+            top: 5.5%;
             left: 42%;
             font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
             font-size: 22px;
@@ -65,6 +55,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
+
 
     </style>
 
@@ -80,7 +71,7 @@
 
         .imgProfile {
             position: absolute;
-            right: 120px;
+            right: 80px;
             top: 49px;
             font-style: italic;
             height: 50px;
@@ -143,15 +134,18 @@
 </head>
 <header>
     <form>
-                <input type="text" id="Text1" placeholder="Type here..." />
+        <div class="search-container">
+                <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
                 <button type="button" class="search-button" data-target="#srcsong" data-toggle="modal" id="showPop">Search</button>
+        </div>
+               
         </>
         <!-- Modal -->
         <div class="modal fade" id="srcsong" role="dialog">
             <div class="modal-dialog   modal-lg">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div class="modal-content" style="background-color:#0b2847;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
@@ -159,9 +153,7 @@
                         <div id="popup">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
+                 
                 </div>
 
             </div>
@@ -203,8 +195,9 @@
 
         <br>
 
+        @if(User.IsInRole("Registered user")){
         <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
-
+        }
     </div>
   
 </header>

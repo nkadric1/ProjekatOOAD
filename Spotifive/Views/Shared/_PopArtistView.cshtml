@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Spotifive.Models.Artist>
+
+<style>
+
+    .imageobject {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<div class="row text-center" style="margin-bottom:100px;">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div>
+                <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@item.ID" style="-webkit-text-fill-color:#a8b6f0;">
+                    <img class="imageobject" src=@item.Image alt="@item.ArtistName">
+                    <p><strong> @item.ArtistName && @item.ArtistSurname</strong></p>
+                </a>
+                <hr style="color:#a8b6f0;" />
+            </div>
+        </div>
+    }
+</div>
+
