@@ -1,7 +1,6 @@
 ﻿@model IEnumerable< Spotifive.Models.Song>
 @{
     ViewData["Title"] = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -9,7 +8,15 @@
     <link rel="stylesheet" href="~/css/bodyLight.css">
     <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
     <link rel="stylesheet" href="~/css/logo.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!--Search bar-->
 
     <style>
     
@@ -24,10 +31,12 @@
         left: 20%;
         
     }
-   
+    header{
+        position:relative;
+    }
         .search-container {
             position: fixed;
-            top: 3%;
+            top: 2%;
             left: 20%;
         }
 
@@ -42,7 +51,7 @@
 
         .search-button {
             position: fixed;
-            top: 5.5%;
+            top: 4.5%;
             left: 42%;
             font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
             font-size: 22px;
@@ -55,7 +64,6 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
-
 
     </style>
 
@@ -71,7 +79,7 @@
 
         .imgProfile {
             position: absolute;
-            right: 80px;
+            right: 120px;
             top: 49px;
             font-style: italic;
             height: 50px;
@@ -133,12 +141,13 @@
 
 </head>
 <header>
+
     <form>
         <div class="search-container">
-                <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
-                <button type="button" class="search-button" data-target="#srcsong" data-toggle="modal" id="showPop">Search</button>
+            <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
+            <button type="button" class="search-button" data-target="#srcsong" data-toggle="modal" id="showPop">Search</button>
         </div>
-               
+
         </>
         <!-- Modal -->
         <div class="modal fade" id="srcsong" role="dialog">
@@ -148,12 +157,12 @@
                 <div class="modal-content" style="background-color:#0b2847;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
+                    </div>
                     <div class="modal-body ">
                         <div id="popup">
                         </div>
                     </div>
-                 
+
                 </div>
 
             </div>
@@ -168,16 +177,18 @@
                 $.ajax({
                     url: url,
                     type: 'post',
-                   data: { "para": $("#Text1").val() },
+                    data: { "para": $("#Text1").val() },
                     success: function (data) {
                         $('#popup').html(data);
                     }
                 });
             })
 
-           
+
         </script>
     }
+
+    <!--User avatar-->
 
     <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
@@ -195,9 +206,8 @@
 
         <br>
 
-        @if(User.IsInRole("Registered user")){
         <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
-        }
+
     </div>
   
 </header>
@@ -205,9 +215,16 @@
 
    
 
-    
+    <style>
+        .posInfo{
+            position:absolute;
+            top:50%;
+            left: 300px;
+            width: 200px;
+        }
+    </style>
 
-   
+  
         <secsongs>
         @foreach (var item in Model)
         {
@@ -215,10 +232,13 @@
         <div class="col-12 col-sm-6 col-md-4 col-lg-2">
             <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
                 <div class="album-thumb">
+
                     <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
-                        <img src=@item.Image alt="@item.SongName" class="imagesong">
-                    </a>
-                    <div class="album-info">
+    <img src="@item.Image" alt="@item.SongName" class="imagesong">
+</a>
+                   
+
+                    <div class="posInfo">
                         <p class="text-right" style="color:#0b2847;">@item.SongName</p>
 
                     </div>

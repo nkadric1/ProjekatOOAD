@@ -141,21 +141,12 @@ namespace Spotifive.Controllers
             return View(playlist);
         }
 
-       
-       
-        public async Task<IActionResult> PlaylistSongs() {
 
-            /* var play = await _context.Song
-   .Include(one => one.PlaylistSongs)
-   .ThenInclude(team => team.Playlist)
-   .ToListAsync();
 
-             if (play == null)
-             {
-                 return NotFound();
-             }
-             return View(play);*/
-            return View(await _context.Playlist.ToListAsync());
+        public IActionResult PlaylistSongs(int id) {
+
+          
+            return View();
         }
 
         private bool PlaylistExists(int id)

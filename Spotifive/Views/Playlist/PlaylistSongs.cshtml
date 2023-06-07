@@ -1,6 +1,6 @@
-﻿@model List< Spotifive.Models.Song>
+﻿@model IEnumerable< Spotifive.Models.Song>
 @{
-    ViewData["Title"] = "SongOfPlaylist";
+    ViewData["Title"] = "Playlist Songs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,6 +12,11 @@
 
 
     <style>
+        secsongs {
+            position: absolute;
+            top: 30%;
+            left: 20%;
+        }
 
         .logo {
             position: fixed;
@@ -183,6 +188,34 @@
     <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
 
+    <secsongs>
+        @foreach (var item in Model)
+        {
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
+                    <div class="album-thumb">
+
+                        <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
+                            <img src="@item.Image" alt="@item.SongName" class="imagesong">
+                        </a>
+
+
+                        <div class="album-info">
+                            <p class="text-right" style="color:#0b2847;">@item.SongName</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+
+
+
+    </secsongs>
+
     <div>
         <h1>Favourite songs</h1>
     </div>
@@ -228,9 +261,9 @@
 
 
 <div>
-    <a href="your-link-here">
+
         <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
-    </a>
+ 
 
 
 </div>

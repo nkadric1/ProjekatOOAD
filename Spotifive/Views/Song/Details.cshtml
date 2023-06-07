@@ -32,8 +32,8 @@
     <style>
         .text-box1 {
             position: fixed;
-            top: 100px;
-            left: 200px;
+            top: 120px;
+            left: 150px;
             color: #0b2847;
             font-family: Montserrat;
             text-align: center;
@@ -57,7 +57,7 @@
 
         h4 {
             position: fixed;
-            top: 230px;
+            top: 238px;
             left: 100px;
         }
     </style>
@@ -95,7 +95,7 @@
 
         h6 {
             position: fixed;
-            top: 310px;
+            top: 318px;
             left: 100px;
         }
     </style>
@@ -122,41 +122,49 @@
             text-align: left;
             font-size: 25px;
         }
+        .posImg{
+            position: fixed;
+            top: 130px;
+            right: 300px;
+        }
+        .posQR{
+            position: fixed;
+            bottom: 30px;
+            left: 100px;
+        }
     </style>
 
 </head>
 
 
-<!--SLIKE!!!-->
+
 <body>
 
-    <img id="Im" src="https://w7" width="145" height="145">
+    
 
-    <div class="text-box" asp-for="SongName">SONG</div>
+    <div class="text-box" asp-for="SongName">@Model.SongName</div>
 
-    <div class="text-box1" asp-for="ArtistName">Artist</div>
+    <div class="text-box1" asp-for="ArtistName">The Weeknd</div>
+	<!-- <div class="text-box1" asp-for="ArtistName">ArtistSurname</div>  -->
+
 
 
     <h4 class="text">
         Genre:
     </h4>
-    <div class="text-box2" asp-for="Genre"></div>
-
-    <h5 class="text">
-        YouTube link:
-    </h5>
-    <div class="text-box3" asp-for="LinkYT"></div>
+    <div class="text-box2" asp-for="Genre">@Model.Genre</div>
 
 
     <h6 class="text">
         Release date:
     </h6>
-    <div class="text-box4" asp-for="DateRelease"></div>
+    <div class="text-box4" asp-for="DateRelease"> @Model.DateRelease</div>
 
+    <!--staviti artist image-->
 
-    <img id="Im2" width="200" height="200" />
+    <img src="@Model.Image" alt="@Model.SongName" width="500" height="500" class="posImg" />
 
-    <!--<img id="Im2" width="200" height="200" />  PROVJERITI ZA STA JE!!!-->
+    <img src="@Model.CodeQR" alt="@Model.SongName"  width="250" height="250" class="posQR" />
 
-    <img class="logo" src="~/assets/images/SpotiFIVELogo.png" height="120px" width="170px">
+    <img class="logo" src="~/assets/images/SpotiFIVELogo.png" height="120" width="170">
 </body>
