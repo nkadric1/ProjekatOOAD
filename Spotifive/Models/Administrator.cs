@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
-    public class Administrator : Person
+    public class Administrator : ApplicationUser
          {       public Administrator() { }
-        public override Person Clone()
+        [ForeignKey("ApplicationUser")]
+        public string UserID { get; set; }
+     /*   public override Person Clone()
         {
            
             Administrator aUser = (Administrator)this.MemberwiseClone();
@@ -15,7 +18,7 @@ namespace Spotifive.Models
             aUser.DateOfBirth = (DateTime)this.DateOfBirth;
             aUser.Gender = (Gender)((int)this.Gender);
             return aUser;
-        }
+        }*/
 
     }
 }

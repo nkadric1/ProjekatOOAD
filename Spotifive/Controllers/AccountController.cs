@@ -29,17 +29,15 @@ namespace Spotifive.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-           return View(await _context.Account.ToListAsync());
+			//await _context.Account.ToListAsync()
+			return View();
             
         }
         [HttpGet]
-     
+        [Authorize(Roles = "Critic,RegisteredUser,Editor,Administrator")]
         public IActionResult Account() {
 
-            /* var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-             ViewData["ApplicationUser"] = userid;
-             return View();*/
+          
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId != null)
@@ -55,30 +53,7 @@ namespace Spotifive.Controllers
             }
             return RedirectToAction("Login");
         }
-       /* [HttpPost]
-        public async Task<IActionResult> Account(ApplicationUser newuser, string c)
-        {
-            if (c == "data")
-            {
-                if (newuser.Name == null || newuser.Surname == null || newuser.UserName == null || newuser.Email == null)
-                {
-                    ModelState.AddModelError("emptyFields", "Fields cannot be empty");
-                    return View(newuser);
-                }
-                var u = await _userManager.GetUserAsync(User);
-                u.Name = newuser.Name;
-                u.Surname = newuser.Surname;
-                u.DateOfBirth = newuser.DateOfBirth;
-                u.Email = newuser.Email;
-                u.UserName = newuser.UserName;
-
-                await _userManager.UpdateAsync(u);
-                _context.SaveChanges();
-                return RedirectToAction("Account", "Account");
-            }
-            else return NotFound();
-        }
-       */
+     
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -89,7 +64,7 @@ namespace Spotifive.Controllers
        
 
         // GET: Account/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+      /*  public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -138,9 +113,9 @@ namespace Spotifive.Controllers
             }
             return View(account);
         }
-
+      */
         // GET: Account/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+       /* public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -171,6 +146,6 @@ namespace Spotifive.Controllers
         private bool AccountExists(int id)
         {
             return _context.Account.Any(e => e.ID == id);
-        }
+        }*/
     }
 }

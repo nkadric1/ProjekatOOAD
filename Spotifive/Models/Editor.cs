@@ -4,9 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
-    public class Editor : Person
+    public class Editor : ApplicationUser
     {   public Editor() { }
-        public override Person Clone()
+
+		[ForeignKey("ApplicationUser")]
+		public string UserID { get; set; }
+		/*public override Person Clone()
         {
             Editor eUser = (Editor)this.MemberwiseClone();
             eUser.Name = (string)this.Name.Clone();
@@ -14,7 +17,7 @@ namespace Spotifive.Models
             eUser.DateOfBirth = (DateTime)this.DateOfBirth;
             eUser.Gender = (Gender)((int)this.Gender);
             return eUser;
-        }
+        }*/
 
-    }
+	}
 }

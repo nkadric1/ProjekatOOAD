@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Spotifive.Models.ApplicationUser>
+﻿@model Spotifive.Models.ApplicationUser
 
 @{
     ViewData["Title"] = "Edit Account";
@@ -17,8 +17,7 @@
             height: 150px;
             width: 150px;
         }
-    </style>
-    <style>
+  
         .background {
             position: fixed;
             top: 150px;
@@ -27,9 +26,7 @@
             height: 500px;
             background-color: #a8b6f0;
         }
-    </style>
 
-    <style>
         .signOut {
             font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
             font-size: 22px;
@@ -71,140 +68,8 @@
             height: 20px;
             background-color: #a8b6f0;
         }
-    </style>
+ 
 
-
-    <style>
-        h1 {
-            position: fixed;
-            top: 180px;
-            left: 430px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        h2 {
-            position: fixed;
-            top: 240px;
-            left: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        h3 {
-            position: fixed;
-            top: 280px;
-            left: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        h4 {
-            position: fixed;
-            top: 320px;
-            left: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        h5 {
-            position: fixed;
-            top: 360px;
-            left: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        h6 {
-            position: fixed;
-            top: 400px;
-            left: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-
-    <style>
-        .text-box {
-            border: 1px solid white;
-            padding: 1px;
-            width: 300px;
-            height: 30px;
-            position: fixed;
-            top: 240px;
-            left: 460px;
-            font-family: Montserrat;
-            color: #0b2847;
-        }
-    </style>
-
-    <style>
-        .text-box1 {
-            border: 1px solid white;
-            padding: 1px;
-            width: 300px;
-            height: 30px;
-            position: fixed;
-            top: 280px;
-            left: 460px;
-            font-family: Montserrat;
-            color: #0b2847;
-        }
-    </style>
-
-    <style>
-        .text-box2 {
-            border: 1px solid white;
-            padding: 1px;
-            width: 300px;
-            height: 30px;
-            position: fixed;
-            top: 320px;
-            left: 460px;
-            font-family: Montserrat;
-            color: #0b2847;
-        }
-    </style>
-
-    <style>
-        .text-box3 {
-            border: 1px solid white;
-            padding: 1px;
-            width: 300px;
-            height: 30px;
-            position: fixed;
-            top: 360px;
-            left: 460px;
-            font-family: Montserrat;
-            color: #0b2847;
-        }
-    </style>
-
-    <style>
-        .text-box4 {
-            border: 1px solid white;
-            padding: 1px;
-            width: 300px;
-            height: 30px;
-            position: fixed;
-            top: 400px;
-            left: 460px;
-            font-family: Montserrat;
-            background-color: #a8b6f0;
-        }
-    </style>
-
-    <style>
         posSignOut {
             position: fixed;
             top: 50px;
@@ -223,9 +88,7 @@
             right: 360px;
         }
 
-    </style>
-
-    <style>
+ 
         .checkboxUser {
             position: fixed;
             top: 480px;
@@ -234,9 +97,6 @@
             font-weight: bold;
         }
 
-    </style>
-
-    <style>
         .checkboxCritic {
             position: fixed;
             top: 520px;
@@ -245,99 +105,45 @@
             font-weight: bold;
         }
 
-        .search-container {
-        }
-
-        .search-box {
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            font-size: 22px;
-            color: #0b2847;
-            margin: 0 10px;
-            padding: 10px;
-            border-radius: 30px;
-            border: 1px solid gray;
-            width: 300px;
-        }
-
-        .search-button {
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            color: #0b2847;
-            background-color: #a8b6f0;
-            width: 100px;
-            height: 50px;
-            padding: 10px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
-        }
-
-        posSearch {
-            position: absolute;
-            top: 45px;
-            left: 250px;
-        }
-
+       
     </style>
 
 </head>
+
+<div>
+    <posSignOut>
+        <button class="signOut" asp-action="LogOut" asp-controller="Account">Sign out</button>
+    </posSignOut>
+</div>
 <body>
-    <form action="#">
-        <posSearch>
-            <input type="text" class="search-box" placeholder="Type here">
-            <button type="submit" class="search-button">Search</button>
-        </posSearch>
-    </form>
-
-    <div class="text-box">
-        <div class="background"></div>
-    </div>
-
-
-    <div>
-        <posSignOut>
-            <button class="signOut">Sign out</button>
-        </posSignOut>
-    </div>
-
-
-
-<!--
-    <form method="post" asp-route-change="data">
+    <form method="get" asp-route-change="data">
         <div class="form-group mb-3">
             <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Name:</b>
             </h2>
-            <input type="text" class="form-control" value="" asp-for="Name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" value="@Model.Name" asp-for="Name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
             <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Last name:</b>
             </h2>
-            <input type="text" class="form-control" value="" asp-for="Surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" asp-for="Surname" value="@Model.Surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
             <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Date of birth:</b>
             </h2>
-            <input type="date" class="form-control" value="" asp-for="Date" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" value="@Model.DateOfBirth" asp-for="DateOfBirth" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
             <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>E-mail:</b>
             </h2>
-            <input type="email" class="form-control" value="" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="email" class="form-control" value="@Model.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
-        <div class="form-group mb-3">
-            <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
-                <b>Password:</b>
-            </h2>
-            <input type="password" class="form-control" id="password" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-        </div>
+     
     </form>
-    -->
+
     <div class="checkboxUser">
         <label for="userCheckbox">User</label>
         <input type="checkbox" id="userCheckbox" name="User">
@@ -345,22 +151,21 @@
 
     <div class="checkboxCritic">
         <label for="criticCheckbox">Critic</label>
-        <input type="checkbox" id="criticCheckbox" name="Critic">
+        <input type="checkbox"  id="criticCheckbox" name="Critic">
     </div>
 
     <div>
         <posDelete>
-            <button class="delete">Delete</button>
+            <button class="delete"><a asp-action="Delete" asp-controller="Administrator" asp-route-id="@Model.Id">Delete</a></button>
         </posDelete>
     </div>
 
     <div>
         <posUpdate>
-            <button class="update">Update</button>
+            <button class="update"> <a type="submit" asp-action="Update" asp-controller="Administrator" asp-route-id="@Model.Id">Update</a></button>
         </posUpdate>
     </div>
     <!--JEDAN CHECKBOX JE DISABLED KADA JE DRUGI KLIKNUT, TO DODATI!!!
         DODATI SVUGDJE ZA MONTSERRAT  + STILOVE POPRAVITI!
     -->
-
 </body>

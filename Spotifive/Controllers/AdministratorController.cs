@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -19,35 +20,50 @@ namespace Spotifive.Controllers
             _context = context;
         }
 
-        // GET: Administrator
+      /*  // GET: Administrator
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Administrator.Include(a => a.Account);
             return View(await applicationDbContext.ToListAsync());
-        }
+        }*/
 
-        public IActionResult Administrator() { return View(); }
-        // GET: Administrator/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Administrator(string id) {
+
+            var per = _context.Users.FirstOrDefault(m => m.Id == id);
+            if (per == null)
+            {
+                return NotFound();
+            }
+
+           
+            return View(per);
+        }
+        public IActionResult GetViewUsers(string para)
+        {
+            //get data
+            var model = _context.Users.Where(x => x.Name.Contains(para) ||  x.Surname.Contains(para)).ToList();
+            return PartialView("_PopUsersView", model);
+        }
+       // GET: Administrator/Details/5
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var administrator = await _context.Administrator
-                .Include(a => a.Account)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (administrator == null)
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(administrator);
+            return View(user);
         }
-
+     
         // GET: Administrator/Create
-        public IActionResult Create()
+      /* public IActionResult Create()
         {
             ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID");
             return View();
@@ -86,11 +102,11 @@ namespace Spotifive.Controllers
             ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
             return View(administrator);
         }
-
+      */
         // POST: Administrator/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+  /*      [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Administrator administrator)
         {
@@ -122,40 +138,63 @@ namespace Spotifive.Controllers
             
             return View(administrator);
         }
-
-        // GET: Administrator/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var administrator = await _context.Administrator
-                .Include(a => a.Account)
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (administrator == null)
-            {
-                return NotFound();
-            }
-
-            return View(administrator);
-        }
-
+  */
+     
         // POST: Administrator/Delete/5
-        [HttpPost, ActionName("Delete")]
+     [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var administrator = await _context.Administrator.FindAsync(id);
-            _context.Administrator.Remove(administrator);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Account", "Account");
+        }
+        public async Task<IActionResult> Update(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+                return View(user);
+            else
+                return RedirectToAction("Account", "Account");
         }
 
-        private bool AdministratorExists(int id)
+        [HttpPost]
+        public async Task<IActionResult> Update(string id, string email)
         {
-            return _context.Administrator.Any(e => e.ID == id);
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                if (!string.IsNullOrEmpty(email))
+                    user.Email = email;
+                else
+                    ModelState.AddModelError("", "Email cannot be empty");
+
+               
+                if (!string.IsNullOrEmpty(email))
+                {
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                        return RedirectToAction("Account","Account");
+                    else
+                        Errors(result);
+                }
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View(user);
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError("", error.Description);
         }
     }
 }
+
+     /*   private bool AdministratorExists(int id)
+        {
+            return _context.Administrator.Any(e => e.ID == id);
+        }*/
+    

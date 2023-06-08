@@ -13,30 +13,21 @@
 	<link rel="stylesheet" href="~/css/motoDark.css">
 	<link rel="stylesheet" href="~/css/bodyLight.css">
 
+
+
 	<style>
 		.posLogo {
 			position: absolute;
 			top: 7px;
 			left: 10px;
 		}
-	</style>
 
-
-
-
-	<style>
 		posButtonCritic {
 			position: absolute;
 			left: 50px;
 			bottom: 50px;
 		}
-	</style>
-
-
-
-
-
-	<style>
+	
 		.buttonUserCritic {
 			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
 			font-size: 22px;
@@ -51,46 +42,33 @@
 			padding-top: 5px;
 			padding-bottom: 5px;
 		}
-	</style>
 
-	<style>
 		h1 {
 			font-size: 40px;
 		}
-	</style>
 
-	<style>
 		positionh1 {
 			position: absolute;
 			top: 90px;
 			left: 690px;
 		}
-	</style>
-
-	<style>
+	
 		position1 {
 			position: absolute;
 			top: 200px;
 			left: 640px;
 		}
-	</style>
-
-
-	<style>
+	
 		h6 {
 			font-size: 20px;
 		}
-	</style>
 
-	<style>
 		positionh6 {
 			position: absolute;
 			top: 400px;
 			left: 665px;
 		}
-	</style>
-
-	<style>
+	
 		linking {
 			font-size: 16px;
 			color: #025abf;
@@ -104,11 +82,11 @@
 	<img width="130" height="100" class="posLogo" src="~/assets/images/SpotiFIVELogo.png">
 	<h1><positionh1>Log in</positionh1></h1>
 	<div class="row">
-		<div class="col-md-4">
-		<section>
+		<div class="col-md-4"> 
+		<position1>
+		<div asp-validation-summary="All" class="text-danger"></div>
+
 			<form id="account" method="post">
-				<div asp-validation-summary="All" class="text-danger"></div>
-				<position1>
 					<div class="form-group">
 						<label asp-for="Input.Username"></label>
 						<input asp-for="Input.Username" class="form-control"/>
@@ -118,8 +96,7 @@
 						<label asp-for="Input.Password"></label>
 						<input asp-for="Input.Password" class="form-control" />
 						<span asp-validation-for="Input.Password" class="text-danger"></span>
-
-										</div>
+				</div>
 					<div class="form-group">
 						<div class="checkbox">
 							<label asp-for="Input.RememberMe">
@@ -144,9 +121,8 @@
 						</p>
 
 					</div>
-				</position1>
 			</form>
-		</section>
+		</position1>
 	</div>
 	</div>
 	@section Scripts {

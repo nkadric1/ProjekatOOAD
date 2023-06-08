@@ -69,9 +69,90 @@
         height: 30px;
         width: 30px;
     }
+
+    .search-container {
+    }
+
+    .search-box {
+        font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+        font-size: 22px;
+        color: #0b2847;
+        margin: 0 10px;
+        padding: 10px;
+        border-radius: 30px;
+        border: 1px solid gray;
+        width: 300px;
+    }
+
+    .search-button {
+        font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        color: #0b2847;
+        background-color: #a8b6f0;
+        width: 100px;
+        height: 50px;
+        padding: 10px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+    }
+
 </style>
 
+@if (User.IsInRole("Administrator"))
+{
+    <header>
+        <form>
+            <div class="search-container">
+                <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
+                <button type="button" class="search-button" data-target="#srcuser" data-toggle="modal" id="showPopUser">Search</button>
+            </div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="srcuser" role="dialog">
+                <div class="modal-dialog   modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body ">
+                            <div id="popupuser">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+
+
+        @section Scripts{
+        <script>
+            $('#showPopUser').click(function () {
+                var url = '@Url.Action("GetViewUsers", "Administrator")';
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: { "para": $("#Text1").val() },
+                    success: function (data) {
+                        $('#popupuser').html(data);
+                    }
+                });
+            })
+
+
+        </script>
+    }
+    </header>
+    
+}
 
 <input class="bckh1" type="text" value="@user.UserName" asp-for="UserName" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
 <body>
@@ -112,6 +193,7 @@
 <div class="text-box10" ;">
     <button class="background1 buttonUserCritic"> <a asp-action="Index" asp-controller="Account" style="color:#0b2847">Sign out</a></button>
 </div>
-
-<a asp-action="Home" asp-controller="Home"><img class="image2" src="https://static.vecteezy.com/system/resources/thumbnails/009/385/954/small/house-symbol-and-home-icon-sign-design-free-png.png"/>
-</a>
+@if (User.IsInRole("Critic,RegisteredUser,Editor"))
+{
+    <a asp-action="Home" asp-controller="Home"><img class="image2" src="https://static.vecteezy.com/system/resources/thumbnails/009/385/954/small/house-symbol-and-home-icon-sign-design-free-png.png"/>
+</a>}

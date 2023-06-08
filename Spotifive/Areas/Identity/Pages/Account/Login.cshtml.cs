@@ -88,7 +88,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
 
 					if (roles.Contains("Administrator"))
                     {
-                        returnUrl = Url.Content("~/Administrator/Administrator");
+                        returnUrl = Url.Content("~/Account/Account");
                     }
                     else if(roles.Contains("Critic"))
                     {

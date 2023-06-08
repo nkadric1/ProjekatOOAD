@@ -72,10 +72,45 @@ namespace Spotifive.Controllers
         public IActionResult Edit() { return View(); }
 
 		[Authorize(Roles = "Editor,Registered user,Critic")]
-		public IActionResult Details() { return View(); }
+		public IActionResult Details(int id) {
+			var song = _context.Song.FirstOrDefault(m => m.ID == id);
+			if (song == null)
+			{
+				return NotFound();
+			}
 
-		public IActionResult Song() { return View(); }
-        [Authorize(Roles = "Editor")]
+
+
+			return View(song);
+		}
+
+		public IActionResult Song(int id) {
+			var song = _context.Song.FirstOrDefault(m => m.ID == id);
+			if (song == null)
+			{
+				return NotFound();
+			}
+
+			// Call the GetComments method to populate the Reviews property
+			song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
+
+			return View(song);
+		}
+		public IActionResult SaveMP3(int id)
+		{
+			var song = _context.Song.FirstOrDefault(m => m.ID == id);
+			if (song == null)
+			{
+				return NotFound();
+			}
+
+			// Call the GetComments method to populate the Reviews property
+			song.SaveMP3();
+
+			return View(song);
+		}
+
+		[Authorize(Roles = "Editor")]
         // GET: Song/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -93,7 +128,7 @@ namespace Spotifive.Controllers
 
             return View(song);
         }
-        /*
+       
         // POST: Song/Delete/5
 
         [HttpPost, ActionName("Delete")]
@@ -105,8 +140,8 @@ namespace Spotifive.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-    */
-        /* public IActionResult SearchResult(string search)
+    
+        public IActionResult SearchResult(string search)
          {
              List<Song> songs = _context.Song.ToList();
              if (search == null)
@@ -119,18 +154,8 @@ namespace Spotifive.Controllers
                  ViewBag.SearchResults = searchResults;
              }
              return View(ViewBag.SearchResults);
-         }*/
-        /* [ValidateAntiForgeryToken]
-         public IActionResult SearchSong(string name)
-         {
-             var songList = from s in Song select s;
-             if (!string.IsNullOrEmpty(name))
-             {
-                 songList = songList.Where(r => r.name.Contains(name));
-             }
-             return View(songList.ToList());
-         }*/
-       
+         }
+           
         private bool SongExists(int id)
         {
             return _context.Song.Any(e => e.ID == id);

@@ -10,8 +10,8 @@ using Spotifive.Data;
 namespace Spotifive.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230606115624_FinalMigrationToDataBase")]
-    partial class FinalMigrationToDataBase
+    [Migration("20230608162337_FinalMigrationTodbSpotifive")]
+    partial class FinalMigrationTodbSpotifive
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,33 +156,6 @@ namespace Spotifive.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.Account", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageF")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageM")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Account");
-                });
-
             modelBuilder.Entity("Spotifive.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -311,60 +284,6 @@ namespace Spotifive.Migrations
                     b.ToTable("ArtistSongs");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditorSongs", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("SongID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("SongID");
-
-                    b.ToTable("EditorSongs");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Person", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AccountID");
-
-                    b.ToTable("Person");
-                });
-
             modelBuilder.Entity("Spotifive.Models.Playlist", b =>
                 {
                     b.Property<int>("ID")
@@ -372,18 +291,15 @@ namespace Spotifive.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("PlaylistName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("Uid")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("Uid");
 
                     b.ToTable("Playlist");
                 });
@@ -417,9 +333,6 @@ namespace Spotifive.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -432,14 +345,14 @@ namespace Spotifive.Migrations
                     b.Property<string>("TimeStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("Uid")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("SongID");
+
+                    b.HasIndex("Uid");
 
                     b.ToTable("Review");
                 });
@@ -450,9 +363,6 @@ namespace Spotifive.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ArtistID")
-                        .HasColumnType("int");
 
                     b.Property<string>("CodeQR")
                         .HasColumnType("nvarchar(max)");
@@ -477,60 +387,45 @@ namespace Spotifive.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ArtistID");
-
                     b.ToTable("Song");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.UserSongs", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("SongID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("SongID");
-
-                    b.ToTable("UserSongs");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Administrator", b =>
                 {
-                    b.HasBaseType("Spotifive.Models.Person");
+                    b.HasBaseType("Spotifive.Models.ApplicationUser");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Administrator");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Critic", b =>
                 {
-                    b.HasBaseType("Spotifive.Models.Person");
+                    b.HasBaseType("Spotifive.Models.ApplicationUser");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Critic");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Editor", b =>
                 {
-                    b.HasBaseType("Spotifive.Models.Person");
+                    b.HasBaseType("Spotifive.Models.ApplicationUser");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Editor");
                 });
 
             modelBuilder.Entity("Spotifive.Models.RegisteredUser", b =>
                 {
-                    b.HasBaseType("Spotifive.Models.Person");
+                    b.HasBaseType("Spotifive.Models.ApplicationUser");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("RegisteredUser");
                 });
@@ -605,53 +500,25 @@ namespace Spotifive.Migrations
                     b.Navigation("Song");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.EditorSongs", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Spotifive.Models.Song", "Song")
-                        .WithMany()
-                        .HasForeignKey("SongID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Song");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Person", b =>
-                {
-                    b.HasOne("Spotifive.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("Spotifive.Models.Playlist", b =>
                 {
-                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
+                    b.HasOne("Spotifive.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("Uid");
 
-                    b.Navigation("AppUser");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Spotifive.Models.PlaylistSongs", b =>
                 {
                     b.HasOne("Spotifive.Models.Playlist", "Playlist")
-                        .WithMany("PlaylistSongs")
+                        .WithMany()
                         .HasForeignKey("PlaylistID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Spotifive.Models.Song", "Song")
-                        .WithMany("PlaylistSongs")
+                        .WithMany()
                         .HasForeignKey("SongID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -663,91 +530,55 @@ namespace Spotifive.Migrations
 
             modelBuilder.Entity("Spotifive.Models.Review", b =>
                 {
-                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("Spotifive.Models.Song", "Song")
                         .WithMany()
                         .HasForeignKey("SongID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Song");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Song", b =>
-                {
-                    b.HasOne("Spotifive.Models.Artist", "Artist")
+                    b.HasOne("Spotifive.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ArtistID");
+                        .HasForeignKey("Uid");
 
-                    b.Navigation("Artist");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.UserSongs", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Spotifive.Models.Song", "Song")
-                        .WithMany()
-                        .HasForeignKey("SongID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Song");
                 });
 
             modelBuilder.Entity("Spotifive.Models.Administrator", b =>
                 {
-                    b.HasOne("Spotifive.Models.Person", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Administrator", "ID")
+                        .HasForeignKey("Spotifive.Models.Administrator", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Spotifive.Models.Critic", b =>
                 {
-                    b.HasOne("Spotifive.Models.Person", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Critic", "ID")
+                        .HasForeignKey("Spotifive.Models.Critic", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Spotifive.Models.Editor", b =>
                 {
-                    b.HasOne("Spotifive.Models.Person", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.Editor", "ID")
+                        .HasForeignKey("Spotifive.Models.Editor", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Spotifive.Models.RegisteredUser", b =>
                 {
-                    b.HasOne("Spotifive.Models.Person", null)
+                    b.HasOne("Spotifive.Models.ApplicationUser", null)
                         .WithOne()
-                        .HasForeignKey("Spotifive.Models.RegisteredUser", "ID")
+                        .HasForeignKey("Spotifive.Models.RegisteredUser", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Playlist", b =>
-                {
-                    b.Navigation("PlaylistSongs");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Song", b =>
-                {
-                    b.Navigation("PlaylistSongs");
                 });
 #pragma warning restore 612, 618
         }

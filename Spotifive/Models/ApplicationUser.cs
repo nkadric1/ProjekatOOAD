@@ -10,7 +10,7 @@ namespace Spotifive.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
+        public override string Id { get; set; }
         public string Name { get; set; }
 
         public string Surname { get; set; }

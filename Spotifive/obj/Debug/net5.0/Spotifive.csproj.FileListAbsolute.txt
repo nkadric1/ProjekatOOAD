@@ -870,3 +870,15 @@ C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Areas\
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopView.cshtml.g.cs
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopArtistView.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\AltoHttp.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\AngleSharp.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\Google.Apis.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\Google.Apis.Auth.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\Google.Apis.Core.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\Google.Apis.YouTube.v3.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\System.Text.Encoding.CodePages.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExplode.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExtractor.dll
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopUsersView.cshtml.g.cs

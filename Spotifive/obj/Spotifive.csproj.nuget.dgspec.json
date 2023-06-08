@@ -40,6 +40,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AltoHttp": {
+              "target": "Package",
+              "version": "[1.5.2, )"
+            },
+            "Google.Apis.YouTube.v3": {
+              "target": "Package",
+              "version": "[1.60.0.3064, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.17, )"
@@ -63,6 +71,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "YoutubeExplode": {
+              "target": "Package",
+              "version": "[6.2.15, )"
+            },
+            "YoutubeExtractor": {
+              "target": "Package",
+              "version": "[0.10.11, )"
             }
           },
           "imports": [

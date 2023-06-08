@@ -3,27 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Spotifive.Migrations
 {
-    public partial class FinalMigrationToDataBase : Migration
+    public partial class FinalMigrationTodbSpotifive : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Account",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageM = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageF = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Account", x => x.ID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Artist",
                 columns: table => new
@@ -84,29 +67,6 @@ namespace Spotifive.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Person",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    AccountID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Person", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Person_Account_AccountID",
-                        column: x => x.AccountID,
-                        principalTable: "Account",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Song",
                 columns: table => new
                 {
@@ -118,18 +78,11 @@ namespace Spotifive.Migrations
                     CodeQR = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LinkYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DriveLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArtistID = table.Column<int>(type: "int", nullable: true)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Song", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Song_Artist_ArtistID",
-                        column: x => x.ArtistID,
-                        principalTable: "Artist",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,6 +104,24 @@ namespace Spotifive.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Administrator",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrator", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Administrator_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,57 +210,20 @@ namespace Spotifive.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Playlist",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserID = table.Column<int>(type: "nvarchar(450)", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Playlist", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Playlist_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Administrator",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administrator", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Administrator_Person_ID",
-                        column: x => x.ID,
-                        principalTable: "Person",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Critic",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Critic", x => x.ID);
+                    table.PrimaryKey("PK_Critic", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Critic_Person_ID",
-                        column: x => x.ID,
-                        principalTable: "Person",
-                        principalColumn: "ID",
+                        name: "FK_Critic_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -297,16 +231,37 @@ namespace Spotifive.Migrations
                 name: "Editor",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Editor", x => x.ID);
+                    table.PrimaryKey("PK_Editor", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Editor_Person_ID",
-                        column: x => x.ID,
-                        principalTable: "Person",
-                        principalColumn: "ID",
+                        name: "FK_Editor_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Playlist",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Uid = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Playlist", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Playlist_AspNetUsers_Uid",
+                        column: x => x.Uid,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -314,16 +269,17 @@ namespace Spotifive.Migrations
                 name: "RegisteredUser",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegisteredUser", x => x.ID);
+                    table.PrimaryKey("PK_RegisteredUser", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RegisteredUser_Person_ID",
-                        column: x => x.ID,
-                        principalTable: "Person",
-                        principalColumn: "ID",
+                        name: "FK_RegisteredUser_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -354,33 +310,6 @@ namespace Spotifive.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EditorSongs",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SongID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EditorSongs", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_EditorSongs_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_EditorSongs_Song_SongID",
-                        column: x => x.SongID,
-                        principalTable: "Song",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
@@ -390,15 +319,14 @@ namespace Spotifive.Migrations
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TimeStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SongID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Uid = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Review", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Review_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Review_AspNetUsers_Uid",
+                        column: x => x.Uid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -408,33 +336,6 @@ namespace Spotifive.Migrations
                         principalTable: "Song",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserSongs",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SongID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserSongs", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_UserSongs_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_UserSongs_Song_SongID",
-                        column: x => x.SongID,
-                        principalTable: "Song",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -513,24 +414,9 @@ namespace Spotifive.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EditorSongs_AppUserId",
-                table: "EditorSongs",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EditorSongs_SongID",
-                table: "EditorSongs",
-                column: "SongID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Person_AccountID",
-                table: "Person",
-                column: "AccountID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Playlist_AppUserId",
+                name: "IX_Playlist_Uid",
                 table: "Playlist",
-                column: "AppUserId");
+                column: "Uid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlaylistSongs_PlaylistID",
@@ -543,29 +429,14 @@ namespace Spotifive.Migrations
                 column: "SongID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Review_AppUserId",
-                table: "Review",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Review_SongID",
                 table: "Review",
                 column: "SongID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Song_ArtistID",
-                table: "Song",
-                column: "ArtistID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserSongs_AppUserId",
-                table: "UserSongs",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserSongs_SongID",
-                table: "UserSongs",
-                column: "SongID");
+                name: "IX_Review_Uid",
+                table: "Review",
+                column: "Uid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -598,9 +469,6 @@ namespace Spotifive.Migrations
                 name: "Editor");
 
             migrationBuilder.DropTable(
-                name: "EditorSongs");
-
-            migrationBuilder.DropTable(
                 name: "PlaylistSongs");
 
             migrationBuilder.DropTable(
@@ -610,7 +478,7 @@ namespace Spotifive.Migrations
                 name: "Review");
 
             migrationBuilder.DropTable(
-                name: "UserSongs");
+                name: "Artist");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -619,19 +487,10 @@ namespace Spotifive.Migrations
                 name: "Playlist");
 
             migrationBuilder.DropTable(
-                name: "Person");
-
-            migrationBuilder.DropTable(
                 name: "Song");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Account");
-
-            migrationBuilder.DropTable(
-                name: "Artist");
         }
     }
 }

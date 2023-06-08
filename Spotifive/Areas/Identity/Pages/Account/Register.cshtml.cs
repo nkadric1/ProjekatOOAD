@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Spotifive.Data;
 using Spotifive.Models;
 
 
@@ -27,19 +29,22 @@ namespace Spotifive.Areas.Identity.Pages.Account
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             RoleManager<IdentityRole> roleManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender, 
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -108,17 +113,41 @@ namespace Spotifive.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    var defaultrole = _roleManager.FindByNameAsync("Registered user").Result;
+                    var defaultrole = _roleManager.FindByNameAsync("RegisteredUser").Result;
                     var role = _roleManager.FindByIdAsync(Input.Role).Result;
                     if (role == null)
                     {
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+
                     }
                     else
                     {
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, role.Name);
                     }
 
+                  /*  if (user.Role == "RegisteredUser")
+                    {
+                        var reguser = new RegisteredUser { UserID = user.Id };
+                        _context.AddAsync(reguser);
+
+                    }else if (user.Role == "Critic")
+                    {
+                        var cuser = new Critic { UserID = user.Id };
+                        _context.AddAsync(cuser);
+
+                    }
+                    else if (user.Role == "Editor")
+                    {
+                        var euser = new Editor { UserID = user.Id };
+                        _context.AddAsync(euser);
+
+                    }
+                    else
+                    {
+                        var auser = new Administrator { UserID = user.Id };
+                        _context.AddAsync(auser);
+
+                    }*/
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

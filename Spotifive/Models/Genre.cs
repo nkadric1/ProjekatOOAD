@@ -2,6 +2,14 @@
 {
     public enum Genre
     {
-        Pop, Rock, Folk, Metal, Country, Jazz, Classical, Traditional, NewAge
+        Pop, 
+        Rock,
+        Folk,
+        Metal,
+        Country,
+        Jazz, 
+        Classical, 
+        Traditional, 
+        RnB
     }
 }
