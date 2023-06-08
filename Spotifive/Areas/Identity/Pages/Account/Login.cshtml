@@ -35,6 +35,7 @@
 			background-color: #0b2847;
 			width: 130px;
 			height: 50px;
+			left:10%;
 			text-align: center;
 			color: #a8b6f0;
 			padding-right: 15px;
@@ -56,7 +57,7 @@
 		position1 {
 			position: absolute;
 			top: 200px;
-			left: 640px;
+			left: 40%;
 		}
 	
 		h6 {
@@ -74,6 +75,28 @@
 			color: #025abf;
 			font-style: italic;
 		}
+
+		.form__input {
+			width: 100%;
+			border: 0px solid transparent;
+			border-radius: 0;
+			border-bottom: 1px solid #aaa;
+			padding: 1em .5em .5em;
+			padding-left: 2em;
+			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+
+			outline: none;
+			margin: 1.5em auto;
+			transition: all .5s ease;
+		}
+
+			.form__input:focus {
+				border-bottom-color: #0b2847;
+				box-shadow: 0 0 5px rgba(0,80,80,.4);
+				font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+
+				border-radius: 4px;
+			}
 	</style>
 
 	<moto></>Let the music move you.</moto>
@@ -82,22 +105,20 @@
 	<img width="130" height="100" class="posLogo" src="~/assets/images/SpotiFIVELogo.png">
 	<h1><positionh1>Log in</positionh1></h1>
 	<div class="row">
-		<div class="col-md-4"> 
-		<position1>
-		<div asp-validation-summary="All" class="text-danger"></div>
+				<position1>
 
 			<form id="account" method="post">
 					<div class="form-group">
 						<label asp-for="Input.Username"></label>
-						<input asp-for="Input.Username" class="form-control"/>
+						<input asp-for="Input.Username" class="form__input"/>
 						<span asp-validation-for="Input.Username" class="text-danger"></span>
 					</div>
 					<div class="form-group">
 						<label asp-for="Input.Password"></label>
-						<input asp-for="Input.Password" class="form-control" />
+						<input asp-for="Input.Password" class="form__input" />
 						<span asp-validation-for="Input.Password" class="text-danger"></span>
 				</div>
-					<div class="form-group">
+					<div class="form-group" style="align-content:center">
 						<div class="checkbox">
 							<label asp-for="Input.RememberMe">
 								<input asp-for="Input.RememberMe" />
@@ -106,17 +127,18 @@
 						</div>
 					</div>
 
-					<posButtonCritic>
-						<div class="form-group">
-								<button type="submit" class="buttonUserCritic">Log in</button>
-							</div>
+				
+						
+					<button type="submit" class="buttonUserCritic">Log in</button>
+			
 
-					</posButtonCritic>
-					<div class="form-group">
-						<p>
-							<a id="forgot-password" asp-page="./ResetPassword">Forgot your password?</a>
+				
+				<div class="form-group" style="align-content:center">
+					<p>
+						Forgot your password?
+							<a id="forgot-password" asp-page="./ResetPassword">Reset</a>
 						</p>
-						<p>
+						<p> Don't have an account?
 							<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
 						</p>
 
@@ -124,7 +146,7 @@
 			</form>
 		</position1>
 	</div>
-	</div>
+	
 	@section Scripts {
 		<partial name="_ValidationScriptsPartial" />
 	}
