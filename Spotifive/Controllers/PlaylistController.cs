@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -156,5 +157,20 @@ namespace Spotifive.Controllers
         {
             return _context.Playlist.Any(e => e.ID == id);
         }
+
+     /*   [HttpPost]
+         [ValidateAntiForgeryToken]
+         public async Task<IActionResult> CreatePlaylist([Bind("ID,PlaylistName,Uid")] Playlist playlist)
+         {
+             if (ModelState.IsValid)
+             {
+                 _context.Add(playlist);
+                 await _context.SaveChangesAsync();
+                 //return RedirectToAction(nameof(Index));
+             }
+             return View();
+         }*/
+        
+        
     }
 }

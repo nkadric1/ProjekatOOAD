@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -58,7 +59,7 @@ namespace Spotifive.Controllers
         [Authorize(Roles = "Editor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,SongName,DateRelease,Genre,CodeQR,LinkYT")] Song song)
+        public async Task<IActionResult> Song([Bind("ID, SongName, DateRelease, Genre, CodeQR, LinkYT, DriveLink, Image")] Song song)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +69,7 @@ namespace Spotifive.Controllers
             }
             return View(song);
         }
+
         [Authorize(Roles ="Editor")]
         public IActionResult Edit() { return View(); }
 
@@ -78,7 +80,10 @@ namespace Spotifive.Controllers
 			{
 				return NotFound();
 			}
-			return View(song);
+            string formattedDate = song.GetFormattedDateRelease();
+            ViewBag.FormattedDateRelease = formattedDate;
+
+            return View(song);
 		}
 
 		public IActionResult Song(int id) {
@@ -91,6 +96,11 @@ namespace Spotifive.Controllers
 			// Call the GetComments method to populate the Reviews property
 			song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
 
+            string actionName = RouteData.Values["action"].ToString();
+            string controllerName = RouteData.Values["controller"].ToString();
+
+            if (actionName == "Song" && controllerName == "Song")
+                song.SaveMP3();
 			return View(song);
 		}
 		public IActionResult SaveMP3(int id)
@@ -102,7 +112,7 @@ namespace Spotifive.Controllers
 			}
 
 			// Call the GetComments method to populate the Reviews property
-			song.SaveMP3();
+			//song.SaveMP3();
 
 			return View(song);
 		}
@@ -157,5 +167,39 @@ namespace Spotifive.Controllers
         {
             return _context.Song.Any(e => e.ID == id);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Song([Bind("ID,PlaylistName,Uid")] Playlist playlist)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Set the Uid property of the playlist to the user's ID
+                playlist.Uid = userId;
+                _context.Add(playlist);
+                await _context.SaveChangesAsync();
+                // return View();
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID, Grade, Comment, Timestamp, SongID, Uid")] Review review)
+        {
+            if (ModelState.IsValid)
+            {
+               // Song song = _context.Song.FirstOrDefault(s => s.ID == ID);
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Song));
+            }
+            return View();
+        }
+
+
     }
 }

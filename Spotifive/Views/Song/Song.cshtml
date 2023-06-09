@@ -201,11 +201,11 @@
 <img src="@Model.Image" alt="@Model.SongName" class="song-image" width="420" height="410" >
 
 </proba>
-	@if (User.IsInRole("RegisteredUser,Critic,Editor"))
-	{
+	
+	
 		<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
 			<img class="centered" src="~/assets/images/DetailsDots.png" />
-	</a>}
+	</a>
 
 	<a href="#criticActions"  data-toggle="modal">
 		<img class="reviews" src="~/assets/images/Reviews.png" />
@@ -223,7 +223,7 @@
 	<p class="textReviews">Reviews</p>
 	
 	<!--href="#successfulDownload" data-toggle="modal" -->
-		<a >
+		 <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@Model.ID">
 		<img class="download" src="~/assets/images/Download.png" />
 	</a>
 
@@ -318,16 +318,21 @@
 
 				<h1>Add to playlist:</h1>
 
-				<h2>Or make a new playlist:</h2>
 
-				<input type="text" id="newPlaylist" placeholder="Enter name..." class="textbox">
+				<h2>Or make a new playlist:</h2>
+				<form method="post" asp-action="Playlist">
+                <div class="form-group">
+                    <input type="text" id="newPlaylist" name="PlaylistName" placeholder="Enter name..." class="textbox"/>
+				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary buttonCancel" data-dismiss="modal">Cancel</button>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonOK" data-dismiss="modal">OK</button>
+					<input type="submit" value="Create" class="btn btn-primary" />
+				<!--<button asp-action="CreatePlaylist" controller="Playlist"  type="submit" form="createPlaylistForm" class="btn btn-secondary buttonOK" data-dismiss="modal">OK</button>  -->
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -582,6 +587,7 @@
 				<div class="rectangle3">	</div>
 				<h13>You are logged in as Critic</h13>
 
+				
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
