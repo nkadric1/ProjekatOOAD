@@ -71,16 +71,13 @@ namespace Spotifive.Controllers
         [Authorize(Roles ="Editor")]
         public IActionResult Edit() { return View(); }
 
-		[Authorize(Roles = "Editor,Registered user,Critic")]
+		[Authorize(Roles = "Editor,RegisteredUser,Critic")]
 		public IActionResult Details(int id) {
 			var song = _context.Song.FirstOrDefault(m => m.ID == id);
 			if (song == null)
 			{
 				return NotFound();
 			}
-
-
-
 			return View(song);
 		}
 

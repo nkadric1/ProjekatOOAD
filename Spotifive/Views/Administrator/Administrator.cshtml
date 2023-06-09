@@ -110,12 +110,13 @@
 
 </head>
 
-<div>
-    <posSignOut>
-        <button class="signOut" asp-action="LogOut" asp-controller="Account">Sign out</button>
-    </posSignOut>
-</div>
+
 <body>
+    <div>
+        <posSignOut>
+            <button class="signOut" asp-action="LogOut" asp-controller="Account">Sign out</button>
+        </posSignOut>
+    </div>
     <form method="get" asp-route-change="data">
         <div class="form-group mb-3">
             <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
@@ -141,30 +142,47 @@
             </h2>
             <input type="email" class="form-control" value="@Model.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
-     
-    </form>
+        <div class="checkboxUser">
+            <label for="userCheckbox">User</label>
+            <input type="checkbox" id="userCheckbox" name="User">
+        </div>
 
-    <div class="checkboxUser">
-        <label for="userCheckbox">User</label>
-        <input type="checkbox" id="userCheckbox" name="User">
-    </div>
-
-    <div class="checkboxCritic">
-        <label for="criticCheckbox">Critic</label>
-        <input type="checkbox"  id="criticCheckbox" name="Critic">
-    </div>
-
+        <div class="checkboxCritic">
+            <label for="criticCheckbox">Critic</label>
+            <input type="checkbox" id="criticCheckbox" name="Critic">
+        </div>
+  
+</form>
+    <form method="post" asp-action="Delete" asp-controller="Administrator" asp-route-id="@Model.Id">
+ 
     <div>
         <posDelete>
-            <button class="delete"><a asp-action="Delete" asp-controller="Administrator" asp-route-id="@Model.Id">Delete</a></button>
+            <input type="submit" class="delete" value="Delete">
         </posDelete>
     </div>
+ 
+    </form>
 
-    <div>
-        <posUpdate>
-            <button class="update"> <a type="submit" asp-action="Update" asp-controller="Administrator" asp-route-id="@Model.Id">Update</a></button>
-        </posUpdate>
-    </div>
+    <form method="post" asp-action="UpdateRoles" asp-route-id="@Model.Id" asp-controller="Administrator">
+            <label>
+                <input type="checkbox" name="isEditor" style="color:white;"/> Editor
+            </label>
+            <br />
+            <label>
+            <input type="checkbox" name="isCritic" style="color:white;" /> Critic
+        </label>
+            <br />
+            <label>
+            <input type="checkbox" name="isRegisteredUser" style="color:white;" /> Registered User
+            </label>
+            <br />
+        <div>
+            <posUpdate>
+                <input type="submit" class="update" value="Update">
+            </posUpdate>
+        </div>
+        </form>
+
     <!--JEDAN CHECKBOX JE DISABLED KADA JE DRUGI KLIKNUT, TO DODATI!!!
         DODATI SVUGDJE ZA MONTSERRAT  + STILOVE POPRAVITI!
     -->

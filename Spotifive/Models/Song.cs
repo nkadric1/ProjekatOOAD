@@ -37,7 +37,7 @@ namespace Spotifive.Models
         public string LinkYT { get; set; }
         public string DriveLink { get; set; }
         public string Image { get; set; }
-		public Artist Artist { get; set; }
+	
 
 		public Song() { }
 		public List<Review> Reviews { get; set; }

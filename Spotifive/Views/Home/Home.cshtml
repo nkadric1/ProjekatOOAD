@@ -202,12 +202,17 @@
 
         <br>
 
+       
         <button class="buttons"><a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;">Artists</a></button>
 
         <br>
 
-        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
-         <br>
+        @if (User.IsInRole("RegisteredUser"))
+        {
+            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+           
+        }
+        <br>
         <h1 style="color:#0b2847;">Top songs</h1>
 
     </div>

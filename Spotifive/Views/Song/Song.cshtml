@@ -201,10 +201,12 @@
 <img src="@Model.Image" alt="@Model.SongName" class="song-image" width="420" height="410" >
 
 </proba>
+	@if (User.IsInRole("RegisteredUser,Critic,Editor"))
+	{
+		<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
+			<img class="centered" src="~/assets/images/DetailsDots.png" />
+	</a>}
 
-	<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
-	<img class="centered" src="~/assets/images/DetailsDots.png" />
-	</a>
 	<a href="#criticActions"  data-toggle="modal">
 		<img class="reviews" src="~/assets/images/Reviews.png" />
 	</a>

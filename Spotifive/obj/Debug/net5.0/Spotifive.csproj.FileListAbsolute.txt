@@ -882,3 +882,4 @@ C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\System.Text.
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExplode.dll
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExtractor.dll
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopUsersView.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_UserDeletedView.cshtml.g.cs
