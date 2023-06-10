@@ -73,6 +73,52 @@ namespace Spotifive.Controllers
         [Authorize(Roles ="Editor")]
         public IActionResult Edit() { return View(); }
 
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit([Bind("ID, SongName, DateRelease, Genre, CodeQR, LinkYT, DriveLink, Image")] Song song)
+		{
+			if (ModelState.IsValid)
+			{
+				_context.Add(song);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Edit));
+			}
+			return View(song);
+
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("ID, SongName, DateRelease, Genre, CodeQR, LinkYT, DriveLink, Image")] Song song)
+		{
+			if (id != song.ID)
+			{
+				return NotFound();
+			}
+
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					_context.Update(song);
+					await _context.SaveChangesAsync();
+				}
+				catch (DbUpdateConcurrencyException)
+				{
+					if (!SongExists(song.ID))
+					{
+						return NotFound();
+					}
+					else
+					{
+						throw;
+					}
+				}
+				return RedirectToAction(nameof(Edit));
+			}
+			return View(song);
+		}
+
 		[Authorize(Roles = "Editor,RegisteredUser,Critic")]
 		public IActionResult Details(int id) {
 			var song = _context.Song.FirstOrDefault(m => m.ID == id);
@@ -149,7 +195,7 @@ namespace Spotifive.Controllers
         }
     
         public IActionResult SearchResult(string search)
-         {
+        {
              List<Song> songs = _context.Song.ToList();
              if (search == null)
                  ViewBag.SearchResults = songs;
@@ -161,7 +207,7 @@ namespace Spotifive.Controllers
                  ViewBag.SearchResults = searchResults;
              }
              return View(ViewBag.SearchResults);
-         }
+        }
            
         private bool SongExists(int id)
         {

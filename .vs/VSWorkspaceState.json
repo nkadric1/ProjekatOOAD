@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Spotifive"
   ],
-  "SelectedNode": "\\Spotifive.sln",
+  "SelectedNode": "\\Spotifive\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }

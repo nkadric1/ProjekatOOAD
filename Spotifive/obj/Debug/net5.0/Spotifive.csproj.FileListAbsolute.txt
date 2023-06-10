@@ -1079,3 +1079,4 @@ C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\ref
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Spotifive.pdb
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Spotifive.genruntimeconfig.cache
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\ref\Spotifive.dll
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Song\Add.cshtml.g.cs
