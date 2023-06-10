@@ -1,9 +1,12 @@
 ﻿@model Spotifive.Models.ApplicationUser
-
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Edit Account";
 }
-
+@{
+    var usermanager = await UserManager.GetUserAsync(User);
+}
 <head>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link rel="stylesheet" href="~/css/body.css">

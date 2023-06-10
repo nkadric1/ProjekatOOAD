@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using AngleSharp.Dom;
+using Google.Apis.YouTube.v3.Data;
+using Humanizer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Spotifive.Data;
 using Spotifive.Models;
+using static Humanizer.In;
 
 namespace Spotifive.Controllers
 {
@@ -16,14 +23,17 @@ namespace Spotifive.Controllers
     {
         private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationUser> _roleManager;
-        public AdministratorController(ApplicationDbContext context)
+        private RoleManager<IdentityRole> _roleManager;
+        public AdministratorController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager)
         {
             _context = context;
-            //       _userManager = userManager;
+              _userManager = userManager;
+            _roleManager = roleManager;
             //     _roleManager = roleManager;
             //     /, UserManager<ApplicationUser> userManager, RoleManager<ApplicationUser>
         }
+        
+       
 
         /*  // GET: Administrator
           public async Task<IActionResult> Index()
@@ -41,103 +51,50 @@ namespace Spotifive.Controllers
             }
             return View(per);
         }
-        public IActionResult GetViewUsers(string para)
-        {
-            //get data
-            var model = _context.Users.Where(x => x.Name.Contains(para) ||  x.Surname.Contains(para)).ToList();
-            return PartialView("_PopUsersView", model);
-        }
+        
 
         [HttpPost]
-        public async Task<IActionResult> UpdateRoles(string id,bool isEditor, bool isCritic, bool isRegisteredUser)
+        public IActionResult UpdateRoles(string id,bool isEditor, bool isCritic, bool isRegisteredUser)
         {
-            /*  // Retrieve the user
-              if (id == null)
+            
+        
+            // Retrieve the user
+            if (id == null)
               {
                   return NotFound();
               }
 
-              var user = await _context.Users
-                  .FirstOrDefaultAsync(m => m.Id == id);
+              var user = _context.Users
+                  .FirstOrDefaultAsync(m => m.Id == id).Result;
               if (user == null)
               {
                   return NotFound();
               }
+            System.Diagnostics.Debug.WriteLine("SomeText", user.Name, user.Role);
+            string role =null;
+            if (isCritic) role = "Critic";
+            if (isRegisteredUser) role = "RegisteredUser";
+            if (isEditor) role = "Editor";
+            System.Diagnostics.Debug.WriteLine("SomeText",role);
 
-              // Update roles based on checkbox selections
-              if (isEditor)
-              {
-                  // User selected Editor role
-                  await AddUserToRole(user, "Editor");
-
-                  // Remove other roles if necessary
-                  await RemoveUserFromRole(user, "Critic");
-                  await RemoveUserFromRole(user, "RegisteredUser");
-              }
-              else if (isCritic)
-              {
-                  // User selected Critic role
-                  await AddUserToRole(user, "Critic");
-
-                  // Remove other roles if necessary
-                  await RemoveUserFromRole(user, "Editor");
-                  await RemoveUserFromRole(user, "RegisteredUser");
-              }
-              else if (isRegisteredUser)
-              {
-                  // User selected RegisteredUser role
-                  await AddUserToRole(user, "RegisteredUser");
-
-                  // Remove other roles if necessary
-                  await RemoveUserFromRole(user, "Editor");
-                  await RemoveUserFromRole(user, "Critic");
-              }
-
-              // Update the user in the database
-              _context.Update(user);
-              await _context.SaveChangesAsync();
-              */
-           /* if (ModelState.IsValid)
-            {
-                // THIS LINE IS IMPORTANT
-                var oldUser = _userManager.FindByIdAsync(id);
-              
-
-                var oldRoleName = DB.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+            // THIS LINE IS IMPORTANT
+            var oldRoleName = user.Role;
 
                 if (oldRoleName != role)
-                {
-                    Manager.RemoveFromRole(user.Id, oldRoleName);
-                    Manager.AddToRole(user.Id, role);
+                {  
+              
+                    _userManager.RemoveFromRoleAsync(user, oldRoleName);
+                    _userManager.AddToRoleAsync(user, role);
                 }
-                DB.Entry(user).State = EntityState.Modified;
-
-                return RedirectToAction(MVC.User.Index());
-            }*/
+                _context.Update(user);
+                 _context.SaveChangesAsync();
+                return RedirectToAction("Account", "Account");
+            
             // Redirect the user to a page indicating the successful role update
-            return RedirectToAction("Account", "Account");
+          //  return RedirectToAction("Index", "Account");
         }
 
-        private async Task AddUserToRole(ApplicationUser user, string roleName)
-        {
-            if (!await _userManager.IsInRoleAsync(user, roleName))
-            {
-                var role = _roleManager.FindByNameAsync(roleName).Result;
-                if (role != null)
-                {
-                    await _userManager.AddToRoleAsync(user, role.Name);
-                }
-            }
-        }
-
-        private async Task RemoveUserFromRole(ApplicationUser user, string roleName)
-        {
-            if (await _userManager.IsInRoleAsync(user, roleName))
-            {
-                await _userManager.RemoveFromRoleAsync(user, roleName);
-            }
-        }
-    
+      
     // GET: Administrator/Create
     /* public IActionResult Create()
       {

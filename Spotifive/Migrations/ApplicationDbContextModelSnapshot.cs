@@ -388,46 +388,6 @@ namespace Spotifive.Migrations
                     b.ToTable("Song");
                 });
 
-            modelBuilder.Entity("Spotifive.Models.Administrator", b =>
-                {
-                    b.HasBaseType("Spotifive.Models.ApplicationUser");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Administrator");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Critic", b =>
-                {
-                    b.HasBaseType("Spotifive.Models.ApplicationUser");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Critic");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Editor", b =>
-                {
-                    b.HasBaseType("Spotifive.Models.ApplicationUser");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Editor");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.RegisteredUser", b =>
-                {
-                    b.HasBaseType("Spotifive.Models.ApplicationUser");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("RegisteredUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -541,42 +501,6 @@ namespace Spotifive.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Song");
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Administrator", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", null)
-                        .WithOne()
-                        .HasForeignKey("Spotifive.Models.Administrator", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Critic", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", null)
-                        .WithOne()
-                        .HasForeignKey("Spotifive.Models.Critic", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Spotifive.Models.Editor", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", null)
-                        .WithOne()
-                        .HasForeignKey("Spotifive.Models.Editor", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Spotifive.Models.RegisteredUser", b =>
-                {
-                    b.HasOne("Spotifive.Models.ApplicationUser", null)
-                        .WithOne()
-                        .HasForeignKey("Spotifive.Models.RegisteredUser", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

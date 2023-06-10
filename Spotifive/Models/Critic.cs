@@ -5,12 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
-    public class Critic : ApplicationUser
+    public class Critic : Person
     {       
         public Critic() { }
-		[ForeignKey("ApplicationUser")]
-		public string UserID { get; set; }
-		/*  public override Person Clone()
+		
+		 public override Person Clone()
 		  {
 			  Critic cUser = (Critic)this.MemberwiseClone();
 			  cUser.Name = (string)this.Name.Clone();
@@ -19,6 +18,6 @@ namespace Spotifive.Models
 			  cUser.Gender = (Gender)((int)this.Gender);
 			  return cUser;
 		  }
-		*/
+		
 	}
 }

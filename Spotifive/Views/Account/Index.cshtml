@@ -30,11 +30,23 @@
 		padding: 0;
 		margin: 0;
 	}
-
+	.bttns{
+		
+		font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
+		font-size: 22px;
+		border-radius: 30px;
+		background-color: #0b2847;
+		text-align: center;
+		color: #a8b6f0;
+		padding-right: 15px;
+		padding-left: 15px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 	.cover {
-		width: 50%;
+		width: 40%;
 		height: 100%;
-		position: fixed;
+		position: absolute;
 		float: left;
 		background-color: white;
 	}
@@ -91,22 +103,24 @@
 	<div class="main">
 		<h1 class="heading"><img src="~/assets/images/SpotiFIVELogo.png" alt=""> <i> Let the music move YOU</i> </h1>
 		<p class="text">SpotiFIVE is home to millions of songs from every corner <br> of the world. <br> Whether it's by keeping the classical works of <br> the renowned artists from the bygone past alive, <br> or giving a home to modern voices carving their names <br> in history, our mission is to take You on a journey <br> through the world of music. <br> Log in or sign up to join us today!</p>
-		<button class="buttons posButton1">
-			<a asp-area="Identity" asp-page="/Account/Login" style="color: #0b2847;">
+		<button class="buttons posButton1 bttns">
+			<a asp-area="Identity" asp-page="/Account/Login">
 				<p>Log In</p>
 			</a>
 		</button>
-		<button class="buttons posButton2">
-			<a asp-area="Identity" asp-page="/Account/Register" style="color: #0b2847;">
+		<button class="buttons posButton2 bttns">
+			<a asp-area="Identity" asp-page="/Account/Register" >
 				<p>Sign up</p>
 			</a>
 		</button>
 
 	</div>
 
-
+	@section Scripts{
 	<script src="/lib/jquery/dist/jquery.min.js"></script>
+
 	<script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0"></script>
-
+	}
+	
 </body>

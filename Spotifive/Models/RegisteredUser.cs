@@ -5,16 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spotifive.Models
 {
-    public class RegisteredUser : ApplicationUser
+    public class RegisteredUser : Person
     {
      public RegisteredUser() { }
-		[ForeignKey("ApplicationUser")]
-		public string UserID { get; set; }
+		
 
 	
 
 		//implementation of prototype pattern
-		/*  public override Person Clone()
+		  public override Person Clone()
 		  {    
 
 				  RegisteredUser rUser=(RegisteredUser)this.MemberwiseClone();
@@ -23,7 +22,7 @@ namespace Spotifive.Models
 			  rUser.DateOfBirth = (DateTime)this.DateOfBirth;
 			  rUser.Gender = (Gender)((int)this.Gender);
 			  return rUser;	
-		  }*/
+		  }
 
 	}
 }

@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Spotifive",
+    "\\Spotifive\\Controllers",
+    "\\Spotifive\\Models",
+    "\\Spotifive\\Views",
+    "\\Spotifive\\Views\\Administrator",
+    "\\Spotifive\\Views\\Shared"
   ],
-  "SelectedNode": "\\Spotifive.sln",
+  "SelectedNode": "\\Spotifive\\Views\\Administrator\\Administrator.cshtml",
   "PreviewInSolutionExplorer": false
 }

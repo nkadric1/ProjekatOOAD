@@ -16,7 +16,7 @@ namespace Spotifive.Controllers
     public class SongController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+	
         public SongController(ApplicationDbContext context)
         {
             _context = context;
@@ -82,16 +82,40 @@ namespace Spotifive.Controllers
 		}
 
 		public IActionResult Song(int id) {
-			var song = _context.Song.FirstOrDefault(m => m.ID == id);
+			var song = _context.Song.FirstOrDefault(s => s.ID == id);
 			if (song == null)
 			{
 				return NotFound();
 			}
 
+			var playlists = _context.Playlist.ToList();
+
+			// Assign the playlists to the ViewBag
+			ViewBag.Playlists = playlists;
 			// Call the GetComments method to populate the Reviews property
 			song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
 
 			return View(song);
+		}
+		[HttpPost]
+		public IActionResult AddSongToPlaylist([FromBody] int songId, [FromBody] int playlistId)
+		{
+			var song = _context.Song.FirstOrDefault(s => s.ID == songId);
+			var playlist = _context.Playlist.FirstOrDefault(p => p.ID == playlistId);
+
+			if (song != null && playlist != null)
+			{
+				var playlistSong = new PlaylistSongs
+				{
+					PlaylistID = playlist.ID,
+					SongID = song.ID
+				};
+
+				_context.PlaylistSongs.Add(playlistSong);
+				_context.SaveChanges();
+			}
+
+			return RedirectToAction("Song", "Song");
 		}
 		public IActionResult SaveMP3(int id)
 		{
@@ -102,7 +126,7 @@ namespace Spotifive.Controllers
 			}
 
 			// Call the GetComments method to populate the Reviews property
-			song.SaveMP3();
+		song.SaveMP3();
 
 			return View(song);
 		}
