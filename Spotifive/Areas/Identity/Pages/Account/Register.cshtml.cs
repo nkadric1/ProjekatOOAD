@@ -77,7 +77,9 @@ namespace Spotifive.Areas.Identity.Pages.Account
             public Gender Gender { get; set; }
             [Display(Name = "Date of birth")]
             [Required]
-            public DateTime DateOfBirth { get; set; }
+			[ValidateDate]
+			[DataType(DataType.Date)]
+			public DateTime DateOfBirth { get; set; }
 
             [Required]
             [Display(Name = "Name")]
@@ -92,7 +94,27 @@ namespace Spotifive.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Username")]
             public string Username { get; set; }
-        }
+			public class ValidateDate : ValidationAttribute
+			{
+				protected override ValidationResult IsValid
+				(object date, ValidationContext validationContext)
+				{
+					if (date is DateTime d)
+					{
+						DateTime minimumAgeDate = DateTime.Now.Date.AddYears(-12); // Calculate the minimum age date (12 years ago)
+
+						if (d <= minimumAgeDate)
+						{
+							return ValidationResult.Success; // User is more than 12 years old
+						}
+					}
+
+					return new ValidationResult("User must be over 12 years old!");
+
+
+				}
+			}
+		}
 
         public async Task OnGetAsync(string returnUrl = null)
         {

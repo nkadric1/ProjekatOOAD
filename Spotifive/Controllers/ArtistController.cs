@@ -28,7 +28,7 @@ namespace Spotifive.Controllers
         public IActionResult PartialViewArtist(int id)
         {
             var songs = _context.ArtistSongs.Include(x => x.Song).Where(entry => entry.ID == id).Select(entry => entry.Song);
-            return PartialView("_PopView", songs);
+            return PartialView("_PopViewArtistSongs", songs);
         }
        
     }

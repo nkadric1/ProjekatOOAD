@@ -8,16 +8,15 @@
         }
     </style>
     <div class="row text-center" style="margin-bottom:100px;">
-        @foreach (Song item in Model)
+        @foreach (var item in Model)
         {
             <div class="col-sm-4">
-                <div>
-                <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@item.ID" style="-webkit-text-fill-color:#a8b6f0;">
-                    <img class="imageobject" src=@item.Image alt="@item.SongName" >
-                        <p><strong>@item.SongName</strong></p>
+
+            <a href="@Url.Action("Song", "Song", new { id = item.ID })">
+                <img class="imageobject" src=@item.Image alt="@item.SongName">
+                <p style="color: #a8b6f0;"><strong>@item.SongName</strong></p>
                     </a>
                 <hr style="color:#a8b6f0;" />
-            </div>
             </div>
         }
     </div>

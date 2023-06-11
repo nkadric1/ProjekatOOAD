@@ -880,5 +880,8 @@ C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\System.Text.
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExplode.dll
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\bin\Debug\net5.0\YoutubeExtractor.dll
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopUsersView.cshtml.g.cs
-C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_UserDeletedView.cshtml.g.cs
 C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Song\Create.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopViewPlaylist.cshtml.g.cs
+C:\Users\x\source\repos\ProjekatOOADv9.0\Spotifive\obj\Debug\net5.0\Razor\Views\Shared\_PopViewArtistSongs.cshtml.g.cs

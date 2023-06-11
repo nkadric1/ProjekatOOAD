@@ -177,8 +177,8 @@
 
    <form>
         <div class="search-container">
-            <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
-            <button type="button" class="search-button" data-target="#srcplaylist" data-toggle="modal" id="showPop">Search</button>
+            <input type="text" class="search-box" id="txt" placeholder="Type here..." />
+            <button type="button" class="search-button" data-target="#srcplaylist" data-toggle="modal" id="showPopPlay">Search</button>
         </div>
 
         </>
@@ -192,7 +192,7 @@
                         <span class="close">&times;</span>
                     </div>
                     <div class="modal-body ">
-                        <div id="popup">
+                        <div id="popupplaylist">
                         </div>
                     </div>
 
@@ -205,16 +205,16 @@
 
     @section Scripts{
         <script>
-            $('#showPop').click(function () {
+            $('#showPopPlay').click(function () {
                 previousUrl = window.location.href; // Store the current URL
 
-                var url = '@Url.Action("GetPartialView", "Playlist")';
+                var url = '@Url.Action("GetPartialViewOfP", "Playlist")';
                 $.ajax({
                     url: url,
                     type: 'post',
-                    data: { "para": $("#Text1").val() },
+                    data: { "para": $("#txt").val() },
                     success: function (data) {
-                        $('#popup').html(data);
+                        $('#popupplaylist').html(data);
                     }
                 });
                 $('.close, .modal').click(function () {
@@ -254,7 +254,7 @@
             <h1 style="color:#0b2847;">Playlists</h1>
 
         </div>
-
+        </div>
 </header>
 
 <body>

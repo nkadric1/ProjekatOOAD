@@ -204,10 +204,6 @@ namespace Spotifive.Controllers
 					_context.Add(playlistSong);
 					await _context.SaveChangesAsync();
 
-					//return RedirectToAction("Song", "Song");
-					//return RedirectToAction(nameof(Song));
-					//return View();
-					//return Redirect(Request.UrlReferrer.ToString());
 					return Redirect(Request.Headers["Referer"].ToString());
 				}
 				else
@@ -217,10 +213,9 @@ namespace Spotifive.Controllers
 			}
 
 			return View(song);
-			//return View();
 		}
-
-		[HttpPost]
+     
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddReview(int id, Review review)
 		{

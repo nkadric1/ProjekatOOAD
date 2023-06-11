@@ -203,7 +203,8 @@
 <div class="text-box10">
     <button class="btn"> <a asp-action="LogOut" asp-controller="Account" style="color:#a8b6f0;;">Sign out</a></button>
 </div>
-
+@if(User.IsInRole("Critic,RegisteredUser,Editor")){
     <a asp-action="Home" asp-controller="Home">
     <img class="image2" src="~/assets/images/icons8-home-64.png"/>
 </a>
+}

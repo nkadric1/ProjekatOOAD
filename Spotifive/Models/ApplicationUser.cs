@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
+using static Spotifive.Models.Song;
 
 namespace Spotifive.Models
 {
@@ -14,14 +15,14 @@ namespace Spotifive.Models
         public string Name { get; set; }
 
         public string Surname { get; set; }
-
+      
         public DateTime DateOfBirth { get; set; }
+
 		[EnumDataType(typeof(Gender))]
 		public Gender Gender { get; set; }
        
         public string Role { get; set; }
-
-
+       
         public ApplicationUser() { }
 
 

@@ -12,11 +12,11 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-   
-    <!-- Stylesheet -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css"  crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
-    <!--Search bar-->
 
     <style>
         header {
@@ -93,11 +93,6 @@
             width: 150px;
             height: 150px;
         }
-
-      <!--  img:hover {
-            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        }-->
-
     
         h1 {
             position: fixed;
@@ -173,14 +168,14 @@
 </head>
 
 <header>
-
     <form>
         <div class="search-container">
             <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
             <button type="button" class="search-button" data-target="#srcsong" data-toggle="modal" id="showPop">Search</button>
         </div>
+       
         <!-- Modal -->
-        <div class="modal fade" id="srcsong" role="dialog">
+        <div class="modal hide fade" id="srcsong" tabindex="-1" role="dialog">
             <div class="modal-dialog   modal-lg">
 
                 <!-- Modal content-->

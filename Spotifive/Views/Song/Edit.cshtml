@@ -69,6 +69,8 @@
 
 <body class="background" style="background-color:#0b2847;">
     <form asp-action="EditSong" asp-controller="Song" asp-route-id="@Model.ID">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <h4 style="color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px">
             <b>Song</b>
         </h4>

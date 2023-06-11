@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Spotifive.Models.Song>
+
+<style>
+
+    .imageobject {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<div class="row text-center" style="margin-bottom:100px;">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+
+            <a href="@Url.Action("Song", "Song", new { id = item.ID })">
+                <img class="imageobject" src=@item.Image alt="@item.SongName">
+                <p style="color: #a8b6f0;"><strong>@item.SongName</strong></p>
+            </a>
+            <hr style="color:#a8b6f0;" />
+        </div>
+    }
+</div>
+

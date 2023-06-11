@@ -23,11 +23,11 @@ namespace Spotifive.Controllers
         }
         public async Task<IActionResult> Playlist() { return View(await _context.Playlist.ToListAsync()); }
 
-          public IActionResult GetPartialView(string para)
+          public IActionResult GetPartialViewOfP(string para)
         {
             //get data
             var model = _context.Song.Where(x => x.SongName.Contains(para)).ToList();
-            return PartialView("_PopView", model);
+            return PartialView("_PopViewPlaylist", model);
         }
        
         public IActionResult PlaylistSongs(int id) {
