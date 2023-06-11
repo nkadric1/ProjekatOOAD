@@ -193,7 +193,24 @@
 </head>
 
 <body>
-
+	<!--OVDJE SU PRIKAZANE REVIEWS JEDNOG CRITICA- ako stignem dodat cu u pop up-->
+	<h2>Critic Reviews</h2>
+@if (ViewBag.CriticReviews != null)
+{
+    <ul>
+        @foreach (var review in ViewBag.CriticReviews)
+        {
+            <li>@review.Comment</li>
+			<li>@review.Grade</li>
+			<li>@review.TimeStamp</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No critic reviews available for this song.</p>
+}
+<!--KRAJ-->
 
 	<!--ovaj dio treba biti u pop up prozorcicu kada se klikne na add songs, ali modal me zezao pa sam ovdje
 		samo isprobala, nisam stigla prebaciti u modal kasnije

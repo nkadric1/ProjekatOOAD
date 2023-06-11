@@ -24,6 +24,7 @@ using static System.Net.Mime.MediaTypeNames;
 using YoutubeExtractor;
 using System.Net;
 using System.Net.Http;
+using Spotifive.Data;
 
 namespace Spotifive.Models
 {
@@ -185,7 +186,23 @@ namespace Spotifive.Models
 			return string.Empty;
 		}
 
+		public List<Review> GetCriticReviews(ApplicationDbContext context)
+		{
+			return context.Review.Where(r => r.SongID == ID).ToList();
+		}
 
+		
+		public Artist GetArtist(DbContext context)
+		{
+			var artistSong = context.Set<ArtistSongs>().FirstOrDefault(r => r.SongID == this.ID);
+			if (artistSong != null)
+			{
+				var artist = context.Set<Artist>().FirstOrDefault(a => a.ID == artistSong.ArtistID);
+				Artist = artist;
+				return artist;
+			}
+			return null; // or handle the case when artist is not found
+		}
 
 	}
 }

@@ -145,7 +145,11 @@
     <div class="text-box" asp-for="SongName">@Model.SongName</div>
 
   
-	<!-- <div class="text-box1" asp-for="ArtistName">ArtistSurname</div>  -->
+ <div class="text-box1">@(((Artist)ViewBag.Artist)?.ArtistName)</div> 
+  <div class="text-box1">@(((Artist)ViewBag.Artist)?.ArtistSurname)</div> 
+
+  <img src=@(((Artist)ViewBag.Artist)?.Image)" height="120" width="170">
+   
 
 
 

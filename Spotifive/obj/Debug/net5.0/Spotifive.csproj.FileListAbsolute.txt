@@ -1080,3 +1080,8 @@ C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Spo
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Spotifive.genruntimeconfig.cache
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\ref\Spotifive.dll
 C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Song\Create.cshtml.g.cs
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Review\Create.cshtml.g.cs
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Review\Delete.cshtml.g.cs
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Review\Details.cshtml.g.cs
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Review\Edit.cshtml.g.cs
+C:\Users\Amina\Source\Repos\nkadric1\ProjekatOOAD\Spotifive\obj\Debug\net5.0\Razor\Views\Review\Index.cshtml.g.cs

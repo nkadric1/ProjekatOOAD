@@ -156,7 +156,8 @@ namespace Spotifive.Controllers
 			string formattedDate = song.GetFormattedDateRelease();
 			ViewBag.FormattedDateRelease = formattedDate;
 
-
+			var artist = song.GetArtist(_context);
+			ViewBag.Artist = artist;
 			/*var artist = song.Artist;
 			if (artist == null)
 			{
@@ -170,6 +171,11 @@ namespace Spotifive.Controllers
 
 		public IActionResult Song(int id) {
 			var song = _context.Song.FirstOrDefault(s => s.ID == id);
+			//var song = _context.Song.Include(s => s.CriticReviews).FirstOrDefault(s => s.ID == id);
+			//var reviews = _context.Review.Where(r => r.SongID == id).ToList();
+
+			//ViewBag.Song = song;
+			//ViewBag.Reviews = reviews;
 			//var song = _context.Song.Include(s => s.Reviews).FirstOrDefault(s => s.ID == id);
 			if (song == null)
 			{
@@ -194,7 +200,9 @@ namespace Spotifive.Controllers
 			// Call the GetComments method to populate the Reviews property
 			song.Reviews = song.GetComments("AIzaSyDGuW4OZgNlerudPj8I6uSCwyD2uUhY74I");
 
-			
+			List<Review> criticReviews = song.GetCriticReviews(_context);
+			ViewBag.CriticReviews = criticReviews;
+
 
 			return View(song);
 		}
