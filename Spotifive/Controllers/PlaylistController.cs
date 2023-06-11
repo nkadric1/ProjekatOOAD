@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,11 +66,13 @@ namespace Spotifive.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,PlaylistName")] Playlist playlist)
         {
-            if (ModelState.IsValid)
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			if (ModelState.IsValid)
             {
+                playlist.Uid = userId;
                 _context.Add(playlist);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Playlist));
             }
             return View(playlist);
         }

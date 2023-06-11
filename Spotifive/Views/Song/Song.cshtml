@@ -194,6 +194,32 @@
 
 <body>
 
+
+	<!--ovaj dio treba biti u pop up prozorcicu kada se klikne na add songs, ali modal me zezao pa sam ovdje
+		samo isprobala, nisam stigla prebaciti u modal kasnije
+	-->	
+			<h1>Song</h1>
+
+@using (Html.BeginForm("AddToPlaylist", "Song", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        <label for="playlistSelection">Select a playlist:</label>
+        <select id="playlistSelection" name="playlistSelection" class="form-control">
+            <option value="">-- Select a playlist --</option>
+            @foreach (var playlist in playlists)
+            {
+                <option value="@playlist.ID">@playlist.PlaylistName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add to Playlist</button>
+}
+<!--endddddddd-->
 	
 	
 <p class="namepos">@Model.SongName</p>
@@ -223,7 +249,7 @@
 
 	<p class="textReviews">Reviews</p>
 	
-		<a >
+		 <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@Model.ID">
 		<img class="download" src="~/assets/images/Download.png" />
 	</a>
 
@@ -237,17 +263,15 @@
 		</audio>
 
 
-	<a href="#addToPlaylist" data-toggle="modal">
+	<a href="#addSongToPlaylist" data-toggle="modal">
 		<img class="add" src="~/assets/images/Add.png" />
 	</a>
 
 	<p class="textAdd">Add</p>
 
-	@if (User.IsInRole("Editor"))
-	{		
-		<a asp-action="Edit" asp-controller="Song"><img class="edit" src="~/assets/images/Edit.png" /></a>
+		<a asp-action="Edit" asp-controller="Song" asp-route-id="@Model.ID"><img class="edit" src="~/assets/images/Edit.png" /></a>
 		<p class="textEdit">Edit</p>
-	}
+	
 	 
 	<form asp-action="AddSongToPlaylist" asp-controller="Song" id="addToPlaylistForm" method="post">
 		
@@ -552,6 +576,8 @@
 		</div>
 		
 	}
+
+	<!--OVDJE JE DA CRITIC DODAJE REVIEWS U BAZU!!!-->
 	<div class="modal fade" id="criticActionsRating" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog">
 			<div class="modal-content criticComment">
@@ -610,7 +636,30 @@
 				</style>
 				<div class="rectangle3">	</div>
 				<h13>You are logged in as Critic</h13>
+				
+@using (Html.BeginForm("AddReview", "Song", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID)
+        @Html.DisplayFor(model => model.ID)
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        @Html.TextAreaFor(model => model.Review.Comment, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="grade">Grade</label>
+        @Html.TextBoxFor(model => model.Review.Grade, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(model => model.ID)
+
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+}
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
@@ -670,8 +719,91 @@
 				</style>
 				<div class="rectangle3">	</div>
 				<h13>Comments</h13>
-			
+				<ul class="posul scroll-view">
+					@foreach (var review in Model.Reviews)
+					{
+						<li class="rectangle4">@review.Comment</li>
+					}
+				</ul>
 
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary buttonOK5" data-dismiss="modal">OK</button>
+				</div>
+			
+		</div>
+	</div>
+
+	<!--adding a new song to the database-->
+	<div class="modal fade" id="addSongToPlaylist" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content criticComment">
+				<style>
+					
+
+					h13 {
+						font-size: 22px;
+						position: absolute;
+						top: 20px;
+						left: 55px;
+					}
+
+					.rectangle4 {
+						
+						margin-bottom: 3px; /* Add spacing at the bottom of each list item */
+						background-color: #a8b6f0;
+						width: 100%;
+						height: auto;
+						
+					}
+					.posul{
+						position: absolute;
+						top: 80px;
+					}
+
+					
+					.buttonOK5 {
+						position: absolute;
+						bottom: 0px;
+						right: 0px;
+						font-size: 18px;
+						height: 40px;
+						width: 110px;
+						background-color: whitesmoke;
+						color: #0b2847;
+						border-color: #0b2847;
+						font-weight: bold;
+					}
+
+					.scroll-view {
+						max-height: 260px; /* Set the maximum height of the scroll view */
+						overflow-y: auto; /* Enable vertical scroll if content overflows */
+					}
+				</style>
+				<h1>Song</h1>
+
+@using (Html.BeginForm("AddToPlaylist", "Song", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ID)
+        @Html.TextBoxFor(model => model.ID, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="playlistSelection">Select a playlist:</label>
+        <select id="playlistSelection" name="playlistSelection" class="form-control">
+            <option value="">-- Select a playlist --</option>
+            @foreach (var playlist in playlists)
+            {
+                <option value="@playlist.ID">@playlist.PlaylistName</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add to Playlist</button>
+}
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary buttonOK5" data-dismiss="modal">OK</button>

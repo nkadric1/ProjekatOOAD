@@ -102,6 +102,15 @@
         background-color: whitesmoke; /* Blue background */
         color: #0b2847;
     }
+    .btn0{
+        width:100px;
+        height:80px;
+        background-color: whitesmoke; /* Blue background */
+        color: #0b2847;
+        position: fixed;
+        top: 528px;
+        left: 500px;
+    }
     .grbu1 {
         position: fixed;
         top: 525px;
@@ -218,26 +227,58 @@
         height: 30px;
         font-family: Montserrat;
     }
+    .form-control6 {
+        position: fixed;
+        top: 470px;
+        left: 450px;
+        box-shadow: 0px 0px 5px #0b2847;
+        border: 1px solid #0b2847;
+        background-color: #a8b6f0;
+        padding: 1px;
+        width: 300px;
+        height: 30px;
+        font-family: Montserrat;
+    }
+    .form-control7 {
+        position: fixed;
+        top: 510px;
+        left: 450px;
+        box-shadow: 0px 0px 5px #0b2847;
+        border: 1px solid #0b2847;
+        background-color: #a8b6f0;
+        padding: 1px;
+        width: 300px;
+        height: 30px;
+        font-family: Montserrat;
+    }
+    posDelete{
+        position: fixed;
+        top: 525px;
+        left: 850px;
+        widht: 80px;
+        height: 80px;
+        border:none;
+        background-color: whitesmoke; /* Blue background */
+        color: #0b2847;
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+    }
+    
 </style>
 
-
-<form asp-action="Search">
-    <posSearch>
-        <input type="text" class="search-box" placeholder="Type here">
-        <button type="submit" class="search-button">Search</button>
-    </posSearch>
 
     <posSgnOut>
         <button class="sign-button"><a asp-action="Index" asp-controller="Account">Sign Out</a></button>
     </posSgnOut>
-</form>
+
     <div class="background">
-    <form>
+    <form asp-action="Edit" asp-controller="Song" asp-route-id="@Model.ID">
         <h4 style="color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px">
             <b>Song</b>
         </h4>
         <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <h1 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
                     <b>Name:</b>
@@ -257,9 +298,22 @@
                 <h3 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
                     <b>Genre:</b>
                 </h3>
-                <select asp-for="Genre" class="form-control3"></select>
+                
+              <!--  <div class="form-group">
+                <label asp-for="Genre" class="control-label"></label>
+                <select asp-for="Genre" class="form-control" aspitems="Html.GetEnumSelectList<Genre>()"></select>
                 <span asp-validation-for="Genre" class="text-danger"></span>
-            </div>
+                </div>
+                </div>  -->
+
+                <select asp-for="Genre" class="form-control3">
+                   @foreach (var genre in Enum.GetValues(typeof(Genre)))
+							{
+								<option value="@genre">@genre</option>
+							}
+               </select>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>  
 
             <div class="form-group">
                 <h5 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
@@ -277,34 +331,50 @@
                 <span asp-validation-for="CodeQR" class="text-danger"></span>
 
             </div>
-            <div class="form-group">
+           <div class="form-group">
                 <h7 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Drop the file for upload here:</b>
+                    <b>Drive link:</b>
                 </h7>
+                 <input asp-for="DriveLink" class="form-control6" type="text" />
+                <span asp-validation-for="DriveLink" class="text-danger"></span>
              
-                <div>
+            </div>
                    <!-- <div class="mb-4 d-flex justify-content-center">
                         <img src="../wwwroot/assets/images/uploadfile.png"
                              style="width: 80px; height: 80px; " />
                     </div> -->
-                    <div class="d-flex justify-content-center">
-                        <div class="btn btn-primary btn-rounded butn3">
-                            <label class="form-label m-1" for="customFile1">Choose file</label>
-                            <input type="file" class="form-control d-none" id="customFile1" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+             <div class="form-group">
+                <h7 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
+                    <b>Image:</b>
+                </h7>
+                 <input asp-for="Image" class="form-control7" type="text" value=@Model.Image/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>       
+                
             <div class="btn-group grbu1" role="group" aria-label="Basic example" >
-                <button  class="btn btn-secondary btn1" ><a asp-action="Add" asp-controller="Song">Add</a></button>
-                <button  class="btn btn-secondary btn1"  ><a asp-action="Update" asp-controller="Song">Update</a></button>
-                <button  class="btn btn-secondary btn1" ><a asp-action="Delete" asp-controller="Song">Delete</a> </button>
+               
+                <button  class="btn btn-secondary btn1"  ><a asp-action="Edit" asp-controller="Song">Update</a></button>
+                
             </div>
 
         </div>
              </form>
-    </div>
 
+              <button  class="btn btn-secondary btn0" ><a asp-action="Create" asp-controller="Song">Add a new song</a></button>
+
+              <!--deete primjer-->
+            <form method="post" asp-action="Delete" asp-controller="Song" asp-route-id="@Model.ID">
+ 
+    <div>
+        <posDelete>
+            <input type="submit" class="delete" value="Delete">
+        </posDelete>
+    </div>
+ 
+    </form>
+    <!--doovdje-->
+    </div>
+    
 
 <!--
 <div>

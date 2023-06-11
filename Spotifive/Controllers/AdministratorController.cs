@@ -1,25 +1,14 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using AngleSharp.Dom;
-using Google.Apis.YouTube.v3.Data;
-using Humanizer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Spotifive.Data;
 using Spotifive.Models;
-using static Humanizer.In;
 
 namespace Spotifive.Controllers
 {
-    public class AdministratorController : Controller
+	public class AdministratorController : Controller
     {
         private readonly ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
