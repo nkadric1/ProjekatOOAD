@@ -49,12 +49,22 @@
         top: 630px;
         right: 30px;
     }
+    .divStyle{
+        color: #0b2847;
+        font-family: Montserrat;
+        text-align: left;
+        font-size: 20px
+    }
 </style>
 
 <posSgnOut>
     <button class="btn"><a asp-action="Index" asp-controller="Account">Sign Out</a></button>
 </posSgnOut>
+   
+
 <body class="background" style="background-color:#0b2847;">
+
+
     <form asp-action="Add">
         <h4 style="color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px">
             <b>Song</b>
@@ -63,21 +73,21 @@
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Song name:</b>
             </h2>
-            <input type="text" class="form-control" asp-for="SongName" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control divStyle" asp-for="SongName"/>
             <span asp-validation-for="SongName" class="text-danger"></span>
         </div>
         <div class="form-group mb-3">
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Release date:</b>
             </h2>
-            <input type="date" class="form-control" asp-for="DateRelease" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="date" class="form-control divStyle" asp-for="DateRelease" />
             <span asp-validation-for="DateRelease" class="text-danger"></span>
         </div>
         <div class="form-group mb-3">
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Genre:</b>
             </h2>
-            <select asp-for="Genre" class="form-control" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px ">
+            <select asp-for="Genre" class="form-control divStyle">
                 @foreach (var genre in Enum.GetValues(typeof(Genre)))
                 {
                     <option value="@genre">@genre</option>
@@ -85,11 +95,12 @@
             </select>
             <span asp-validation-for="Genre" class="text-danger"></span>
         </div>
+
         <div class="form-group mb-3">
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Link:</b>
             </h2>
-            <input type="link" class="form-control" asp-for="LinkYT" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="link" class="form-control divStyle" asp-for="LinkYT"/>
             <span asp-validation-for="LinkYT" class="text-danger"></span>
         </div>
 
@@ -97,15 +108,16 @@
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>QR code:</b>
             </h2>
-            <input type="link" class="form-control" asp-for="CodeQR" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="link" class="form-control divStyle" asp-for="CodeQR"/>
             <span asp-validation-for="CodeQR" class="text-danger"></span>
         </div>
+
 
         <div class="form-group mb-3">
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Drive link:</b>
             </h2>
-            <input type="link" class="form-control" asp-for="DriveLink" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="link" class="form-control divStyle" asp-for="DriveLink"/>
             <span asp-validation-for="DriveLink" class="text-danger"></span>
         </div>
 
@@ -113,14 +125,13 @@
             <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Image:</b>
             </h2>
-            <input type="link" class="form-control" asp-for="Image" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="link" class="form-control divStyle" asp-for="Image"/>
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
 
         <button class="btn posBtn"><a asp-action="Add" asp-controller="Song">Add</a></button>
+
     </form>
-
-
 
     @section Scripts {
         @{

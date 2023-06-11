@@ -17,7 +17,7 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	
+
 	<script>
 		$(document).ready(function () {
 			$("#saveMP3Button").click(function () {
@@ -119,7 +119,7 @@
 			font-size: 20px;
 		}
 
-	
+
 
 		.edit {
 			position: absolute;
@@ -174,14 +174,16 @@
 			font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
 			color: #0b2847;
 		}
-		proba{
+
+		proba {
 			position: absolute;
 			left: 37.5%;
 			top: 9%;
 			color: #a8b6f0;
 			font-size: 20px;
 		}
-		.namepos{
+
+		.namepos {
 			position: absolute;
 			left: 49%;
 			top: 67%;
@@ -196,26 +198,27 @@
 			width: 400px;
 			height: 400px;
 		}
-		.imgG:hover {
-			box-shadow: 0 0 2px 1px  #a8b6f0;
-		}
+
+			.imgG:hover {
+				box-shadow: 0 0 2px 1px #a8b6f0;
+			}
 	</style>
 
 </head>
 
 
 
-    
+
 <body>
-	
-<proba>
-	
-<img src="@Model.Image" alt="@Model.SongName" class="imgG" width="420" height="410" >
+
+	<proba>
+
+		<img src="@Model.Image" alt="@Model.SongName" class="imgG" width="420" height="410">
 		<p style="align-content:center">@Model.SongName</p>
-</proba>
-	
-		<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
-			<img class="centered" src="~/assets/images/DetailsDots.png" />
+	</proba>
+
+	<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
+		<img class="centered" src="~/assets/images/DetailsDots.png" />
 	</a>
 
 
@@ -228,33 +231,36 @@
 	<a asp-action="Account" asp-controller="Account"><img class="profile" src="~/assets/images/Profile.png" /></a>
 
 	@if (User.IsInRole("Critic"))
-{	
-	<a href="#criticActionsRating" data-toggle="modal">
-		<img class="reviews" src="~/assets/images/Ratings.png" />
-	</a>
-}
-@if(User.IsInRole("RegisteredUser,Critic")){
-	<p class="ratings" style="color: #a8b6f0; font-size: 20px;">Reviews</p>
-}
- @if(User.IsInRole("RegisteredUser")){
-	 <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@Model.ID">
+	{
+		<a href="#criticActionsRating" data-toggle="modal">
+			<img class="reviews" src="~/assets/images/Ratings.png" />
+		</a>
+	}
+	@if (User.IsInRole("RegisteredUser,Critic"))
+	{
+		<p class="ratings" style="color: #a8b6f0; font-size: 20px;">Reviews</p>
+	}
+	@if (User.IsInRole("RegisteredUser"))
+	{
+		<a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@Model.ID">
 			<img class="download" src="~/assets/images/Download.png" />
-	</a>
+		</a>
 
-		<p  class="textDownload" style="color: #a8b6f0; font-size: 20px;">Download</p>
- }
-		<audio controls style="width: 70%" class="playsong">
+		<p class="textDownload" style="color: #a8b6f0; font-size: 20px;">Download</p>
+	}
+	<audio controls style="width: 70%" class="playsong">
 		<!--<source src="https://drive.google.com/uc?export=download&id=1gNoxCrLwgMLnGsgN2lEFMhIFETAaAAVC" />  -->
 		<source src="@Model.DriveLink" />
-		</audio>
+	</audio>
 
- 
- @if(User.IsInRole("RegisteredUser")){
-	<a href="#addSongToPlaylist" data-toggle="modal">
-		<img class="add" src="~/assets/images/Add.png" />
-	</a>
-	<p class="textAdd" style="color: #a8b6f0; font-size: 20px;">Add</p>
- }
+
+	@if (User.IsInRole("RegisteredUser"))
+	{
+		<a href="#addSongToPlaylist" data-toggle="modal">
+			<img class="add" src="~/assets/images/Add.png" />
+		</a>
+		<p class="textAdd" style="color: #a8b6f0; font-size: 20px;">Add</p>
+	}
 
 
 	@if (User.IsInRole("Editor"))
@@ -369,115 +375,115 @@
 				</div>
 			</div>
 		</div>
-	}	
+	}
 
-@if(User.IsInRole("Critic")){
-	<div class="modal fade" id="criticActionsRating" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog">
-			<div class="modal-content criticComment">
-				<style>
-					h13 {
-						font-size: 22px;
-						position: absolute;
-						top: 20px;
-						left: 55px;
-					}
-
-					.rectangle3 {
-						position: absolute;
-						top: 10px;
-						left: 0px;
-						width: 100%;
-						height: 50px;
-						background-color: #a8b6f0;
-					}
-
-					.buttonConfirm {
-						position: absolute;
-						bottom: 0px;
-						right: 0px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						font-weight: bold;
-					}
-
-					.buttonCancel3 {
-						position: absolute;
-						bottom: 0px;
-						right: 110px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-					}
-
-					.starbar {
-						border-color: #0b2847;
-						position: absolute;
-						top: 70px;
-						left: 50px;
-						font-size: 18px;
-						height: 280px;
-						width: 290px;
-					}
-
-					.btn {
-						background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
-						font-family: 'Montserrat', sans-serif;
-						font-size: 20px;
-						font-weight: 700;
-						text-transform: capitalize;
-						letter-spacing: 1px;
-						border-radius: 20px/50px;
-						border: 2px solid #0b2847;
-						transition: all 0.5s ease 0s;
-						color: #a8b6f0;
-					}
-
-						.btn:hover,
-						.btn:focus {
-							color: #a8b6f0;
-							background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
-							box-shadow: 4px 4px rgba(253,238,172,0.2);
+	@if (User.IsInRole("Critic"))
+	{
+		<div class="modal fade" id="criticActionsRating" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content criticComment">
+					<style>
+						h13 {
+							font-size: 22px;
+							position: absolute;
+							top: 20px;
+							left: 55px;
 						}
 
+						.rectangle3 {
+							position: absolute;
+							top: 10px;
+							left: 0px;
+							width: 100%;
+							height: 50px;
+							background-color: #a8b6f0;
+						}
 
-				</style>
-			<h13 class="rectangle3">You are logged in as Critic</h13>
-			<div class="modal-body">
-				
-@using (Html.BeginForm("AddReview", "Song", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+						.buttonConfirm {
+							position: absolute;
+							bottom: 0px;
+							right: 0px;
+							font-size: 18px;
+							height: 40px;
+							width: 110px;
+							background-color: whitesmoke;
+							color: #0b2847;
+							border-color: #0b2847;
+							font-weight: bold;
+						}
 
-   <br />
-   <br/>
+						.buttonCancel3 {
+							position: absolute;
+							bottom: 0px;
+							right: 110px;
+							font-size: 18px;
+							height: 40px;
+							width: 110px;
+							background-color: whitesmoke;
+							color: #0b2847;
+							border-color: #0b2847;
+						}
 
-    <div class="form-group">
-        <label for="comment">Comment</label>
-        @Html.TextAreaFor(model => model.Review.Comment, new { @class = "form-control" })
-    </div>
+						.starbar {
+							border-color: #0b2847;
+							position: absolute;
+							top: 70px;
+							left: 50px;
+							font-size: 18px;
+							height: 280px;
+							width: 290px;
+						}
 
-    <div class="form-group">
-        <label for="grade">Grade</label>
-        @Html.TextBoxFor(model => model.Review.Grade, new { @class = "form-control" })
-    </div>
+						.btn {
+							background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+							font-family: 'Montserrat', sans-serif;
+							font-size: 20px;
+							font-weight: 700;
+							text-transform: capitalize;
+							letter-spacing: 1px;
+							border-radius: 20px/50px;
+							border: 2px solid #0b2847;
+							transition: all 0.5s ease 0s;
+							color: #a8b6f0;
+						}
 
-    @Html.HiddenFor(model => model.ID)
+							.btn:hover,
+							.btn:focus {
+								color: #a8b6f0;
+								background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
+								box-shadow: 4px 4px rgba(253,238,172,0.2);
+							}
 
-    <button type="submit" class="btn">Submit review</button>
-}
+					</style>
+					<h13 class="rectangle3">You are logged in as Critic</h13>
+					<div class="modal-body">
+
+						@using (Html.BeginForm("AddReview", "Song", FormMethod.Post))
+						{
+							@Html.AntiForgeryToken()
+
+							<br />
+							<br />
+
+							<div class="form-group">
+								<label for="comment">Comment</label>
+								@Html.TextAreaFor(model => model.Review.Comment, new { @class = "form-control" })
+							</div>
+
+							<div class="form-group">
+								<label for="grade">Grade</label>
+								@Html.TextBoxFor(model => model.Review.Grade, new { @class = "form-control" })
+							</div>
+
+							@Html.HiddenFor(model => model.ID)
+
+							<button type="submit" class="btn">Submit review</button>
+						}
+					</div>
+
 				</div>
-			
 			</div>
 		</div>
-	</div>
 	}
 	@if (User.IsInRole("RegisteredUser"))
 	{
@@ -488,49 +494,48 @@
 
 
 						h13 {
-						font-size: 22px;
-						position: absolute;
-						top: 20px;
-						left: 55px;
+							font-size: 22px;
+							position: absolute;
+							top: 20px;
+							left: 55px;
 						}
 
 						.rectangle4 {
-
-						margin-bottom: 3px; /* Add spacing at the bottom of each list item */
-						background-color: #a8b6f0;
-						width: 100%;
-						height: auto;
-
+							margin-bottom: 3px; /* Add spacing at the bottom of each list item */
+							background-color: #a8b6f0;
+							width: 100%;
+							height: auto;
 						}
-						.posul{
-						position: absolute;
-						top: 80px;
+
+						.posul {
+							position: absolute;
+							top: 80px;
 						}
 
 
 						.btn {
-						background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
-						font-family: 'Montserrat', sans-serif;
-						font-size: 20px;
-						font-weight: 700;
-						text-transform: capitalize;
-						letter-spacing: 1px;
-						border-radius: 20px/50px;
-						border: 2px solid #0b2847;
-						transition: all 0.5s ease 0s;
-						color: #a8b6f0;
+							background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+							font-family: 'Montserrat', sans-serif;
+							font-size: 20px;
+							font-weight: 700;
+							text-transform: capitalize;
+							letter-spacing: 1px;
+							border-radius: 20px/50px;
+							border: 2px solid #0b2847;
+							transition: all 0.5s ease 0s;
+							color: #a8b6f0;
 						}
 
-						.btn:hover,
-						.btn:focus {
-						color: #a8b6f0;
-						background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
-						box-shadow: 4px 4px rgba(253,238,172,0.2);
-						}
+							.btn:hover,
+							.btn:focus {
+								color: #a8b6f0;
+								background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
+								box-shadow: 4px 4px rgba(253,238,172,0.2);
+							}
 
 						.scroll-view {
-						max-height: 260px; /* Set the maximum height of the scroll view */
-						overflow-y: auto; /* Enable vertical scroll if content overflows */
+							max-height: 260px; /* Set the maximum height of the scroll view */
+							overflow-y: auto; /* Enable vertical scroll if content overflows */
 						}
 					</style>
 					<div class="rectangle3">	</div>
@@ -569,7 +574,7 @@
 			</div>
 		</div>
 	}
-	
+
 
 
 

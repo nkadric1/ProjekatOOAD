@@ -20,23 +20,24 @@ using System.Net;
 using System.Net.Http;
 using Spotifive.Data;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace Spotifive.Models
 {
     public class Song
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        public string SongName { get; set; }
-        public DateTime? DateRelease { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int ID { get; set; }
+		public string SongName { get; set; }
+		public DateTime? DateRelease { get; set; }
 		[EnumDataType(typeof(Genre))]
-		public Genre Genre { get; set; }    
-        public string CodeQR { get; set; }
-        public string LinkYT { get; set; }
-        public string DriveLink { get; set; }
-        public string Image { get; set; }
-	
+		public Genre Genre { get; set; }
+		public string CodeQR { get; set; }
+		public string LinkYT { get; set; }
+		public string DriveLink { get; set; }
+		public string Image { get; set; }
+
 		public Song() { }
 		public List<Review> Reviews { get; set; }
 		public Review Review;
