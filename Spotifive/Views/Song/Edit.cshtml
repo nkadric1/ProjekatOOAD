@@ -6,312 +6,158 @@
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 <style>
     posSgnOut {
-        position: absolute;
-        top: 30px;
-        right: 100px;
-    }
-</style>
-
-<style>
-    posSearch {
         position: fixed;
-        top: 30px;
-        left: 340px;
+        top: 40px;
+        right: 30px;
     }
-</style>
 
-<style>
-    body {
+     body {
         background-color: #0b2847;
     }
 
     .background {
         position: fixed;
-        top: 150px;
+        top: 30px;
         left: 200px;
-        right: 160px;
-        width: 850px;
-        height: 500px;
-        background-color: #a8b6f0;
+        width: 700px;
+        height: 300px;
     }
 
-
-    .search-box {
-        position: fixed;
-        top: 50px;
-        left: 200px;
-        margin: 20px 5px;
-        padding: 10px;
-        border-radius: 30px;
-        border: 1px solid gray;
-        width: 300px;
-        height: 50px;
-        font-size: 16px;
-    }
-
-    .search-button {
-        position: fixed;
-        top: 70px;
-        left: 520px;
-        font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-        background-color:#a8b6f0;
-        text-align: center;
-        width: 100px;
-        height: 50px;
-        padding: 10px;
-        border-radius: 30px;
-        border: none;
-        color: #0b2847;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    .sign-button {
-        position: fixed;
-        top: 70px;
-        left: 1050px;
-        background-color: #a8b6f0;
+    .btn {
+     
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
         font-family: 'Montserrat', sans-serif;
-        width: 100px;
-        height: 50px;
-        padding: 10px;
-        text-align: center;
-        border-radius: 30px;
-        border: none;
-        color: #0b2847;
-        font-size: 16px;
-        cursor: pointer;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        border-radius: 20px/50px;
+        border: 2px solid #a8b6f0;
+        transition: all 0.5s ease 0s;
+        color: #a8b6f0;
     }
 
- 
-    .butn3 {
-        position: fixed;
-        top: 525px;
-        left: 550px;
-        width: 80px;
-        height: 80px;
-        border:none;
-        background-color: whitesmoke; /* Blue background */
-        color: #0b2847;
-        font-size: 16px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-    }
-    .btn1{
-        width:80px;
-        height:80px;
-        background-color: whitesmoke; /* Blue background */
-        color: #0b2847;
-    }
-    .grbu1 {
-        position: fixed;
-        top: 525px;
-        left: 770px;
-        border:none;
-        background-color: whitesmoke; /* Blue background */
-        color: #0b2847;
-        font-size: 16px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-    }
-   
-    .btn:hover {
-            background-color: slateblue;
+        .btn:hover,
+        .btn:focus {
+            color: #0b2847;
+            background: radial-gradient(circle, #a8b6f0 0.25em, transparent 0.25em) center/0.1em 0.1em;
+            box-shadow: 4px 4px rgba(253,238,172,0.2);
         }
-    h6 {
+    .posDelete{
         position: fixed;
-        top: 420px;
-        left: 220px;
+        top: 510px;
+              right: 30px;
+    }
+     .posUpdate{
+        position: fixed;
+        top: 570px;
+        right: 30px;
     }
 
-    h1 {
+    .posAdd{
         position: fixed;
-        top: 220px;
-        left: 220px;
+        top: 630px;
+        right: 30px;
     }
 
-    h2 {
-        position: fixed;
-        top: 270px;
-        left: 220px;
-    }
-
-    h3 {
-        position: fixed;
-        top: 320px;
-        left: 220px;
-    }
-
-    h4 {
-        position: fixed;
-        top: 170px;
-        left: 450px;
-    }
-
-    h5 {
-        position: fixed;
-        top: 370px;
-        left: 220px;
-    }
-
-    h7 {
-        position: fixed;
-        top: 470px;
-        left: 220px;
-    }
-
-    .form-control1 {
-        position: fixed;
-        top: 220px;
-        left: 450px;
-        box-shadow: 0px 0px 5px #0b2847;
-        border: 1px solid #0b2847;
-        background-color: #a8b6f0;
-        width: 300px;
-        height: 30px;
-        font-family: Montserrat;
-    }
-
-    .form-control2 {
-        position: fixed;
-        top: 270px;
-        left: 450px;
-        box-shadow: 0px 0px 5px #0b2847;
-        border: 1px solid #0b2847;
-        background-color: #a8b6f0;
-        width: 300px;
-        height: 30px;
-        font-family: Montserrat;
-    }
-
-    .form-control3 {
-        position: fixed;
-        top: 320px;
-        left: 450px;
-        box-shadow: 0px 0px 5px #0b2847;
-        border: 1px solid #0b2847;
-        background-color: #a8b6f0;
-        width: 300px;
-        height: 30px;
-        font-family: Montserrat;
-    }
-
-    .form-control4 {
-        position: fixed;
-        top: 370px;
-        left: 450px;
-        box-shadow: 0px 0px 5px #0b2847;
-        border: 1px solid #0b2847;
-        background-color: #a8b6f0;
-        width: 300px;
-        height: 30px;
-        font-family: Montserrat;
-    }
-
-    .form-control5 {
-        position: fixed;
-        top: 420px;
-        left: 450px;
-        box-shadow: 0px 0px 5px #0b2847;
-        border: 1px solid #0b2847;
-        background-color: #a8b6f0;
-        padding: 1px;
-        width: 300px;
-        height: 30px;
-        font-family: Montserrat;
-    }
 </style>
 
 
-<form asp-action="Search">
-    <posSearch>
-        <input type="text" class="search-box" placeholder="Type here">
-        <button type="submit" class="search-button">Search</button>
-    </posSearch>
-
     <posSgnOut>
-        <button class="sign-button"><a asp-action="Index" asp-controller="Account">Sign Out</a></button>
+    <button class="btn"><a asp-action="LogOut" asp-controller="Account" style="color: #a8b6f0">Sign Out</a></button>
     </posSgnOut>
-</form>
-    <div class="background">
-    <form>
+
+<body class="background" style="background-color:#0b2847;">
+    <form asp-action="EditSong" asp-controller="Song" asp-route-id="@Model.ID">
         <h4 style="color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px">
             <b>Song</b>
         </h4>
-        <div class="col-md-4">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <h1 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Name:</b>
-                </h1>
-                <input asp-for="SongName" class="form-control1" />
-                <span asp-validation-for="SongName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h2 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Release date:</b>
-                </h2>
-                <input asp-for="DateRelease" class="form-control2" />
-                <span asp-validation-for="DateRelease" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <h3 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Genre:</b>
-                </h3>
-                <select asp-for="Genre" class="form-control3"></select>
-                <span asp-validation-for="Genre" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <h5 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Link:</b>
-                </h5>
-                <input asp-for="LinkYT" class="form-control4" />
-                <span asp-validation-for="LinkYT" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <h6 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>QR code:</b>
-                </h6>
-                <input asp-for="CodeQR" class="form-control5" type="text" />
-                <span asp-validation-for="CodeQR" class="text-danger"></span>
-
-            </div>
-            <div class="form-group">
-                <h7 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
-                    <b>Drop the file for upload here:</b>
-                </h7>
-             
-                <div>
-                   <!-- <div class="mb-4 d-flex justify-content-center">
-                        <img src="../wwwroot/assets/images/uploadfile.png"
-                             style="width: 80px; height: 80px; " />
-                    </div> -->
-                    <div class="d-flex justify-content-center">
-                        <div class="btn btn-primary btn-rounded butn3">
-                            <label class="form-label m-1" for="customFile1">Choose file</label>
-                            <input type="file" class="form-control d-none" id="customFile1" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="btn-group grbu1" role="group" aria-label="Basic example" >
-                <button  class="btn btn-secondary btn1" ><a asp-action="Add" asp-controller="Song">Add</a></button>
-                <button  class="btn btn-secondary btn1"  ><a asp-action="Update" asp-controller="Song">Update</a></button>
-                <button  class="btn btn-secondary btn1" ><a asp-action="Delete" asp-controller="Song">Delete</a> </button>
-            </div>
-
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Song name:</b>
+            </h2>
+            <input type="text" class="form-control" asp-for="SongName" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="SongName" class="text-danger"></span>
         </div>
-             </form>
-    </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Release date:</b>
+            </h2>
+            <input type="text" class="form-control" asp-for="DateRelease" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="DateRelease" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Genre:</b>
+            </h2>
+            <select asp-for="Genre" class="form-control" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px ">
+                @foreach (var genre in Enum.GetValues(typeof(Genre)))
+                {
+                    <option value="@genre">@genre</option>
+                }
+            </select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Link:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="LinkYT" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="LinkYT" class="text-danger"></span>
+        </div>
+
+            <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>QR code:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="CodeQR"  style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="CodeQR" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Drive link:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="DriveLink" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="DriveLink" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Image:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="Image" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        
+            <button class="btn posUpdate"><a asp-action="EditSong" asp-controller="Song" style=" color:#a8b6f0;">Update</a></button>
 
 
-<!--
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>-->
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        </form>
+
+
+    <form method="post" asp-action="Create" asp-controller="Song" asp-route-id="@Model.ID">
+
+
+
+        <input type="submit" class="btn posAdd"  value="Add song" style=" color:#a8b6f0;">
+
+
+    </form>
+    <form method="post" asp-action="Delete" asp-controller="Song" asp-route-id="@Model.ID">
+
+
+
+        <input type="submit" class="btn posDelete" value="Delete" style=" color:#a8b6f0;">
+      
+
+    </form>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}
+</body>
+    
+
+

@@ -53,7 +53,7 @@
             width: 300px;
             font-size: 16px;
         }
-
+         
         .search-button {
             position: fixed;
             top: 4.5%;
@@ -94,27 +94,20 @@
             height: 150px;
         }
 
-        img:hover {
+      <!--  img:hover {
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        }
+        }-->
 
-    +
+    
         h1 {
             position: fixed;
-            top: 50vh;
-            left: 100vh;
+            top: 20vh;
+            left: 40vh;
             font-size: 40px;
             font-weight: bold;
         }
     
-        .buttons {
-            border: 1px solid transparent;
-            color: #0b2847;
-            text-align: left;
-            font-size: 28px;
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            background-color: #a8b6f0;
-        }
+        
 
         .positionh2 {
             position: fixed;
@@ -138,7 +131,43 @@
             width: 200px;
         }
 
+        .imgG {
+            --m: radial-gradient(circle farthest-side at right,#000 99%,#0000) 0 100%/46% 92% no-repeat, radial-gradient(circle farthest-side at left,#000 99%,#0000) 100% 0/46% 92% no-repeat;
+            -webkit-mask: var(--m);
+            mask: var(--m);
+            filter: grayscale(.5);
+            transition: .3s linear;
+            cursor: pointer;
+        }
 
+            .imgG:hover {
+                -webkit-mask-position: 7.5% 50%,92.5% 50%;
+                mask-position: 7.5% 50%,92.5% 50%;
+                filter: grayscale(0);
+            }
+
+        .hvr {
+            --c: linear-gradient(#0b2847 0 0); /* update the color here */
+
+            padding-bottom: .15em;
+            background: var(--c), var(--c);
+            background-size: .3em .1em;
+            background-position: 50% 100%;
+            background-repeat: no-repeat;
+            transition: .3s linear, background-size .3s .2s linear;
+           
+        }
+
+            .hvr:hover {
+                background-size: 40% .1em;
+                background-position: 10% 100%, 90% 100%;
+            }
+
+
+
+
+       
+        
     </style>
 
 </head>
@@ -150,8 +179,6 @@
             <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
             <button type="button" class="search-button" data-target="#srcsong" data-toggle="modal" id="showPop">Search</button>
         </div>
-        <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
-        </>
         <!-- Modal -->
         <div class="modal fade" id="srcsong" role="dialog">
             <div class="modal-dialog   modal-lg">
@@ -192,24 +219,25 @@
     }
 
     <!--User avatar-->
+    <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
-    
-  
+
+
 
     <div class="positionh2">
 
-        <button class="buttons"><a asp-action="Home" asp-controller="Home" style="color:#0b2847;">Home</a></button>
+        <a asp-action="Home" asp-controller="Home" style="color:#0b2847; font-size: 30px;" class="hvr">Home</a>
 
         <br>
 
-       
-        <button class="buttons"><a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;">Artists</a></button>
+
+        <a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;font-size: 30px;" class="hvr">Artists</a>
 
         <br>
 
         @if (User.IsInRole("RegisteredUser"))
         {
-            <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+            <a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847; font-size: 30px;" class="hvr">Playlists</a>
            
         }
         <br>
@@ -229,7 +257,7 @@
             <div class="col-sm-4 ">
                 <div>
                     <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@item.ID" style="-webkit-text-fill-color:#0b2847;">
-                        <img src="@item.Image" alt="@item.SongName" width="200" height="200">
+                            <img class="imgG" src="@item.Image" alt="@item.SongName" width="200" height="200" >
                     </a>
                     <p class="text-center" style="color:#0b2847;">@item.SongName</p>
                 </div>

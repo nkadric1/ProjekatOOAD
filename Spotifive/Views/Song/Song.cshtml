@@ -188,299 +188,84 @@
 			color: #a8b6f0;
 			font-size: 20px;
 		}
+
+		.imgG {
+			border: 1px solid #a8b6f0;
+			border-radius: 4px;
+			padding: 5px;
+			width: 400px;
+			height: 400px;
+		}
+		.imgG:hover {
+			box-shadow: 0 0 2px 1px  #a8b6f0;
+		}
 	</style>
 
 </head>
 
+
+
+    
 <body>
-
 	
-	
-<p class="namepos">@Model.SongName</p>
-
 <proba>
 	
-<img src="@Model.Image" alt="@Model.SongName" class="song-image" width="420" height="410" >
-
+<img src="@Model.Image" alt="@Model.SongName" class="imgG" width="420" height="410" >
+		<p style="align-content:center">@Model.SongName</p>
 </proba>
 	
 		<a asp-action="Details" asp-route-id="@Model.ID" asp-controller="Song">
 			<img class="centered" src="~/assets/images/DetailsDots.png" />
 	</a>
 
-	<a href="#criticActions"  data-toggle="modal">
-		<img class="reviews" src="~/assets/images/Reviews.png" />
-	</a>
-	<a href="#seeComments" data-toggle="modal">
-		<img class="reviews" src="~/assets/images/Reviews.png" />
-	</a>
 
+	@if (User.IsInRole("RegisteredUser"))
+	{
+		<a href="#seeComments" data-toggle="modal">
+			<img class="reviews" src="~/assets/images/Reviews.png" />
+		</a>
+	}
 	<a asp-action="Account" asp-controller="Account"><img class="profile" src="~/assets/images/Profile.png" /></a>
 
+	@if (User.IsInRole("Critic"))
+{	
 	<a href="#criticActionsRating" data-toggle="modal">
-		<img class="ratings" src="~/assets/images/Ratings.png" />
+		<img class="reviews" src="~/assets/images/Ratings.png" />
+	</a>
+}
+@if(User.IsInRole("RegisteredUser,Critic")){
+	<p class="ratings" style="color: #a8b6f0; font-size: 20px;">Reviews</p>
+}
+ @if(User.IsInRole("RegisteredUser")){
+	 <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@Model.ID">
+			<img class="download" src="~/assets/images/Download.png" />
 	</a>
 
-	<p class="textReviews">Reviews</p>
-	
-		<a >
-		<img class="download" src="~/assets/images/Download.png" />
-	</a>
-
-	
-
-	<p class="textDownload">Download</p>
-	
+		<p  class="textDownload" style="color: #a8b6f0; font-size: 20px;">Download</p>
+ }
 		<audio controls style="width: 70%" class="playsong">
 		<!--<source src="https://drive.google.com/uc?export=download&id=1gNoxCrLwgMLnGsgN2lEFMhIFETAaAAVC" />  -->
 		<source src="@Model.DriveLink" />
 		</audio>
 
-
-	<a href="#addToPlaylist" data-toggle="modal">
+ 
+ @if(User.IsInRole("RegisteredUser")){
+	<a href="#addSongToPlaylist" data-toggle="modal">
 		<img class="add" src="~/assets/images/Add.png" />
 	</a>
+	<p class="textAdd" style="color: #a8b6f0; font-size: 20px;">Add</p>
+ }
 
-	<p class="textAdd">Add</p>
 
 	@if (User.IsInRole("Editor"))
-	{		
-		<a asp-action="Edit" asp-controller="Song"><img class="edit" src="~/assets/images/Edit.png" /></a>
+	{
+		<a asp-action="Edit" asp-controller="Song" asp-route-id="@Model.ID"><img class="edit" src="~/assets/images/Edit.png" /></a>
 		<p class="textEdit">Edit</p>
 	}
-	 
-	<form asp-action="AddSongToPlaylist" asp-controller="Song" id="addToPlaylistForm" method="post">
-		
 
-		<div class="modal fade" id="addToPlaylist" role="dialog">
-			<div class="modal-dialog   modal-lg">
-	
-			<div class="modal-content">
-				<span class="close">&times;</span>
-
-				<style>
-					h1 {
-						font-size: 22px;
-						position: absolute;
-						top: 10px;
-						left: 20px;
-					}
-
-					h2 {
-						font-size: 22px;
-						position: absolute;
-						top: 330px;
-						left: 20px;
-					}
-
-					.rectangle {
-						position: absolute;
-						top: 10px;
-						left: 0px;
-						width: 100%;
-						height: 50px;
-						background-color: whitesmoke;
-					}
-
-					.buttonOK {
-						position: absolute;
-						bottom: 0px;
-						right: 0px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						font-weight: bold;
-					}
-
-					.buttonCancel {
-						position: absolute;
-						bottom: 0px;
-						right: 110px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-					}
-
-					.textbox {
-						border-color: #0b2847;
-						position: absolute;
-						top: 390px;
-						left: 60px;
-						font-size: 18px;
-						height: 40px;
-						width: 280px;
-					}
-				</style>
-
-				<div class="rectangle"></div>
-
-				<h1>Add to playlist:</h1>
-				<select id="playlistId" name="playlistId">
-					@foreach (var playlist in playlists)
-					{
-						<option id="playlistIdHidden" value="@playlist.ID">@playlist.PlaylistName</option>
-					}
-				</select>
-				<h2>Or make a new playlist:</h2>
-
-				<input type="text" id="newPlaylist" placeholder="Enter name..." class="textbox">
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonCancel" data-dismiss="modal">Cancel</button>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="addToPlaylistButton">Add</button>
-					<!--<button type="button" class="btn btn-secondary buttonOK" data-dismiss="modal">OK</button>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	</form>
-	@section Scripts {
-		<script>
-			$(function () {
-				// Add event listener to the "Add" button
-				$("#addToPlaylistButton").on("click", function () {
-					// Get the selected playlist ID
-					var playlistId = $("#playlistId").val();
-
-					// Set the value of the hidden input field
-					$("#songId").val("@Model.ID");
-					$("#playlistIdHidden").val(playlistId);
-
-					// Submit the form
-					$("#addToPlaylistForm").submit();
-				});
-			});
-		</script>
-	}
-
-
-
-	<div class="modal fade" id="successfulDownload" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog">
-			<div class="modal-content successfulyDownloaded">
-				<style>
-					h12 {
-						font-size: 22px;
-						position: absolute;
-						top: 10px;
-						left: 43px;
-					}
-
-					.rectangle2 {
-						position: absolute;
-						top: 10px;
-						left: 0px;
-						width: 100%;
-						height: 50px;
-						background-color: whitesmoke
-					}
-
-					.buttonOK2 {
-						position: absolute;
-						bottom: 0px;
-						right: 0px;
-						font-size: 18px;
-						height: 40px;
-						width: 100%;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						font-weight: bold;
-					}
-				</style>
-				<div class="rectangle2"></div>
-
-				<h12>Downloaded successfully!</h12>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonOK2" data-dismiss="modal">OK</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-		<div class="modal fade" id="criticActions" data-backdrop="static" data-keyboard="false">
-			<div class="modal-dialog">
-				<div class="modal-content criticComment">
-					<style>
-						h13 {
-						font-size: 22px;
-						position: absolute;
-						top: 20px;
-						left: 55px;
-						}
-
-						.rectangle3 {
-						position: absolute;
-						top: 10px;
-						left: 0px;
-						width: 100%;
-						height: 50px;
-						background-color: #a8b6f0;
-						}
-
-						.buttonConfirm {
-						position: absolute;
-						bottom: 0px;
-						right: 0px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						font-weight: bold;
-						}
-
-						.buttonCancel3 {
-						position: absolute;
-						bottom: 0px;
-						right: 110px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						}
-
-						.textbox3 {
-						border-color: #0b2847;
-						position: absolute;
-						top: 70px;
-						left: 50px;
-						font-size: 18px;
-						height: 280px;
-						width: 290px;
-						}
-					</style>
-					<div class="rectangle3">	</div>
-					<h13>You are logged in as Critic</h13>
-
-
-					<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	
-	@if(User.IsInRole("Registered user"))
+	@if (User.IsInRole("RegisteredUser"))
 	{
-		<div class="modal fade" id="userActions" data-backdrop="static" data-keyboard="false">
+		<div class="modal fade" id="addSongToPlaylist" data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog">
 				<div class="modal-content criticComment">
 					<style>
@@ -525,7 +310,7 @@
 							border-color: #0b2847;
 						}
 
-						.textbox3 {
+						.starbar {
 							border-color: #0b2847;
 							position: absolute;
 							top: 70px;
@@ -534,24 +319,59 @@
 							height: 280px;
 							width: 290px;
 						}
+
+						.btn {
+							background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+							font-family: 'Montserrat', sans-serif;
+							font-size: 20px;
+							font-weight: 700;
+							text-transform: capitalize;
+							letter-spacing: 1px;
+							border-radius: 20px/50px;
+							border: 2px solid #0b2847;
+							transition: all 0.5s ease 0s;
+							color: #a8b6f0;
+						}
+
+							.btn:hover,
+							.btn:focus {
+								color: #a8b6f0;
+								background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
+								box-shadow: 4px 4px rgba(253,238,172,0.2);
+							}
+
 					</style>
-					<div class="rectangle3">	</div>
-					<h13>You are logged in as Critic</h13>
+					<h13 class="rectangle3">Add song to playlist:</h13>
+					<div class="modal-body">
 
 
-					<input type="text" id="newComment" placeholder="Add comment..." class="textbox3">
+						@using (Html.BeginForm("AddToPlaylist", "Song", FormMethod.Post))
+						{
+							@Html.AntiForgeryToken()
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
+							@Html.HiddenFor(model => model.ID)
+							<br />
+							<br />
+							<div class="form-group">
+								<select id="playlistSelection" name="playlistSelection" class="form-control">
+									<option value="">-- Select a playlist --</option>
+									@foreach (var playlist in playlists)
+									{
+										<option value="@playlist.ID">@playlist.PlaylistName</option>
+									}
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Add to Playlist</button>
+						}
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
-					</div>
+
 				</div>
 			</div>
 		</div>
-		
-	}
+	}	
+
+@if(User.IsInRole("Critic")){
 	<div class="modal fade" id="criticActionsRating" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog">
 			<div class="modal-content criticComment">
@@ -607,79 +427,149 @@
 						width: 290px;
 					}
 
+					.btn {
+						background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+						font-family: 'Montserrat', sans-serif;
+						font-size: 20px;
+						font-weight: 700;
+						text-transform: capitalize;
+						letter-spacing: 1px;
+						border-radius: 20px/50px;
+						border: 2px solid #0b2847;
+						transition: all 0.5s ease 0s;
+						color: #a8b6f0;
+					}
+
+						.btn:hover,
+						.btn:focus {
+							color: #a8b6f0;
+							background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
+							box-shadow: 4px 4px rgba(253,238,172,0.2);
+						}
+
+
 				</style>
-				<div class="rectangle3">	</div>
-				<h13>You are logged in as Critic</h13>
+			<h13 class="rectangle3">You are logged in as Critic</h13>
+			<div class="modal-body">
+				
+@using (Html.BeginForm("AddReview", "Song", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+   <br />
+   <br/>
 
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonCancel3" data-dismiss="modal">Cancel</button>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        @Html.TextAreaFor(model => model.Review.Comment, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="grade">Grade</label>
+        @Html.TextBoxFor(model => model.Review.Grade, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(model => model.ID)
+
+    <button type="submit" class="btn">Submit review</button>
+}
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonConfirm" data-dismiss="modal">Confirm</button>
-				</div>
+			
 			</div>
 		</div>
 	</div>
+	}
+	@if (User.IsInRole("RegisteredUser"))
+	{
+		<div class="modal fade" id="seeComments" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content criticComment">
+					<style>
 
-	<!--user reviews-->
-	<div class="modal fade" id="seeComments" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog">
-			<div class="modal-content criticComment">
-				<style>
-					
 
-					h13 {
+						h13 {
 						font-size: 22px;
 						position: absolute;
 						top: 20px;
 						left: 55px;
-					}
+						}
 
-					.rectangle4 {
-						
+						.rectangle4 {
+
 						margin-bottom: 3px; /* Add spacing at the bottom of each list item */
 						background-color: #a8b6f0;
 						width: 100%;
 						height: auto;
-						
-					}
-					.posul{
+
+						}
+						.posul{
 						position: absolute;
 						top: 80px;
-					}
+						}
 
-					
-					.buttonOK5 {
-						position: absolute;
-						bottom: 0px;
-						right: 0px;
-						font-size: 18px;
-						height: 40px;
-						width: 110px;
-						background-color: whitesmoke;
-						color: #0b2847;
-						border-color: #0b2847;
-						font-weight: bold;
-					}
 
-					.scroll-view {
+						.btn {
+						background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+						font-family: 'Montserrat', sans-serif;
+						font-size: 20px;
+						font-weight: 700;
+						text-transform: capitalize;
+						letter-spacing: 1px;
+						border-radius: 20px/50px;
+						border: 2px solid #0b2847;
+						transition: all 0.5s ease 0s;
+						color: #a8b6f0;
+						}
+
+						.btn:hover,
+						.btn:focus {
+						color: #a8b6f0;
+						background: radial-gradient(circle, #0b2847 0.25em, transparent 0.25em) center/0.1em 0.1em;
+						box-shadow: 4px 4px rgba(253,238,172,0.2);
+						}
+
+						.scroll-view {
 						max-height: 260px; /* Set the maximum height of the scroll view */
 						overflow-y: auto; /* Enable vertical scroll if content overflows */
-					}
-				</style>
-				<div class="rectangle3">	</div>
-				<h13>Comments</h13>
-			
+						}
+					</style>
+					<div class="rectangle3">	</div>
+					<div method="modal-body">
+						<h13>Comments</h13>
+						<ul class="posul scroll-view">
+							<p>Comments from Youtube</p>
+							@foreach (var review in Model.Reviews)
+							{
+								<li class="rectangle4">@review.Comment</li>
+							}
 
 
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary buttonOK5" data-dismiss="modal">OK</button>
+							@if (ViewBag.CriticReviews != null)
+							{
+								<p>Comments from Critics</p>
+								@foreach (var review in ViewBag.CriticReviews)
+								{
+									<li class="rectangle4"> @review.Comment, @review.Grade, @review.TimeStamp</li>
+								}
+
+							}
+							else
+							{
+								<p>No critic reviews available for this song.</p>
+							}
+						</ul>
+						<div class="modal-footer">
+							<button type="button" class="btn" data-dismiss="modal" style="position:fixed; bottom: 330px; ">Close</button>
+						</div>
+					</div>
+
 				</div>
-			
-		</div>
-	</div>
 
+
+			</div>
+		</div>
+	}
+	
 
 
 

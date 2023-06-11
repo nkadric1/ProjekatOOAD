@@ -10,8 +10,15 @@
     <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
     <link rel="stylesheet" href="~/css/logo.css">
 
-
     <style>
+        header {
+            position: fixed;
+            height: 32vh;
+            width: 200vh;
+            top: 0;
+            z-index: 1;
+            background-color: #a8b6f0;
+        }
 
         .logo {
             position: fixed;
@@ -19,15 +26,15 @@
             right: 60px;
         }
 
-        secsongs {
-            position: absolute;
-            top: 30%;
-            left: 20%;
+        .secsongs {
+            position: relative;
+            margin-top: 34vh;
         }
+
 
         .search-container {
             position: fixed;
-            top: 3%;
+            top: 2%;
             left: 20%;
         }
 
@@ -42,7 +49,7 @@
 
         .search-button {
             position: fixed;
-            top: 5.5%;
+            top: 4.5%;
             left: 42%;
             font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
             font-size: 22px;
@@ -56,22 +63,17 @@
             padding-bottom: 5px;
         }
 
-    </style>
-
-    <style>
         h3 {
             position: fixed;
             top: 100px;
             left: 150px;
         }
-    </style>
 
-    <style>
 
         .imgProfile {
-            position: absolute;
-            right: 80px;
-            top: 49px;
+            position: fixed;
+            right: 14vh;
+            top: 5vh;
             font-style: italic;
             height: 50px;
             width: 50px;
@@ -85,38 +87,25 @@
             height: 150px;
         }
 
-        img:hover {
+        <!-- img:hover {
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         }
+        -->
 
-    </style>
 
-
-    <style>
         h1 {
             position: fixed;
-            top: 20%;
-            left: 20%;
+            top: 20vh;
+            left: 40vh;
             font-size: 40px;
             font-weight: bold;
         }
-    </style>
 
-    <style>
-        .buttons {
-            border: 1px solid transparent;
-            color: #0b2847;
-            text-align: left;
-            font-size: 28px;
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            background-color: #a8b6f0;
-        }
-    </style>
 
-    <style>
+
         .positionh2 {
             position: fixed;
-            top: 60px;
+            top: 45px;
             left: 100px;
         }
 
@@ -130,6 +119,45 @@
             top: 40%;
             left: 20%;
         }
+
+        .posInfo {
+            position: absolute;
+            top: 50%;
+            left: 300px;
+            width: 200px;
+        }
+
+        .imgG {
+            --m: radial-gradient(circle farthest-side at right,#000 99%,#0000) 0 100%/46% 92% no-repeat, radial-gradient(circle farthest-side at left,#000 99%,#0000) 100% 0/46% 92% no-repeat;
+            -webkit-mask: var(--m);
+            mask: var(--m);
+            filter: grayscale(.5);
+            transition: .3s linear;
+            cursor: pointer;
+        }
+
+            .imgG:hover {
+                -webkit-mask-position: 7.5% 50%,92.5% 50%;
+                mask-position: 7.5% 50%,92.5% 50%;
+                filter: grayscale(0);
+            }
+
+        .hvr {
+            --c: linear-gradient(#0b2847 0 0); /* update the color here */
+
+            padding-bottom: .15em;
+            background: var(--c), var(--c);
+            background-size: .3em .1em;
+            background-position: 50% 100%;
+            background-repeat: no-repeat;
+            transition: .3s linear, background-size .3s .2s linear;
+        }
+
+            .hvr:hover {
+                background-size: 40% .1em;
+                background-position: 10% 100%, 90% 100%;
+            }
+
     </style>
 
 </head>
@@ -183,12 +211,12 @@
     <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
 
 
-    <div>
+
         <h1>Favourite songs</h1>
-    </div>
+  
     <div class="positionh2">
 
-          <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Back</a></button>
+         <a class="hvr" asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847; font-size:30px;">Back</a>
 
     </div>
 
@@ -196,42 +224,31 @@
 
 
 
+<body>
 
 
-
-
-<secsongs>
-    
-    @foreach (var item in Model)
-    {
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-            <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
-                <div class="album-thumb">
-                    <a asp-action="Song" asp-route-id="@item.ID" asp-controller="Song">
-                        <img src=@item.Image alt="@item.SongName" class="imagesong">
-                    </a>
-                    <div class="album-info">
-                        <p class="text-right" style="color:#0b2847;">@item.SongName</p>
-
+    <section class="secsongs">
+        <div class="row text-center" style="margin-bottom:100px;">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4 ">
+                    <div>
+                        <a asp-area="" asp-controller="Song" asp-action="Song" asp-route-id="@item.ID" style="-webkit-text-fill-color:#0b2847;">
+                            <img class="imgG" src="@item.Image" alt="@item.SongName" width="200" height="200">
+                        </a>
+                        <p class="text-center" style="color:#0b2847;">@item.SongName</p>
                     </div>
                 </div>
-
-            </div>
+            }
         </div>
-    }
+    </section>
 
 
+    <div>
+        <a href="your-link-here">
+            <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
+        </a>
 
 
-</secsongs>
-
-
-<div>
-    <a href="your-link-here">
-        <img width="130" height="100" class="logo" src="~/assets/images/SpotiFIVELogo.png">
-    </a>
-
-
-</div>
-
+    </div>
+</body>

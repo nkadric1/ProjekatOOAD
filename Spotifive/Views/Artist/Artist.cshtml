@@ -9,27 +9,37 @@
     <link rel="stylesheet" href="~/css/bodyLight.css">
     <link rel="stylesheet" href="~/css/sgnLogBttnDark.css">
     <link rel="stylesheet" href="~/css/logo.css">
-
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
     <!--Search bar-->
 
     <style>
-      
+        header {
+            position: fixed;
+            height:32vh;
+            width:200vh;
+            top: 0;
+            z-index: 1;
+            background-color: #a8b6f0;
+        }
         .logo {
             position: fixed;
             bottom: 40px;
             right: 60px;
         }
+    .secsongs{
+        position:relative;
+        margin-top: 34vh;
+             
+    }
 
-        secsongs {
-            position: absolute;
-            top: 30%;
-            left: 20%;
-        }
-
-        header {
-            position: relative;
-        }
-
+       
         .search-container {
             position: fixed;
             top: 2%;
@@ -44,7 +54,7 @@
             width: 300px;
             font-size: 16px;
         }
-
+         
         .search-button {
             position: fixed;
             top: 4.5%;
@@ -61,28 +71,23 @@
             padding-bottom: 5px;
         }
 
-    </style>
-
-    <style>
         h3 {
             position: fixed;
             top: 100px;
             left: 150px;
         }
-    </style>
-
-    <style>
+  
 
         .imgProfile {
-            position: absolute;
-            right: 120px;
-            top: 49px;
+            position: fixed;
+            right: 14vh;
+            top: 5vh;
             font-style: italic;
             height: 50px;
             width: 50px;
         }
 
-        .imagesong {
+        .imagesong{
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 5px;
@@ -90,166 +95,190 @@
             height: 150px;
         }
 
-        img:hover {
+      <!--  img:hover {
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        }
+        }-->
 
-    </style>
-
-
-    <style>
+    
         h1 {
             position: fixed;
-            top: 20%;
-            left: 20%;
+            top: 20vh;
+            left: 40vh;
             font-size: 40px;
             font-weight: bold;
         }
-    </style>
+    
+        
 
-    <style>
-        .buttons {
-            border: 1px solid transparent;
-            color: #0b2847;
-            text-align: left;
-            font-size: 28px;
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            background-color: #a8b6f0;
-        }
-    </style>
-
-    <style>
         .positionh2 {
             position: fixed;
             top: 60px;
             left: 100px;
         }
-
-        .imgpos {
+        .imgpos{
             height: 150px;
-            width: 150px;
+            width:150px;
         }
-
-        .tabpos {
+        .tabpos{
             position: fixed;
             top: 40%;
             left: 20%;
         }
+
+        .posInfo {
+            position: absolute;
+            top: 50%;
+            left: 300px;
+            width: 200px;
+        }
+
+        .imgG {
+            --m: radial-gradient(circle farthest-side at right,#000 99%,#0000) 0 100%/46% 92% no-repeat, radial-gradient(circle farthest-side at left,#000 99%,#0000) 100% 0/46% 92% no-repeat;
+            -webkit-mask: var(--m);
+            mask: var(--m);
+            filter: grayscale(.5);
+            transition: .3s linear;
+            cursor: pointer;
+        }
+
+            .imgG:hover {
+                -webkit-mask-position: 7.5% 50%,92.5% 50%;
+                mask-position: 7.5% 50%,92.5% 50%;
+                filter: grayscale(0);
+            }
+
+        .hvr {
+            --c: linear-gradient(#0b2847 0 0); /* update the color here */
+
+            padding-bottom: .15em;
+            background: var(--c), var(--c);
+            background-size: .3em .1em;
+            background-position: 50% 100%;
+            background-repeat: no-repeat;
+            transition: .3s linear, background-size .3s .2s linear;
+           
+        }
+
+            .hvr:hover {
+                background-size: 40% .1em;
+                background-position: 10% 100%, 90% 100%;
+            }
+
+
+
+
+       
+        
     </style>
 
 </head>
 
+<header>
 
+  
+        <form>
+            <div class="search-container">
+                <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
+                <button type="button" class="search-button" data-target="#srcartist" data-toggle="modal" id="showPop">Search</button>
+            </div>
 
-   
-   
+            </>
+            <!-- Modal -->
+            <div class="modal fade" id="srcartist" role="dialog">
+                <div class="modal-dialog   modal-lg">
 
-    <header>
-
-    <form>
-        <div class="search-container">
-            <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
-            <button type="button" class="search-button" data-target="#srcartist" data-toggle="modal" id="showPop">Search</button>
-        </div>
-
-        </>
-        <!-- Modal -->
-        <div class="modal fade" id="srcartist" role="dialog">
-            <div class="modal-dialog   modal-lg">
-
-                <!-- Modal content-->
-                <div class="modal-content" style="background-color:#0b2847;">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body ">
-                        <div id="popup">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="background-color:#0b2847;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
+                        <div class="modal-body ">
+                            <div id="popup">
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-    </form>
+        </form>
 
-    <form>
-      
+        <form>
 
-        </>
-        <!-- Modal -->
-        <div class="modal fade" id="artist" role="dialog">
-            <div class="modal-dialog   modal-lg">
 
-                <!-- Modal content-->
-                <div class="modal-content" style="background-color:#0b2847;">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body ">
-                        <div id="popupart">
+            </>
+            <!-- Modal -->
+            <div class="modal fade" id="artist" role="dialog">
+                <div class="modal-dialog   modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" style="background-color:#0b2847;">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
+                        <div class="modal-body ">
+                            <div id="popupart">
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-    </form>
-
-
-        <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
+        </form>
 
 
-        <div>
-            <h1>Top artists</h1>
-        </div>
+    <a asp-action="Account" asp-controller="Account"><img class="imgProfile" id="userAvatar" src="~/assets/images/Profile.png"></a>
+   
+  
 
-        <div class="positionh2">
+    <div class="positionh2">
 
-        <button class="buttons"><a asp-action="Home" asp-controller="Home" style="color:#0b2847;">Home</a></button>
+        <a asp-action="Home" asp-controller="Home" style="color:#0b2847; font-size: 30px;" class="hvr">Home</a>
 
-            <br>
+        <br>
 
-        <button class="buttons"><a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;">Artists</a></button>
 
-            <br>
+        <a asp-action="Artist" asp-controller="Artist" style="color:#0b2847;font-size: 30px;" class="hvr">Artists</a>
 
-        <button class="buttons"><a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847;">Playlists</a></button>
+        <br>
 
-        </div>
+        @if (User.IsInRole("RegisteredUser"))
+        {
+            <a asp-action="Playlist" asp-controller="Playlist" style="color:#0b2847; font-size: 30px;" class="hvr">Playlists</a>
+           
+        }
+        <br>
+        <h1 style="color:#0b2847;">Top artists</h1>
 
-    </header>
+    </div>
+  
+</header>
+
+
+  
 
 <body>
-    <secsongs>
-        @foreach (var item in Model)
-        {
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-2" >
-                <div class="single-album-area wow fadeInUp" data-wow-delay="600ms">
-                    <div class="album-thumb">
-                        <a data-target="#artist" data-toggle="modal" id="showPopArtist">
-                            <img  src=@item.Image alt="@item.ArtistName" id="imageart" class="imagesong">
+  
+    <section class="secsongs">
+        <div class="row text-center" style="margin-bottom:100px;">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4 ">
+                    <div>
+                        <a asp-area="" data-target="#artist" data-toggle="modal" id="showPopArtist">
+                            <img class="imgG" src=@item.Image alt="@item.ArtistName" id="imageart" width="200" height="200">
                         </a>
-                    </div>
-                    <div class="album-info">
-                        <p class="text-left" style="color:#0b2847;">@item.ArtistName</p>
-                        <p class="text-left" style="color:#0b2847;">@item.ArtistSurname</p>
+                        <p class="text-center" style="color:#0b2847;">@item.ArtistName @item.ArtistSurname</p>
+                       
 
-                        <br />
                     </div>
                 </div>
-            </div>
-        }
-
-
-
-
-    </secsongs>
-
+            }
+        </div>
+    </section>
     
     <div>
         <a href="your-link-here">
@@ -285,6 +314,21 @@
                 data: { "para": $("#imageart").val() },
                 success: function (data) {
                     $('#popupart').html(data);
+                }
+            });
+        })
+
+
+    </script>
+    <script>
+        $('#showPop').click(function () {
+            var url = '@Url.Action("GetPartialView", "Home")';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: { "para": $("#Text1").val() },
+                success: function (data) {
+                    $('#popup').html(data);
                 }
             });
         })

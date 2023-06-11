@@ -129,7 +129,7 @@
         }
         .posQR{
             position: fixed;
-            bottom: 30px;
+            bottom: 120px;
             left: 100px;
         }
     </style>
@@ -141,13 +141,10 @@
 <body>
 
     
-
     <div class="text-box" asp-for="SongName">@Model.SongName</div>
 
-    <div class="text-box1" asp-for="ArtistName">The Weeknd</div>
-	<!-- <div class="text-box1" asp-for="ArtistName">ArtistSurname</div>  -->
 
-
+    <div class="text-box1">@(((Artist)ViewBag.Artist)?.ArtistName) @(((Artist)ViewBag.Artist)?.ArtistSurname)</div>
 
     <h4 class="text">
         Genre:
@@ -158,13 +155,11 @@
     <h6 class="text">
         Release date:
     </h6>
-    <div class="text-box4" asp-for="DateRelease"> @Model.DateRelease</div>
+    <div class="text-box4" asp-for="DateRelease"> @ViewBag.FormattedDateRelease</div>
 
-    <!--staviti artist image-->
+    <img src=@(((Artist)ViewBag.Artist)?.Image) alt="@Model.SongName" width="500" height="500" class="posImg" />
 
-    <img src="@Model.Image" alt="@Model.SongName" width="500" height="500" class="posImg" />
-
-    <img src="@Model.CodeQR" alt="@Model.SongName"  width="250" height="250" class="posQR" />
+    <img src="@Model.CodeQR" alt="@Model.SongName" width="250" height="250" class="posQR" />
 
     <img class="logo" src="~/assets/images/SpotiFIVELogo.png" height="120" width="170">
 </body>

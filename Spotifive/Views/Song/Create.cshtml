@@ -1,0 +1,133 @@
+﻿@model Spotifive.Models.Song
+
+@{
+    ViewData["Title"] = "New song";
+}
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<style>
+
+    body {
+        background-color: #0b2847;
+    }
+
+    .background {
+        position: fixed;
+        top: 30px;
+        left: 200px;
+        width: 700px;
+        height: 300px;
+    }
+
+    .btn {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        border-radius: 20px/50px;
+        border: 2px solid #a8b6f0;
+        transition: all 0.5s ease 0s;
+        color: #a8b6f0;
+    }
+
+        .btn:hover,
+        .btn:focus {
+            color: #0b2847;
+            background: radial-gradient(circle, #a8b6f0 0.25em, transparent 0.25em) center/0.1em 0.1em;
+            box-shadow: 4px 4px rgba(253,238,172,0.2);
+        }
+
+    posSgnOut {
+        position: fixed;
+        top: 40px;
+        right: 30px;
+    }
+
+    .posBtn {
+        position: fixed;
+        top: 630px;
+        right: 30px;
+    }
+</style>
+
+<posSgnOut>
+    <button class="btn"><a asp-action="Index" asp-controller="Account">Sign Out</a></button>
+</posSgnOut>
+<body class="background" style="background-color:#0b2847;">
+    <form asp-action="Add">
+        <h4 style="color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px">
+            <b>Song</b>
+        </h4>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Song name:</b>
+            </h2>
+            <input type="text" class="form-control" asp-for="SongName" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="SongName" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Release date:</b>
+            </h2>
+            <input type="date" class="form-control" asp-for="DateRelease" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="DateRelease" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Genre:</b>
+            </h2>
+            <select asp-for="Genre" class="form-control" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px ">
+                @foreach (var genre in Enum.GetValues(typeof(Genre)))
+                {
+                    <option value="@genre">@genre</option>
+                }
+            </select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Link:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="LinkYT" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="LinkYT" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>QR code:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="CodeQR" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="CodeQR" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Drive link:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="DriveLink" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="DriveLink" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
+                <b>Image:</b>
+            </h2>
+            <input type="link" class="form-control" asp-for="Image" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <button class="btn posBtn"><a asp-action="Add" asp-controller="Song">Add</a></button>
+    </form>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+</body>
+
+

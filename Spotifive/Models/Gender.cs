@@ -1,7 +1,13 @@
-﻿namespace Spotifive.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace Spotifive.Models
 {
     public enum Gender
     {
-    Male, Female
+		[Display(Name = "Male")]
+		Male,
+		[Display(Name = "Female")] 
+		Female
     }
 }

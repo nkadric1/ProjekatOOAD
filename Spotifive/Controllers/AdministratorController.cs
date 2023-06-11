@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom;
 using Google.Apis.YouTube.v3.Data;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -29,18 +30,8 @@ namespace Spotifive.Controllers
             _context = context;
               _userManager = userManager;
             _roleManager = roleManager;
-            //     _roleManager = roleManager;
-            //     /, UserManager<ApplicationUser> userManager, RoleManager<ApplicationUser>
         }
         
-       
-
-        /*  // GET: Administrator
-          public async Task<IActionResult> Index()
-          {
-              var applicationDbContext = _context.Administrator.Include(a => a.Account);
-              return View(await applicationDbContext.ToListAsync());
-          }*/
 
         public IActionResult Administrator(string id) {
 
@@ -49,132 +40,76 @@ namespace Spotifive.Controllers
             {
                 return NotFound();
             }
+            IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
+            ViewBag.Roles = new SelectList(roles.ToList(), "Id", "Name");
             return View(per);
         }
-        
+
 
         [HttpPost]
-        public IActionResult UpdateRoles(string id,bool isEditor, bool isCritic, bool isRegisteredUser)
+        public IActionResult Update(string id, ApplicationUser updatedUser)
         {
-            
-        
-            // Retrieve the user
-            if (id == null)
-              {
-                  return NotFound();
-              }
+            // Retrieve the existing user from the database using the id
+            var user = _context.Users.Find(id);
 
-              var user = _context.Users
-                  .FirstOrDefaultAsync(m => m.Id == id).Result;
-              if (user == null)
-              {
-                  return NotFound();
-              }
-            System.Diagnostics.Debug.WriteLine("SomeText", user.Name, user.Role);
-            string role =null;
-            if (isCritic) role = "Critic";
-            if (isRegisteredUser) role = "RegisteredUser";
-            if (isEditor) role = "Editor";
-            System.Diagnostics.Debug.WriteLine("SomeText",role);
+            if (user == null)
+            {
+                // Handle the case where the user does not exist
+                // ...
+            }
 
-            // THIS LINE IS IMPORTANT
-            var oldRoleName = user.Role;
+            // Update the properties of the existing user with the new values
+            user.Name = updatedUser.Name;
+            user.Surname = updatedUser.Surname;
+            user.DateOfBirth = updatedUser.DateOfBirth;
+            user.Gender = updatedUser.Gender;
+            user.Role = updatedUser.Role;
+            // Update other properties
 
-                if (oldRoleName != role)
-                {  
-              
-                    _userManager.RemoveFromRoleAsync(user, oldRoleName);
-                    _userManager.AddToRoleAsync(user, role);
-                }
-                _context.Update(user);
-                 _context.SaveChangesAsync();
-                return RedirectToAction("Account", "Account");
-            
-            // Redirect the user to a page indicating the successful role update
-          //  return RedirectToAction("Index", "Account");
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
-      
-    // GET: Administrator/Create
-    /* public IActionResult Create()
-      {
-          ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID");
-          return View();
-      }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("ID,Name,Surname,DateOfBirth,Email,Gender,Role")] ApplicationUser applicationUser)
+        {
+            if (id != applicationUser.Id)
+            {
+                return NotFound();
+            }
 
-      // POST: Administrator/Create
-      // To protect from overposting attacks, enable the specific properties you want to bind to.
-      // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Create([Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Administrator administrator)
-      {
-          if (ModelState.IsValid)
-          {
-              _context.Add(administrator);
-              await _context.SaveChangesAsync();
-              return RedirectToAction(nameof(Index));
-          }
-          ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
-          return View(administrator);
-      }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(applicationUser);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Edit));
+            }
+            return RedirectToAction("Account", "Account");
+        }
 
-      // GET: Administrator/Edit/5
-      public async Task<IActionResult> Edit(int? id)
-      {
-          if (id == null)
-          {
-              return NotFound();
-          }
+        [Authorize(Roles = "Editor")]
+        public IActionResult Edit(string id)
+        {
+            var user = _context.Users.FirstOrDefault(m => m.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Account", "Account");
 
-          var administrator = await _context.Administrator.FindAsync(id);
-          if (administrator == null)
-          {
-              return NotFound();
-          }
-          ViewData["AccountID"] = new SelectList(_context.Account, "ID", "ID", administrator.AccountID);
-          return View(administrator);
-      }
-    */
-    // POST: Administrator/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    /*      [HttpPost]
-          [ValidateAntiForgeryToken]
-          public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Surname,DateOfBirth,Gender,AccountID")] Administrator administrator)
-          {
-              if (id != administrator.ID)
-              {
-                  return NotFound();
-              }
-
-              if (ModelState.IsValid)
-              {
-                  try
-                  {
-                      _context.Update(administrator);
-                      await _context.SaveChangesAsync();
-                  }
-                  catch (DbUpdateConcurrencyException)
-                  {
-                      if (!AdministratorExists(administrator.ID))
-                      {
-                          return NotFound();
-                      }
-                      else
-                      {
-                          throw;
-                      }
-                  }
-                  return RedirectToAction(nameof(Index));
-              }
-
-              return View(administrator);
-          }
-    */
-
-    // GET: Administrator/Delete/5
-    public async Task<IActionResult> Delete(string id)
+        }
+        //GET
+        public async Task<IActionResult> Delete(string id)
 		{
 			if (id == null)
 			{
@@ -183,13 +118,14 @@ namespace Spotifive.Controllers
 
 			var user = await _context.Users
 				.FirstOrDefaultAsync(m => m.Id == id);
+
 			if (user == null)
 			{
 				return NotFound();
 			}
             return RedirectToAction("Account", "Account");
         }
-		// POST: Administrator/Delete/5
+		//POST
 		[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
@@ -199,71 +135,8 @@ namespace Spotifive.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Account", "Account");
         }
-        public async Task<IActionResult> Update(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user != null)
-                return View(user);
-            else
-                return RedirectToAction("Account", "Account");
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> Update(string id, string email)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user != null)
-            {
-                if (!string.IsNullOrEmpty(email))
-                    user.Email = email;
-                else
-                    ModelState.AddModelError("", "Email cannot be empty");
-
-               
-                if (!string.IsNullOrEmpty(email))
-                {
-                    IdentityResult result = await _userManager.UpdateAsync(user);
-                    if (result.Succeeded)
-                        return RedirectToAction("Account","Account");
-                    else
-                        Errors(result);
-                }
-            }
-            else
-                ModelState.AddModelError("", "User Not Found");
-            return View(user);
-        }
-
-        // pokusaj za izmjenu aspnetroles metoda
-        [HttpPost]
-        public async Task<IActionResult> UpdateRole(string userId, bool isAdmin)
-        {
-            // Retrieve the user
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                // Handle user not found
-                return NotFound();
-            }
-
-            // Check if the user is in the "Admin" role
-            var isInRole = await _userManager.IsInRoleAsync(user, "Admin");
-
-            if (isAdmin && !isInRole)
-            {
-                // If the checkbox is checked and the user is not in the role, add the role
-                await _userManager.AddToRoleAsync(user, "Admin");
-            }
-            else if (!isAdmin && isInRole)
-            {
-                // If the checkbox is unchecked and the user is in the role, remove the role
-                await _userManager.RemoveFromRoleAsync(user, "Admin");
-            }
-
-            // Redirect the user to a page indicating the successful role update
-            return RedirectToAction("Index", "Home");
-        }
-
+        
         private void Errors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -271,9 +144,3 @@ namespace Spotifive.Controllers
         }
     }
 }
-
-     /*   private bool AdministratorExists(int id)
-        {
-            return _context.Administrator.Any(e => e.ID == id);
-        }*/
-    

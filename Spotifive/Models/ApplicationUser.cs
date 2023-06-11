@@ -16,8 +16,9 @@ namespace Spotifive.Models
         public string Surname { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-        public Gender Gender { get; set; }
-
+		[EnumDataType(typeof(Gender))]
+		public Gender Gender { get; set; }
+       
         public string Role { get; set; }
 
 

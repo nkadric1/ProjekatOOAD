@@ -101,7 +101,8 @@ namespace Spotifive.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             IEnumerable<IdentityRole> roles = _roleManager.Roles.ToList();
             ViewData["Role"] = new SelectList(roles.ToList(), "Id","Name");
-        }
+			
+		}
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -125,29 +126,7 @@ namespace Spotifive.Areas.Identity.Pages.Account
                         IdentityResult roleresult = await _userManager.AddToRoleAsync(user, role.Name);
                     }
 
-                  /*  if (user.Role == "RegisteredUser")
-                    {
-                        var reguser = new RegisteredUser { UserID = user.Id };
-                        _context.AddAsync(reguser);
-
-                    }else if (user.Role == "Critic")
-                    {
-                        var cuser = new Critic { UserID = user.Id };
-                        _context.AddAsync(cuser);
-
-                    }
-                    else if (user.Role == "Editor")
-                    {
-                        var euser = new Editor { UserID = user.Id };
-                        _context.AddAsync(euser);
-
-                    }
-                    else
-                    {
-                        var auser = new Administrator { UserID = user.Id };
-                        _context.AddAsync(auser);
-
-                    }*/
+                   
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

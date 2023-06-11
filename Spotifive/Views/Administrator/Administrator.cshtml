@@ -7,186 +7,128 @@
 @{
     var usermanager = await UserManager.GetUserAsync(User);
 }
+@{
+    var roles = ViewBag.Roles as SelectList;
+}
 <head>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link rel="stylesheet" href="~/css/body.css">
 
     <style>
-        .image1 {
+
+        .btn {
             position: fixed;
-            top: 100px;
-            left: 200px;
-            border-radius: 50%;
-            height: 150px;
-            width: 150px;
-        }
-  
-        .background {
-            position: fixed;
-            top: 150px;
-            left: 260px;
-            width: 1000px;
-            height: 500px;
-            background-color: #a8b6f0;
+            top: 575px;
+            left: 1150px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            border-radius: 20px/50px;
+            border: 2px solid #a8b6f0;
+            transition: all 0.5s ease 0s;
+            color: #a8b6f0;
         }
 
-        .signOut {
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            font-size: 22px;
-            font-weight: bold;
-            background-color: #a8b6f0;
-            text-align: center;
-            color: #0b2847;
-        }
+            .btn:hover,
+            .btn:focus {
+                color: #0b2847;
+                background: radial-gradient(circle, #a8b6f0 0.25em, transparent 0.25em) center/0.1em 0.1em;
+                box-shadow: 4px 4px rgba(253,238,172,0.2);
+            }
+
+
 
         .delete {
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            font-size: 22px;
-            font-weight: bold;
-            background-color: whitesmoke;
-            text-align: center;
-            color: #0b2847;
-            border-color: #0b2847;
-            height: 100px;
-            width: 100px;
+            position: fixed;
+            top: 600px;
+            left: 210px;
         }
 
         .update {
-            font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-            font-size: 22px;
-            font-weight: bold;
-            background-color: whitesmoke;
-            text-align: center;
-            color: #0b2847;
-            border-color: #0b2847;
-            height: 100px;
-            width: 100px;
-        }
-
-        .background1 {
             position: fixed;
-            top: 520px;
-            left: 1100px;
-            width: 100px;
-            height: 20px;
-            background-color: #a8b6f0;
+            top: 600px;
+            left: 350px;
         }
- 
 
-        posSignOut {
+        .background {
             position: fixed;
-            top: 50px;
-            right: 200px;
+            top: 80px;
+            left: 200px;
+            width: 700px;
+            height: 300px;
         }
-
-        posDelete {
-            position: fixed;
-            top: 500px;
-            right: 459px;
-        }
-
-        posUpdate {
-            position: fixed;
-            top: 500px;
-            right: 360px;
-        }
-
- 
-        .checkboxUser {
-            position: fixed;
-            top: 480px;
-            left: 480px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .checkboxCritic {
-            position: fixed;
-            top: 520px;
-            left: 480px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-       
     </style>
 
 </head>
 
 
-<body>
-    <div>
-        <posSignOut>
-            <button class="signOut" asp-action="LogOut" asp-controller="Account">Sign out</button>
-        </posSignOut>
-    </div>
-    <form method="get" asp-route-change="data">
+<body class="background" style="background-color:#0b2847;">
+
+    <form asp-action="Update" asp-controller="Administrator">
+        <input type="hidden" asp-for="Id" />
         <div class="form-group mb-3">
-            <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Name:</b>
             </h2>
-            <input type="text" class="form-control" value="@Model.Name" asp-for="Name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" value="@Model.Name" asp-for="Name" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
-            <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Last name:</b>
             </h2>
-            <input type="text" class="form-control" asp-for="Surname" value="@Model.Surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" asp-for="Surname" value="@Model.Surname" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
-            <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>Date of birth:</b>
             </h2>
-            <input type="text" class="form-control" value="@Model.DateOfBirth" asp-for="DateOfBirth" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" value="@Model.DateOfBirth" asp-for="DateOfBirth" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
         <div class="form-group mb-3">
-            <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
                 <b>E-mail:</b>
             </h2>
-            <input type="email" class="form-control" value="@Model.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="email" class="form-control" value="@Model.Email" asp-for="Email" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
         </div>
-        <div class="checkboxUser">
-            <label for="userCheckbox">User</label>
-            <input type="checkbox" id="userCheckbox" name="User">
+        <div class="form-group mb-3">
+            <h3 style="color:#a8b6f0;  font-family: Montserrat; text-align: left; font-size: 20px">
+                <b>Gender:</b>
+            </h3>
+
+            <select asp-for="Gender" class="form-control" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px ">
+                @foreach (var g in Enum.GetValues(typeof(Gender)))
+                {
+                    <option value="@g">@g</option>
+                }
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
 
-        <div class="checkboxCritic">
-            <label for="criticCheckbox">Critic</label>
-            <input type="checkbox" id="criticCheckbox" name="Critic">
+        <div class="form-group">
+            <h5 style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px">
+                <b>Role:</b>
+            </h5>
+            <div class="form-group">
+                <label for="role">Select Role:</label>
+                @Html.DropDownList("Role", roles, "-- Select Role --", new { @class = "form-control" })
+            </div>
+            <span asp-validation-for="Role" class="text-danger"></span>
         </div>
-  
-</form>
-    <form method="post" asp-action="Delete" asp-controller="Administrator" asp-route-id="@Model.Id">
- 
-    <div>
-        <posDelete>
-            <input type="submit" class="delete" value="Delete">
-        </posDelete>
-    </div>
- 
+       
+        <input type="submit" class="btn update" value="Update">
+
     </form>
 
-    <form method="post" asp-action="UpdateRoles" asp-route-id="@Model.Id" asp-controller="Administrator">
-            <label>
-                <input type="checkbox" name="isEditor" style="color:white;"/> Editor
-            </label>
-            <br />
-            <label>
-            <input type="checkbox" name="isCritic" style="color:white;" /> Critic
-        </label>
-            <br />
-            <label>
-            <input type="checkbox" name="isRegisteredUser" style="color:white;" /> Registered User
-            </label>
-            <br />
-        <div>
-            <posUpdate>
-                <input type="submit" class="update" value="Update">
-            </posUpdate>
-        </div>
-        </form>
+    <form method="post" asp-action="Delete" asp-controller="Administrator" asp-route-id="@Model.Id">
 
-    <!--JEDAN CHECKBOX JE DISABLED KADA JE DRUGI KLIKNUT, TO DODATI!!!
-        DODATI SVUGDJE ZA MONTSERRAT  + STILOVE POPRAVITI!
-    -->
+
+
+        <input type="submit" class="btn posDelete" value="Delete" style=" color:#a8b6f0;">
+
+
+    </form>
+
 </body>

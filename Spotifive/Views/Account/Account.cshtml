@@ -13,8 +13,8 @@
         top: 100px;
         left: 200px;
         border-radius: 50%;
-        height: 150px;
-        width: 150px;
+        height: 120px;
+        width: 120px;
     }
 
 </style>
@@ -25,7 +25,7 @@
     .background {
         position: fixed;
         top: 270px;
-        left: 200px;
+        left: 140px;
         width: 700px;
         height: 300px;
         background-color: #a8b6f0;
@@ -44,35 +44,42 @@
         text-align: center;
     }
 
-    .background1 {
+    .btn {
         position: fixed;
-        top: 520px;
-        left: 1100px;
+        top: 575px;
+        left: 1150px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0.25em, transparent 0.25em) center/1em 1.2em;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        border-radius: 20px/50px;
+        border: 2px solid #a8b6f0;
+        transition: all 0.5s ease 0s;
+        color:#a8b6f0;
     }
 
-    .buttonUserCritic {
-        font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
-        font-size: 22px;
-        border-radius: 30px;
-        text-align: center;
-        background-color: #a8b6f0;
-        padding-right: 15px;
-        padding-left: 15px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
+        .btn:hover,
+        .btn:focus {
+            color:#0b2847;
+            background: radial-gradient(circle, #a8b6f0 0.25em, transparent 0.25em) center/0.1em 0.1em;
+            box-shadow: 4px 4px rgba(253,238,172,0.2);
+        }
 
     .image2 {
         position: fixed;
-        top: 100px;
-        left: 1150px;
-        height: 30px;
-        width: 30px;
+        top: 135px;
+        left: 1200px;
+        height: 45px;
+        width: 45px;
     }
 
-    .search-container {
-    }
-
+  .search{
+      position:fixed;
+      top:20px;
+      left: 500px;
+  }
     .search-box {
         font-family: 'Montserrat', sans-serif; /*sans-serif is in case there is no montserrat on the user's system*/
         font-size: 22px;
@@ -103,21 +110,22 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <header>
+    
         <form>
-            <div class="search-container">
+        <div class="search">
                 <input type="text" class="search-box" id="Text1" placeholder="Type here..." />
                 <button type="button" class="search-button" data-target="#srcuser" data-toggle="modal" id="showPopUser">Search</button>
-            </div>
+         </div>
 
-            <!-- Modal -->
+    <!-- Modal -->
             <div class="modal fade" id="srcuser" role="dialog">
                 <div class="modal-dialog   modal-lg">
 
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2>Users</h2>
+                            <span class="close">&times;</span>
                         </div>
                         <div class="modal-body ">
                             <div id="popupuser">
@@ -136,6 +144,8 @@
         @section Scripts{
         <script>
             $('#showPopUser').click(function () {
+            previousUrl = window.location.href; // Store the current URL
+         
                 var url = '@Url.Action("GetViewUsers", "Account")';
                 $.ajax({
                     url: url,
@@ -145,58 +155,55 @@
                         $('#popupuser').html(data);
                     }
                 });
+            $('.close, .modal').click(function () {
+                $('#srcuser').css('display', 'none');
+            window.location.href = previousUrl;
+        });
             })
 
 
         </script>
     }
 
-
-
-    </header>
-    
+   
 }
 
-<input class="bckh1" type="text" value="@user.UserName" asp-for="UserName" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
-<body>
+<body class="background">
+    <input class="bckh1" readonly="readonly" type="text" value="@user.UserName" asp-for="UserName" style=" background-color:#0b2847; font-family: Montserrat; text-align: center; font-size: 25px; border:none" />
+
 <form method="post" asp-route-change="data">
     <div class="form-group mb-3">
-        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Name:</b> 
         </h2>
-        <input type="text" class="form-control" value="@user.Name" asp-for="Name" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text"  readonly="readonly"  class="form-control" value="@user.Name" asp-for="Name" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
     <div class="form-group mb-3">
-        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Surname:</b>
         </h2>
-        <input type="text" class="form-control" value="@user.Surname" asp-for="Surname" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control"  readonly="readonly"  value="@user.Surname" asp-for="Surname" style="color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
     <div class="form-group mb-3">
-        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+        <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>Date of birth:</b>
         </h2>
-        <input type="text" class="form-control" value="@user.DateOfBirth" asp-for="DateOfBirth" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="text" class="form-control" readonly="readonly" value="@user.DateOfBirth" asp-for="DateOfBirth" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
     <div class="form-group mb-3">
-        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
+            <h2 style="color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px;">
             <b>E-mail:</b>
         </h2>
-        <input type="email" class="form-control" value="@user.Email" asp-for="Email" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
+            <input type="email" class="form-control" readonly="readonly" value="@user.Email" asp-for="Email" style=" color:#0b2847; font-family: Montserrat; text-align: left; font-size: 20px " />
     </div>
-  <!--  <div class="form-group mb-3">
-        <h2 style="color:#0b2847 ;font-family: Montserrat; text-align: left; font-size: 20px;">
-            <b>Password:</b>
-        </h2>
-        <input type="password" class="form-control" id="password" style=" color:#a8b6f0; font-family: Montserrat; text-align: left; font-size: 20px " />
-    </div> -->
+
 </form>
 
 </body>
-<div class="text-box10" ;">
-    <button class="background1 buttonUserCritic"> <a asp-action="Index" asp-controller="Account" style="color:#0b2847">Sign out</a></button>
+<div class="text-box10">
+    <button class="btn"> <a asp-action="LogOut" asp-controller="Account" style="color:#a8b6f0;;">Sign out</a></button>
 </div>
-@if (User.IsInRole("Critic,RegisteredUser,Editor"))
-{
-    <a asp-action="Home" asp-controller="Home"><img class="image2" src="https://static.vecteezy.com/system/resources/thumbnails/009/385/954/small/house-symbol-and-home-icon-sign-design-free-png.png"/>
-</a>}
+
+    <a asp-action="Home" asp-controller="Home">
+    <img class="image2" src="~/assets/images/icons8-home-64.png"/>
+</a>
